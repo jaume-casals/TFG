@@ -12,9 +12,9 @@ Aquest apartat descriu l'arquitectura del sistema que s'ha desenvolupat per a l'
 
 La figura \ref{fig:pipeline} mostra un diagrama de flux que il·lustra el funcionament del sistema.
 
-\begin{figure}[h]
+\begin{figure}[H]
      \centering
-     \includegraphics[width=0.8\textwidth]{pipeline.png}
+     \includegraphics[width=0.8\textwidth]{example-image-a}
      \caption{Diagrama de flux del sistema d'anàlisi automàtica de tiquets d'incidències de ciberseguretat.}
      \label{fig:pipeline}
 \end{figure}
@@ -78,6 +78,3 @@ El resultat de l'entrenament és un model de PLN capaç de detectar i extreure e
 L'anonimització dels camps extrets té com a objectiu protegir la privadesa i la confidencialitat de les dades personals o sensibles que puguin contenir els tiquets d'incidències de ciberseguretat. Per fer-ho, s'ha utilitzat una funció proporcionada per l'Agència, que rep com a paràmetre el text d'un camp i torna un text anonimitzat, que substitueix les dades per símbols o etiquetes genèriques. Per exemple, si el text del camp és "Juan Pérez", la funció torna "NOM COGNOM", i si el text és "192.168.1.1", la funció torna "IP PRIVADA".
 
 La funció d'anonimització s'ha implementat en un script de Python que rep com a entrada el fitxer amb els camps extrets pel model de PLN, i torna com a sortida un altre fitxer amb els camps anonimitzats, que s'emmagatzemen en un diccionari amb la següent estructura:
-
-\begin{code} { “id_tiquet”: { “TIPO”: “texto anonimizado”, “PRIORIDAD”: “texto anonimizado”, “USUARIO”: “texto anonimizado”, “DISPOSITIVO”: “texto anonimizado”, “FECHA”: “texto anonimizado”, “HORA”: “texto anonimizado”, “ORG”: “texto anonimizado”, “LOC”: “texto anonimizado” }, … } \end{code}
-
