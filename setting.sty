@@ -1,0 +1,91 @@
+\ProvidesPackage{setting}
+\usepackage[margin = 1in]{geometry}
+\usepackage[utf8]{inputenc}
+\usepackage[catalan]{babel}
+\usepackage[colorlinks = true,
+            linkcolor = blue,
+            urlcolor  = magenta,
+            citecolor = brown,
+            anchorcolor = blue]{hyperref}
+\hypersetup{colorlinks=true}
+\usepackage{graphicx}
+\usepackage{verbatim}
+\usepackage{float}
+\usepackage{changepage}
+\usepackage{booktabs}
+\usepackage[table,xcdraw]{xcolor}
+\usepackage{pdfpages}
+\usepackage{chngcntr}
+\usepackage{afterpage}  % Pàgines amb blanc
+
+\usepackage{tikz}
+\usetikzlibrary{matrix,babel,shapes,positioning}
+\usepackage{titlesec}
+\usepackage{amsmath}
+\usepackage{enumitem}
+\usepackage{import}
+\usepackage{fancyvrb}
+%\newcommand{\tabitem}{~~\llap{\textbullet}~~}
+\usepackage{tabularx}
+\newcommand{\HRule}{\rule{\linewidth}{0.5mm}}
+\usepackage{setspace}
+\usepackage{multicol}
+\usepackage[backend=biber, sorting=none]{biblatex}
+\addbibresource{referencies.bib}
+\usepackage{multirow}
+\usepackage[table,xcdraw]{xcolor}
+\usepackage{lscape}
+\usepackage{eurosym}
+\usepackage{algorithm}
+\usepackage{algpseudocode}
+\usepackage{minted}
+\usepackage{lipsum}
+\usepackage{graphicx}
+\usepackage{caption}
+\captionsetup{justification=centering} 
+\usepackage{pdflscape}            % Per les pagines mode landscape
+
+\renewenvironment{abstract}{
+  \vspace*{\fill}
+  \begin{center}%
+    \bfseries\abstractname
+  \end{center}}%
+  {\vfill}
+
+%\renewcommand{\thesection}{\Roman{section}} 
+%\renewcommand\thesubsection{\arabic{subsection}}
+\usepackage{listings, xcolor}
+\newlist{tableitemize}{itemize}{1}
+\setlist[tableitemize]{label=\textbullet,leftmargin=*,topsep=0ex,
+    parsep=0pt,after=\vspace{-\baselineskip},before=\vspace{-0.75\baselineskip}}
+    
+\definecolor{verylightgray}{rgb}{.99,.99,.99}
+
+\algnewcommand{\algorithmicand}{\textbf{ and }}
+\algnewcommand{\algorithmicor}{\textbf{ or }}
+\algnewcommand{\OR}{\algorithmicor}
+\algnewcommand{\AND}{\algorithmicand}
+
+\lstset{
+    tabsize = 4, %% set tab space width
+    showstringspaces = false, %% prevent space marking in strings,     string is defined as the text that is generally printed directly     to the console
+    %numbers = left, %% display line numbers on the left
+    commentstyle = \color{green}, %% set comment color
+    keywordstyle = \color{blue}, %% set keyword color
+    stringstyle = \color{red}, %% set string color
+    rulecolor = \color{black}, %% set frame color to avoid being     affected by text color
+    basicstyle = \small \ttfamily , %% set listing font and size
+    breaklines = true, %% enable line breaking
+    backgroundcolor=\color{verylightgray},%
+    numberstyle={\tiny \color{black}},
+    %numberstyle = \tiny,
+    belowskip=0pt,
+}
+\setlength{\parindent}{0em}
+\setlength{\parskip}{0.5em}
+\renewcommand{\lstlistingname}{Script}% Listing -> Algorithm
+
+\counterwithout{figure}{chapter}
+\counterwithout{table}{chapter}
+
+\usepackage[style=english]{csquotes}

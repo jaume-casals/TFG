@@ -1,0 +1,55 @@
+\section{Taula de tasques}
+
+{\renewcommand{\arraystretch}{1.00} % Les cel·les són un 0% més grans verticalment
+{\setlength{\tabcolsep}{1em}   %Espai a la dreta i esquerra de cada cel·la amb text
+
+\begin{table}[H]
+\begin{tabular}{|cllc|}
+\hline
+\multicolumn{1}{|l|}{\textbf{Nom}}          & \multicolumn{1}{l|}{\textbf{Dependències}} & \multicolumn{1}{l|}{\textbf{Recursos}} & \textbf{Duració (hores)} \\ \hline 
+\hline
+\multicolumn{3}{|c|}{\textbf{Gestió de Projectes (GP)}}                             & \textbf{180}             \\ \hline
+\multicolumn{1}{|l|}{\textbf{GP1}}          & \multicolumn{1}{l|}{}                      & \multicolumn{1}{l|}{Overleaf, Reunions} & 25                       \\ \hline
+\multicolumn{1}{|l|}{\textbf{GP2}}          & \multicolumn{1}{l|}{GP1}                      & \multicolumn{1}{l|}{Overleaf, onlinegantt}       & 15                       \\ \hline
+\multicolumn{1}{|l|}{\textbf{GP3}}          & \multicolumn{1}{l|}{GP2}                      & \multicolumn{1}{l|}{Overleaf}               & 20                       \\ \hline
+\multicolumn{1}{|l|}{\textbf{GP4}}          & \multicolumn{1}{l|}{}                      & \multicolumn{1}{l|}{Overleaf}                  & 80                       \\ \hline
+\multicolumn{1}{|l|}{\textbf{GP5}}          & \multicolumn{1}{l|}{}                      & \multicolumn{1}{l|}{Meet, Reunions}    & 40                       \\ \hline
+\hline
+\multicolumn{3}{|c|}{\textbf{Treball Previ (TP)}}                                   & \textbf{80}              \\ \hline
+\multicolumn{1}{|l|}{\textbf{TP1}}          & \multicolumn{1}{l|}{}                      & \multicolumn{1}{l|}{}                  & 10                       \\ \hline
+\multicolumn{1}{|l|}{\textbf{TP2}}          & \multicolumn{1}{l|}{TP1}                      & \multicolumn{1}{l|}{PyCharm}        & 40                       \\ \hline
+\multicolumn{1}{|l|}{\textbf{TP3}}          & \multicolumn{1}{l|}{TP2}                      & \multicolumn{1}{l|}{}               & 20                       \\ \hline
+\multicolumn{1}{|l|}{\textbf{TP4}}          & \multicolumn{1}{l|}{TP3}                      & \multicolumn{1}{l|}{PyCharm, Git}   & 10                       \\ \hline
+\hline
+\multicolumn{3}{|c|}{\textbf{Desenvolupament (D)}}                                  & \textbf{340}             \\ \hline
+                                              \multicolumn{3}{|c|}{Recopilació de dades (D1)}                                     & \textbf{65}              \\ \hline
+\multicolumn{1}{|l|}{\textbf{D1.1}}         & \multicolumn{1}{l|}{}                      & \multicolumn{1}{l|}{PyCharm, Portàtil, VPN} & 25                       \\ \hline
+\multicolumn{1}{|l|}{\textbf{D1.2}}         & \multicolumn{1}{l|}{D1.1}                      & \multicolumn{1}{l|}{Meet, Reunions}    & 10                       \\ \hline
+\multicolumn{1}{|l|}{\textbf{D1.3}}         & \multicolumn{1}{l|}{D1.2}                      & \multicolumn{1}{l|}{PyCharm, Portàtil, VPN}    & 20                       \\ \hline
+\multicolumn{1}{|l|}{\textbf{D1.4}}         & \multicolumn{1}{l|}{}                      & \multicolumn{1}{l|}{PyCharm, Git}    & 10                       \\ \hline
+                                              \multicolumn{3}{|c|}{Desenvolupament del model NLP (D2)}                            & \textbf{75}              \\ \hline
+\multicolumn{1}{|l|}{\textbf{D2.1}}         & \multicolumn{1}{l|}{}                      & \multicolumn{1}{l|}{Pycharm, Git}   & 5                        \\ \hline
+\multicolumn{1}{|l|}{\textbf{D2.2}}         & \multicolumn{1}{l|}{D1.3}                      & \multicolumn{1}{l|}{Pycharm, Git, VPN} & 70                       \\ \hline
+                                              \multicolumn{3}{|c|}{Implementació del \textit{pipeline} (D3)}         & \textbf{50}              \\ \hline
+\multicolumn{1}{|l|}{\textbf{D3.1}}         & \multicolumn{1}{l|}{}                      & \multicolumn{1}{l|}{PyCharm, Git}              & 30                       \\ \hline
+\multicolumn{1}{|l|}{\textbf{D3.2}}         & \multicolumn{1}{l|}{D1.4, D3.1}                      & \multicolumn{1}{l|}{PyCharm, Git}        & 20                       \\ \hline
+                                              \multicolumn{3}{|c|}{Proves i validació (D4)}                                       & \textbf{40}              \\ \hline
+\multicolumn{1}{|l|}{\textbf{D4.1}}         & \multicolumn{1}{l|}{}                      & \multicolumn{1}{l|}{PyCharm, Git, Reunions}                  & 20                       \\ \hline
+\multicolumn{1}{|l|}{\textbf{D4.2}}         & \multicolumn{1}{l|}{D2.2, D4.1}                      & \multicolumn{1}{l|}{PyCharm, Git}        & 10                       \\ \hline
+\multicolumn{1}{|l|}{\textbf{D4.3}}         & \multicolumn{1}{l|}{D2.2, D4.2}                      & \multicolumn{1}{l|}{PyCharm, Git}        & 10                       \\ \hline
+                                              \multicolumn{3}{|c|}{Optimització i desplegament del model (D5)}                    & \textbf{60}              \\ \hline
+\multicolumn{1}{|l|}{\textbf{D5.1}}         & \multicolumn{1}{l|}{D2.2}                      & \multicolumn{1}{l|}{PyCharm, Git}              & 40                       \\ \hline
+\multicolumn{1}{|l|}{\textbf{D5.2}}         & \multicolumn{1}{l|}{D5.1}                      & \multicolumn{1}{l|}{PyCharm, Git}              & 20                       \\ \hline
+                                              \multicolumn{3}{|c|}{Proves finals, documentació i desplegament final (D6)}                & \textbf{50}              \\ \hline
+\multicolumn{1}{|l|}{\textbf{D6.1}}         & \multicolumn{1}{l|}{D5.2}                      & \multicolumn{1}{l|}{PyCharm, Git}              & 25                       \\ \hline
+\multicolumn{1}{|l|}{\textbf{D6.2}}         & \multicolumn{1}{l|}{}                      & \multicolumn{1}{l|}{Overleaf, Drive}                  & 10                       \\ \hline
+\multicolumn{1}{|l|}{\textbf{D6.3}}         & \multicolumn{1}{l|}{D6.1, D6.2}                      & \multicolumn{1}{l|}{PyCharm, Git, Portàtil, VPN}        & 15                       \\ \hline
+\hline
+\multicolumn{3}{|l|}{\textbf{TOTAL}}                & \textbf{600}              \\ \hline
+\end{tabular}
+\caption[Taula de tasques]{Taula de tasques amb les dependències, els recursos i l'estimació de les hores \\ (Elaboració pròpia)}
+\label{fig:taula_tasques}
+\end{table}
+
+}
+}

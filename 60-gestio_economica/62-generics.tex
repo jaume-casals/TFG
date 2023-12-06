@@ -1,0 +1,81 @@
+\section{Costos genèrics}
+Les despeses dels costos genèrics no estan vinculades a tasques específiques, però tenen un paper fonamental en l'avaluació financera. Aquesta secció abasta la depreciació dels components de maquinari i programari, així com el consum d'energia, la connexió a la xarxa i l'espai que s'ocupa. 
+
+\subsection{Amortitzacions}
+\subsubsection{Software}
+Hi ha cert programari, sobretot en l'entorn de desenvolupament controlat per \textbf{l'Agència}, que no estan sota control o són desconeguts i, a més a més, poden variar. En tot cas, aquest programari no afecta al pressupost, i, per tant, no es tindrà en compte. A continuació es calcula el cost del programari utilitzat:
+
+\begin{itemize}
+    \item \textbf{Google Drive:} No es contracta cap espai extra.
+    \item \textbf{Overleaf:} No s'utilitzen les característiques de la subscripció mensual.
+    \item \textbf{Git:} No és necessari l'ús dels extres que s'ofereixen.
+    \item \textbf{PyCharm:} S'usa la llicència d'estudiant que dura un any.
+\end{itemize}
+
+En conclusió, el programari no afegeix cap cost addicional al projecte.
+
+$$
+\text{Amortització Software} = 0\text{\euro}
+$$
+
+\subsubsection{Hardware}
+Només és necessari un ordinador de sobretaula pels tres integrants de l'equip per la realització d'aquest projecte. S'estima que un ordinador com els fets servir amb els seus dos monitors i perifèrics costa uns 1200\text{\euro}. La vida útil d'aquest ordinador s'estima que oscil·la els cinc anys (seixanta mesos) i aquest projecte té una duració d'uns quatre mesos. Amb aquesta informació es calcula l'amortització dels ordinadors:
+
+$$
+\text{Amortització Hardware} = 1200\text{\euro} * 3 \text{ unitats} * \frac{4}{60} \text{ mesos} = 240\text{\euro}
+$$
+
+\subsection{Consum elèctric}
+El cost elèctric que es calcularà serà el dels ordinadors de sobretaula que es fan servir amb dos monitors cadascun. El teclat i el ratolí tenen una potència negligible en aquest càlcul. Com s'ha calculat a la taula \ref{fig:costos_tasques}, en total s'invertiran 1345 hores en aquest projecte entre tots els integrants de l'equip. El preu mitjà de la llum de 0,1728\text{\euro}/kWh \cite{preu-llum}, un ordinador amb un consum de 400 W \cite{watts-ordinador}, les dues pantalles de cada monitor són idèntiques amb un consum màxim de 35 W \cite{watts-monitor}.
+
+
+\begin{table}[H]
+    \centering
+    \begin{tabular}{|c|c|c|c|c|r|}
+        \hline
+        \textbf{Producte} & \textbf{Potència} & \textbf{Unitats} & \textbf{Hores d'ús} & \textbf{Consum total} & \textbf{Cost total} \\
+        \hline
+        \textbf{\begin{tabular}{@{}c@{}}Ordinador \\ sobretaula\end{tabular}} & 400 W & 3 & 1345 & 1614 kWh & 278,9\euro \\
+        \hline
+        \textbf{Pantalla} & 35 W & 6 & 1345 & 282,45 kWh & 48,81\euro \\
+        \hline
+        \textbf{Total}    & \textbf{470 W} & \textbf{3} & \textbf{1345} & \textbf{1896,45 kWh} & \textbf{327,71\euro} \\
+        \hline
+    \end{tabular}
+    \caption[Consum elèctric]{Taula del consum elèctric \\ (Elaboració pròpia)}
+    \label{tab:consum_electric}
+\end{table}
+
+\subsection{Connexió internet}
+Es calcula que el preu de la connexió a internet ronda els 50\euro \space per mes. Amb un projecte de quatre mesos de duració, el total és de:
+
+$$
+\text{Preu Connexió} = \frac{50 \text{\euro}}{1 \text{ mes}} * 4 \text{ mesos} = 200\text{\euro}
+$$
+
+\subsection{Espai d'oficina}
+El cost de l'espai d'oficina s'estima segons el cost mitjà de les oficines disponibles per lloguer en aquesta època \cite{preu-oficina}. Es calcula un preu de 21\text{\euro}/$m^2$ amb l'aigua inclosa i serà necessari 25$m^2$ d'oficina.
+
+$$
+\text{Preu Espai} = \frac{21 \text{\euro}}{1 m^2} * 25 m^2 = 525\text{\euro}
+$$
+
+\subsection{Total costos genèrics}
+
+
+\begin{table}[H]
+    \centering
+    \begin{tabular}{c|l}
+        \textbf{Concepte}     & \textbf{Cost} \\
+        \hline
+        Amortització \textit{Software} & 0\euro         \\
+        Amortització \textit{Hardware} & 240\euro       \\
+        Consum Elèctric                & 327,71\euro    \\
+        Connexió Internet              & 200\euro       \\
+        Espai d'oficina                & 525\euro       \\
+        \hline
+        \textbf{Total}                 & 1292,71\euro   \\
+    \end{tabular}
+    \caption[Costos genèrics]{Suma total dels costos genèrics \\ (Elaboració pròpia)}
+    \label{tab:costos_generics}
+\end{table}

@@ -1,0 +1,49 @@
+\section{Abast}
+
+\subsection{Objectius} \label{ssec:objectius}
+
+El principal objectiu d'aquest projecte és el desenvolupament d'una eina que aconsegueixi extreure, analitzar i emmagatzemar la informació trobada en els tiquets proveïts per l'Agència. A continuació es llisten els objectius:
+
+\begin{itemize}
+    \item Fer un estudi de l’estat de l’art per tal d’identificar solucions ja existents a problemes similars i adaptar-ne una al problema presentat.
+    \item Implementar un sistema d'extracció de la informació d'un tiquet basat en l'objectiu anterior per aconseguir un resultat satisfactori.
+    \item Dissenyar i desenvolupar una \textit{pipeline} que extregui els tiquets, extregui i processi les dades, anonimitzi les necessàries i ho emmagatzemi a una altra base de dades. 
+    \item Posar en funcionament una API que permeti accedir i utilitzar aquest sistema de manera senzilla.
+\end{itemize}
+
+
+\subsection{Requeriments funcionals}
+
+Tot el funcionament de l'API ha de ser invisible per l'usuari, però darrere hi ha tot el sistema en funcionament. El funcionament del sistema ha de ser el següent: 
+\begin{enumerate}
+    \item L'usuari introdueix els \textbf{paràmetres d'entrada a l'API}, entre els quals s'inclou l'identificador del tiquet a analitzar.
+    \item Es \textbf{comprova si hi ha cap error greu} i es retorna un missatge d'error en aquest cas.
+    \item S'envia l'ordre a la primera base de dades on, mitjançant l'identificador abans mencionat, es \textbf{retorna el tiquet especificat}.
+    \item \textbf{S'executa l'algorisme principal} localment utilitzant el tiquet obtingut i retorna les dades dels camps especificats.
+    \item El resultat és tractat i es passa per un \textbf{algorisme d'anonimització}.
+    \item \textbf{S'emmagatzema} en la segona base de dades escollida.
+\end{enumerate}
+Aquestes dades que proporcioni l'algorisme seran tractades i passades per un algorisme d'anonimització i, finalment, s'emmagatzemaran a una segona base de dades. Tot aquest procés serà invisible per l'usuari de l'API 
+
+
+\subsection{Requeriments no funcionals} \label{ssec:abast-requeriments-no-funcionals}
+
+\begin{itemize}
+    \item \textbf{Adaptabilitat:} El sistema ha de permetre l'extracció d'informació de qualsevol seqüència de tiquets independentment de la manera en la qual s'ha escrit. Ha d'aconseguir comprendre el significat dels texts i arribar a conclusions equivalents, fins i tot amb variacions a la redacció.
+    quadern de càrregues que presenti un fabricant independentment de la manera en la qual s'ha escrit.
+    \item \textbf{Usabilitat:} L'eina ha de ser fàcil d'usar per facilitar-ne la integració en el flux de treball actual amb les mínimes dificultats.
+    \item \textbf{Eficiència:} Aquest projecte no prioritza el desenvolupament d'un sistema crític on el temps sigui una preocupació primordial. Tot i això, s'ha de processar una gran quantitat de dades i és crucial obtenir un temps d'espera curt per evitar que aquest pas esdevingui un coll d'ampolla en el procés o causi molèsties durant el seu ús.
+    \item \textbf{Escalabilitat:} Els tiquets a processar varien en mida, tant pel que fa a la longitud dels mateixos articles com al nombre d'articles inclosos en un tiquet. Per obtenir un rendiment òptim, l'eina ha de tenir un rang d'acceptació ampli, que doni cabuda a la màxima quantitat de tiquets i garanteixi al mateix temps una funcionalitat correcta amb tots ells.
+    \item \textbf{Confidencialitat:} Els tiquets que es processen estan subjectes a contractes de confidencialitat estrictes. Aquest fet implica que les dades no es poden retirar dels servidors designats i s'han de tractar amb cura, adoptant les mesures d'anonimització adequades. Aquests contractes també imposen limitacions als tipus de models i tècniques que es poden utilitzar durant el projecte.
+\end{itemize}
+
+
+\subsection{Obstacles i riscos potencials} \label{ssec:abast-riscos}
+
+\begin{itemize}
+    \item \textbf{L'eina no entén correctament el llenguatge:} Comprendre el llenguatge natural és una tasca difícil que evoluciona contínuament i, sobretot, és molt lluny de ser perfecta. Una preocupació important és la possible inadequació dels models disponibles per comprendre eficaçment determinats textos. És una tasca difícil, sobretot en català, trobar models de NLP que tinguin la capacitat de comprendre textos extensos i que extreguin la informació desitjada. A més a més, dependre únicament de models en local pot augmentar aquest risc en impedir que el sistema millori i s'ajusti constantment amb nous models lingüístics i dades, cosa que podria impedir el rendiment sostingut del programari.
+    \item \textbf{La resposta està separada o es troba en articles diferents:} Aquest repte sorgeix perquè els models de NLP depenen sovint del context i la proximitat per establir connexions entre paraules i frases. Quan els detalls clau estan dispersos o són incoherents, el model pot tenir dificultats per reunir la informació necessària, cosa que dona lloc a respostes incompletes o errònies a les consultes dels usuaris. Això també s'aplica a situacions en què la informació està repartida en diversos articles, ja que no és factible proporcionar al model una conversa completa d'un tiquet. En conseqüència, si la resposta es fragmenta i no és analitzada correctament, es pot perdre part de la informació. A més a més, aquesta limitació restringeix la varietat de models disponibles, ja que certes categories d'aquest àmbit no afavoreixen el nivell de flexibilitat desitjat.
+    \item \textbf{Escassetat de dades d'entrenament}. L'èxit de l'entrenament del model depèn en gran manera d'un conjunt de dades ampli i variat. Tot i això, l'adquisició d'aquestes dades és lenta i hi ha una llarga demora per aconseguir-les. Aquest estancament impedeix l'avenç del projecte i també limita la capacitat per perfeccionar i optimitzar eficaçment el model. En cas que fos necessari, es buscarien dades sintètiques per compensar aquestes limitacions, encara que estiguessin en llengües diferents.
+    \item \textbf{Potència insuficient per executar el model:} Aquests models són reconeguts per la seva complexitat i mida, cosa que exigeix considerables recursos informàtics. És possible que l'Agència no tingui la infraestructura necessària per suportar els models d'ús intensiu de recursos. Aquesta circumstància té el potencial de dificultar l'execució exitosa del projecte i donar lloc a problemes de rendiment que poden requerir la reavaluació del model seleccionat.
+    \item \textbf{Poca experiència amb les tecnologies necessàries:} Aquesta manca de coneixements podria provocar problemes durant el desenvolupament, com ara un progrés més lent, possibles errors i una corba d'aprenentatge més pronunciada. Per reduir aquest risc, es compta amb orientació, formació addicional programada i col·laboració amb experts als camps pertinents per a una execució del projecte més fluida i satisfactòria.
+\end{itemize}
