@@ -1,8 +1,25 @@
 \section{Aprenentatge autònom}
 
 \subsection{Models d'aprenentatge autònom}
+L'aprenentatge autònom (\textit{Machine learning} en anglès) és un subcamp de la intel·ligència artificial que permet als ordinadors aprendre els patrons i regles implícites en grans conjunts de dades. Aquests després, es poden fer sevir per fer prediccions o decisions i millorar-ne el rendiment amb l'experiència sense necessitat de programació explícita. Les solucions d'aprenentatge autònom s'apliquen àmpliament a diversos sectors, com ara el comerç electrònic, la sanitat, les finances o la indústria.
 
-\subsection{Models del processament del llenguatge natural}
+A continuació es mostra com hi ha diversos tipus d'algorismes d'aprenentatge autònom segons el resultat desitjat i el tipus de dades que es disposin.
 
+\subsubsection{Classificació segons la naturalesa de les dades}
+Segons la naturalesa de les dades, l'aprenentatge automàtic es pot dividir en tres tipus: 
+\begin{itemize}
+    \item \textbf{Supervisat:} Aquests algoritmes s'entrenen amb conjunts de dades etiquetades que contenen les variables d'entrada i sortida. L'objectiu principal és aprendre una funció que relacioni les dades d'entrada amb les de sortida i, a continuació, aplicar-la per fer prediccions sobre dades noves o desconegudes. La regressió, classificació i detecció d'anomalies són exemples d'aprenentatge autònom supervisat.
+    \item \textbf{No supervisat:} En aquest tipus, els algoritmes s'entrenen amb conjunts de dades no etiquetades que només contenen les variables d'entrada. El seu objectiu és descobrir l'estructura o la distribució subjacent de les dades per agrupar-les o segmentar-les en categories significatives. Alguns exemples d'aprenentatge autònom no supervisat són l'agrupació i la reducció de la dimensionalitat.
+    \item \textbf{Per reforç:} L'aprenentatge autònom per reforç implica algorismes que no depenen de conjunts de dades externes, sinó que aprenen de les mateixes accions i de la retroalimentació rebuda de l'entorn. L'objectiu és determinar la política o estratègia òptima que maximitzi la recompensa o minimitzi el cost al llarg del temps. Normalment, s'utilitza en situacions on hi ha un món virtual i un agent que el pugui explorar.
+\end{itemize}
 
+\subsubsection{Classificació segons la tasca a resoldre}
+Segons la tasca a resoldre, l'aprenentatge automàtic es pot dividir en quatre tipus: 
+\begin{itemize}
+    \item \textbf{Multimodal:} Són les tasques entre les quals s'inclou el processament i integració de diverses modalitats, incloent-hi imatges, àudio, text i més. El propòsit és establir una representació cohesiva de les dades independentment del seu format i s'usa en una àmplia gamma d'aplicacions, com creació i edició d'imatges, extracció d'informació i descripció d'imatges.
+    \item \textbf{Visió per Computador:} Aquesta tasca consisteix a analitzar i comprendre les dades visuals, tals com imatges i vídeos amb l'objectiu d'extreure informació o característiques de les dades per utilitzar-les en detecció d'imatges, el reconeixement de cares o la segmentació d'escenes, entre altres.
+    \item \textbf{Processament del Llenguatge Natural:} Consisteix en l'anàlisi i generació del llenguatge natural, és a dir, text. El seu objectiu és entendre el significat i propòsit de les paraules que rep. Les dades llavors poden ser aplicades a altres tasques com el resum de textos, la traducció o la generació de text. Aquesta és la tasca dels models que es fan servir en aquest projecte, i en l'apartat \ref{ssec:definicio_NLP} es parlarà en més en profunditat.
+    \item \textbf{Àudio:} El processament d'àudio s'ocupa de la manipulació i generació d'àudio, tant veu, com música o efectes de soroll. L'objectiu és extreure informació o característiques de la pista d'àudio pel reconeixement de veu, la generació de música o la recomanació de música. 
+\end{itemize}
 
+\subsection{Processament del llenguatge natural} \label{ssec:definicio_NLP}
