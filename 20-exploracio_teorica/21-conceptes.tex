@@ -13,21 +13,6 @@ En el tiquet es poden veure els següents camps:
     \item \textbf{Nombre de l'article:} Un tiquet es divideix en diferents articles. Cada article representa un missatge o correu que una de les parts ha fet. En aquest exemple hi ha dos articles: El primer (\ref{fig:tiquet-exemple-2}) informant del problema i el segon (\ref{fig:tiquet-exemple-1}) explicant les mesures preses a causa de l'incident. És important tenir en compte que, tal com es veu a la Figura \ref{fig:tiquet-exemple-1}, el text de tots els anteriors tiquets es reescriu sota d'aquest.
 \end{enumerate}
 
-\begin{figure}[H]
-    \centering
-    \includegraphics[width=\textwidth]{meitat-1.png}
-    \caption{Primera meitat del tiquet d'exemple d'ORTS amb totes les parts indicades. \\ (Creació pròpia)}
-    \label{fig:tiquet-exemple-1}
-\end{figure}
-
-
-\begin{figure}[H]
-    \centering
-    \includegraphics[width=\textwidth]{meitat-2.png}
-    \caption{Segona meitat del tiquet d'exemple d'ORTS amb totes les parts indicades. \\ (Creació pròpia)}
-    \label{fig:tiquet-exemple-2}
-\end{figure}
-
 Tal i com s'ha explicat, la feina d'extracció succeeix majoritariament dins del tiquet, analitzant i extraient informació dels diferents articles. Aquests són els camps que es busquen, la seva explicació i el seu identificador otorgat per l'\textbf{Agència}: 
 \begin{enumerate}
   \setcounter{enumi}{6}
@@ -40,8 +25,32 @@ Tal i com s'ha explicat, la feina d'extracció succeeix majoritariament dins del
   \item \textbf{Assumpte correu de l'incident (\textit{subject\_mail\_incident}):} És l'assumpte que tenia el correu de l'atacant. Solen ser assumptes molt cridaners amb paraules que inciten a actuar ràpidament, per aconseguir que la víctima entri sense pensar-s'ho dues vegades.
 \end{enumerate}
 
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=\textwidth]{meitat-1.png}
+    \caption{Primera meitat del tiquet d'exemple d'ORTS amb totes les parts indicades. \\ (Creació pròpia)}
+    \label{fig:tiquet-exemple-1}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=\textwidth]{meitat-2.png}
+    \caption{Segona meitat del tiquet d'exemple d'ORTS amb totes les parts indicades. \\ (Creació pròpia)}
+    \label{fig:tiquet-exemple-2}
+\end{figure}
+
+
 \subsubsection{Non-Disclosure Agreement (NDA)}
 Un acord de no divulgació (NDA), també conegut com a acord de confidencialitat, és un contracte legal que estableix una relació confidencial entre dues o més parts que acorden protegir qualsevol informació confidencial que puguin compartir o rebre.
+
 Els elements clau d'un acord de confidencialitat solen incloure la identificació de la informació confidencial, la descripció de les obligacions i les responsabilitats de les parts reveladora i receptora, l'especificació de la durada i l'abast de les obligacions de confidencialitat, i la definició de les excepcions o exclusions de l'acord. En cas d'incompliment d'un acord de confidencialitat per una de les parts, l'altra part o les altres parts poden sol·licitar recursos legals, com ara mesures cautelars o danys i perjudicis, per evitar noves divulgacions i compensar qualsevol pèrdua.
-En aquest context, l'acord de confidencialitat que s'ha signat per aquest projecte, inclou la protecció de totes les dades que estiguin dins dels servidors de l'\textbf{Agència} (en especial els tiquets d'incidències), així com tot allò que ho engloba.\subsubsection{Phishing/programari maliciós}
+
+En aquest context, l'acord de confidencialitat que s'ha signat per aquest projecte, inclou la protecció de totes les dades que estiguin dins dels servidors de l'\textbf{Agència} (en especial els tiquets d'incidències), així com tota l'informació relativa al projecte que contingui informació crítica.
+
+\subsubsection{Phishing}
+El \textit{phishing} és un tipus de ciberatac que utilitza correus electrònics fraudulents o altres mètodes de comunicació per enganyar els destinataris per tal que revelin informació confidencial o instal·lin \textit{malware} als seus dispositius. Sovint, els correus electrònics de \textit{phishing} suplanten la identitat d'entitats o persones legítimes i redirigeixen els usuaris a pàgines web falses dissenyades per assemblar-se als reals. El \textit{phishing} pot donar lloc a robatoris d'identitat, pèrdues financeres o comptes compromesos.
+
+\subsubsection{Malware}
+El \textit{malware} o programari maliciós es refereix a qualsevol programa dissenyat per interrompre o danyar un sistema informàtic, una xarxa o un dispositiu. El \textit{malware} pot dur a terme una sèrie d'accions malicioses, entre les quals s'inclouen robar, xifrar o esborrar dades i monitorar l'activitat de l'usuari. També es pot infiltrar en els sistemes a través de diversos canals, com ara correus electrònics de \textit{phishing}, descàrregues de fonts no segures, mitjans extraïbles o connexions de xarxa. Un cop dins, el \textit{malware} pot suposar greus amenaces per a la seguretat del sistema, i, fins i tot, pot permetre ciberatacs addicionals.
+
 \subsubsection{dataset}
