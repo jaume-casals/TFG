@@ -6,7 +6,7 @@ L'aprenentatge autònom (\textit{Machine learning} en anglès) és un subcamp de
 A continuació es mostra com hi ha diversos tipus d'algorismes d'aprenentatge autònom segons el resultat desitjat i el tipus de dades que es disposin.
 
 \subsubsection{Classificació segons la naturalesa de les dades}
-Segons la naturalesa de les dades, l'aprenentatge automàtic es pot dividir en tres tipus: 
+Segons la naturalesa de les dades, l'aprenentatge autònom es pot dividir en tres tipus principals: 
 \begin{itemize}
     \item \textbf{Supervisat:} Aquests algoritmes s'entrenen amb conjunts de dades etiquetades que contenen les variables d'entrada i sortida. L'objectiu principal és aprendre una funció que relacioni les dades d'entrada amb les de sortida i, a continuació, aplicar-la per fer prediccions sobre dades noves o desconegudes. La regressió, classificació i detecció d'anomalies són exemples d'aprenentatge autònom supervisat.
     \item \textbf{No supervisat:} En aquest tipus, els algoritmes s'entrenen amb conjunts de dades no etiquetades que només contenen les variables d'entrada. El seu objectiu és descobrir l'estructura o la distribució subjacent de les dades per agrupar-les o segmentar-les en categories significatives. Alguns exemples d'aprenentatge autònom no supervisat són l'agrupació i la reducció de la dimensionalitat.
@@ -14,7 +14,7 @@ Segons la naturalesa de les dades, l'aprenentatge automàtic es pot dividir en t
 \end{itemize}
 
 \subsubsection{Classificació segons la tasca a resoldre}
-Segons la tasca a resoldre, l'aprenentatge automàtic es pot dividir en quatre tipus: 
+Segons la tasca a resoldre, l'aprenentatge autònom es pot dividir principalment en quatre tipus, encara que hi ha altres categories i moltes subcategories dins de cada tasca. 
 \begin{itemize}
     \item \textbf{Multimodal:} Són les tasques entre les quals s'inclou el processament i integració de diverses modalitats, incloent-hi imatges, àudio, text i més. El propòsit és establir una representació cohesiva de les dades independentment del seu format i s'usa en una àmplia gamma d'aplicacions, com creació i edició d'imatges, extracció d'informació i descripció d'imatges.
     \item \textbf{Visió per Computador:} Aquesta tasca consisteix a analitzar i comprendre les dades visuals, tals com imatges i vídeos amb l'objectiu d'extreure informació o característiques de les dades per utilitzar-les en detecció d'imatges, el reconeixement de cares o la segmentació d'escenes, entre altres.
@@ -22,7 +22,13 @@ Segons la tasca a resoldre, l'aprenentatge automàtic es pot dividir en quatre t
     \item \textbf{Àudio:} El processament d'àudio s'ocupa de la manipulació i generació d'àudio, tant veu, com música o efectes de soroll. L'objectiu és extreure informació o característiques de la pista d'àudio pel reconeixement de veu, la generació de música o la recomanació de música. 
 \end{itemize}
 
-L'aprenentatge profund és un subcamp de l'aprenentatge automàtic que aprofita les xarxes neuronals per analitzar dades i abordar problemes que serien massa difícils o fins i tot inviables per als algorismes tradicionals. Les xarxes neuronals consisteixen en capes de neurones artificials que adquireixen patrons i característiques complexos a partir de les dades d'entrada. L'aprenentatge profund ha demostrat resultats excel·lents en nombrosos dominis, com ara la visió per ordinador, el reconeixement de la parla, el processament del llenguatge natural i més enllà.
+\subsubsection{Deep learning}
+
+El \textit{deep learning} (aprenentatge profund en català) és un subcamp del \textit{machine learning} que aprofita les xarxes neuronals per analitzar dades. 
+
+Les xarxes neuronals consisteixen en capes de neurones artificials que adquireixen patrons i característiques complexos a partir de les dades d'entrada. Fa servir aquestes xarxes neuronals amb múltiples capes per extreure'n característiques i patrons complexos de les dades. Cada capa neuronal obté informació de la capa anterior, fa càlculs i transmet el resultat a la següent capa. 
+
+Els models de \textit{deep learning} poden aprendre de grans quantitats de dades i assolir una precisió i eficiència elevades. Destaquen sobretot, perquè són capaços de fer tasques complexes que els algoritmes d'aprenentatge autònom tradicionals consideren difícils, com ara la visió per ordinador i el processament del llenguatge natural. Tot i això, l'aprenentatge profund requereix més recursos i temps per l'entrenament i execució que el \textit{machine learning}.
 
 \subsection{Processament del Llenguatge Natural} \label{ssec:definicio_NLP}
 El processament del llenguatge natural (\textit{NLP} per les seves sigles en anglès) es refereix a la disciplina de dissenyar màquines capaçes de comprendre el llenguatge humà, o dades semblants al llenguatge humà, de la manera com s'escriu, es parla i s'organitza. Els models d'aprenentatge profund poden aprendre a representar el llenguatge natural d'una manera significativa i utilitzar aquestes representacions per realitzar diverses tasques de \textit{NLP} \cite{Hugging-Face}. Per cadascuna d'elles es descriurà i s'indicarà si és adequada pel projecte que es desenvolupa.
