@@ -6,15 +6,108 @@ Lògicament, un model de generació del llenguatge natural pot ser una eina molt
 per cada: nom, quin us té (chatbot, etc..) o en que es centra, empresa que ho fa, model de negoci (online, offline sobretot), etc?
 
 \begin{itemize}
-    \item \textbf{GPT-4:} \textit{GPT-4} és un gran model multimodal que pot agafar entrades d'imatge i text i produir sortides de text. Representa el darrer avenç en la investigació d'\textit{OpenAI} sobre l'ampliació del \textit{deep learning}. El seu principal ús és per crear xatbots (bots conversacionals) generals, que poden conversar sobre temes molt diversos i, fins i tot, cercar a la xarxa per aportar informació extra. Alguns exemples són \textit{ChatGPT} i \textit{Bing Chat}, tots dos són serveis en línia i, per tant, no aplicables per al projecte.
-    \item \textbf{LaMDA:} \textit{LaMDA} és una col·lecció de grans models lingüístics desenvolupats per Google que treballen conjuntament per resoldre diverses tasques de generació de text. \textit{LaMDA} no està disponible públicament i només es pot accedir utilitzant la seva plataforma. Google va integrar aquest model en alguns dels seus productes, per millorar la seva funcionalitat i també va desenvolupar una primera versió d'un xatbot (\textit{Google Bard}) que durant un temps va usar aquest model.
-    \item \textbf{PaLM 2:} \textit{PaLM 2} és un gran model lingüístic (LLM) que amplia el llegat de Google en matèria d'aprenentatge automàtic i de recerca responsable de la IA. S'ha entrenat en un corpus divers i multilingüe de text, codi, matemàtiques i pàgines web i va ser usat durant un temps com a xatbot amb \textit{Google Bard}. Tot i que no és de codi obert, es pot accedir a PaLM 2 a través d'una API.
-    \item \textbf{Gemini:} \textit{Gemini} de Google és un ambiciós projecte d'intel·ligència artificial. És gran model de llenguatge (LLM) que tingui la capacitat de fer una gran varietat de tasques, incloses les relacionades amb text, imatges i àudio. \textit{Gemini} compta amb un disseny multimodal que permet la integració de diversos tipus d'informació i dona lloc a una àmplia gamma de formats de sortida. No és una plataforma de codi obert, per la qual cosa el codi i les dades no són accessibles al públic. Per altra banda, s'integra amb eines d'IA per a la generació de continguts, com ara la versió més nova de \textit{Google Bard}, que permet la interacció de l'usuari amb aquest model.
-    \item \textbf{Claude 2:} \textit{Claude 2} és un model de llenguatge d'intel·ligència artificial avançat desenvolupat per \textit{Anthropic} amb un enfocament a IA segura i beneficiosa. Permet generar textos de primera qualitat i contextualment apropiats per a diverses aplicacions, com ara la generació de codi, l'anàlisi de textos i la redacció de composicions. És accessible al públic mitjançant un lloc web beta (en forma de xatbot), però el codi i les dades utilitzades per la formació i el funcionament no són accessibles pel públic.
-    \item \textbf{Inflection-1:} \textit{Inflection-1} és un gran model de llenguatge (LLM) desenvolupat per \textit{Inflection AI}. És la base de \textit{Pi}, un assistent d'IA que pretén ser un xatbot de companyia, que continua les converses més llargues amb els usuaris i s'adapta a cadascun d'ells en funció d'aquestes converses. \textit{Inflection-1} no està disponible publicament i només és accessible en línia a través del xatbot que fa servir.
-    \item \textbf{Grok-1:} \textit{Grok-1} va ser creat per \textit{xAI}. Es tracta del motor que impulsa Grok, un \textit{xatbot} capaç de respondre gairebé qualsevol dubte i fins i tot d'oferir suggeriments sobre les preguntes que s'han de formular. Grok està configurat per assistir als usuaris amb la xarxa social que del que és propietari el mateix fundador de l'empresa. Grok-1 no és un programa de codi obert i no es pot emprar de manera lliure a excepció d'una beta oberta.
+  \item \textbf{GPT-4:} \textit{GPT-4} és un gran model multimodal que pot agafar entrades d'imatge i text i produir sortides de text. Representa el darrer avenç en la investigació d'\textit{OpenAI} sobre l'ampliació del \textit{deep learning}. El seu principal ús és per crear xatbots (bots conversacionals) generals, que poden conversar sobre temes molt diversos i, fins i tot, cercar a la xarxa per aportar informació extra. Alguns exemples són \textit{ChatGPT} i \textit{Bing Chat}, tots dos són serveis en línia i, per tant, no aplicables per al projecte.
+  \item \textbf{LaMDA:} \textit{LaMDA} és una col·lecció de grans models lingüístics desenvolupats per Google que treballen conjuntament per resoldre diverses tasques de generació de text. \textit{LaMDA} no està disponible públicament i només es pot accedir utilitzant la seva plataforma. Google va integrar aquest model en alguns dels seus productes, per millorar la seva funcionalitat i també va desenvolupar una primera versió d'un xatbot (\textit{Google Bard}) que durant un temps va usar aquest model.
+  \item \textbf{PaLM 2:} \textit{PaLM 2} és un gran model lingüístic (LLM) que amplia el llegat de Google en matèria d'aprenentatge automàtic i de recerca responsable de la IA. S'ha entrenat en un corpus divers i multilingüe de text, codi, matemàtiques i pàgines web i va ser usat durant un temps com a xatbot amb \textit{Google Bard}. Tot i que no és de codi obert, es pot accedir a PaLM 2 a través d'una API.
+  \item \textbf{Gemini:} \textit{Gemini} de Google és un ambiciós projecte d'intel·ligència artificial. És gran model de llenguatge (LLM) que tingui la capacitat de fer una gran varietat de tasques, incloses les relacionades amb text, imatges i àudio. \textit{Gemini} compta amb un disseny multimodal que permet la integració de diversos tipus d'informació i dona lloc a una àmplia gamma de formats de sortida. No és una plataforma de codi obert, per la qual cosa el codi i les dades no són accessibles al públic. Per altra banda, s'integra amb eines d'IA per a la generació de continguts, com ara la versió més nova de \textit{Google Bard}, que permet la interacció de l'usuari amb aquest model.
+  \item \textbf{Claude 2:} \textit{Claude 2} és un model de llenguatge d'intel·ligència artificial avançat desenvolupat per \textit{Anthropic} amb un enfocament a IA segura i beneficiosa. Permet generar textos de primera qualitat i contextualment apropiats per a diverses aplicacions, com ara la generació de codi, l'anàlisi de textos i la redacció de composicions. És accessible al públic mitjançant un lloc web beta (en forma de xatbot), però el codi i les dades utilitzades per la formació i el funcionament no són accessibles pel públic.
+  \item \textbf{Inflection-1:} \textit{Inflection-1} és un gran model de llenguatge (LLM) desenvolupat per \textit{Inflection AI}. És la base de \textit{Pi}, un assistent d'IA que pretén ser un xatbot de companyia, que continua les converses més llargues amb els usuaris i s'adapta a cadascun d'ells en funció d'aquestes converses. \textit{Inflection-1} no està disponible publicament i només és accessible en línia a través del xatbot que fa servir.
+  \item \textbf{Grok-1:} \textit{Grok-1} va ser creat per \textit{xAI}. Es tracta del motor que impulsa \textit{Grok}, un xatbot capaç de respondre gairebé qualsevol dubte i fins i tot d'oferir suggeriments sobre les preguntes que s'han de formular. \textit{Grok} està configurat per assistir als usuaris amb la xarxa social que del que és propietari el mateix fundador de l'empresa. \textit{Grok-1} no és un model de codi obert i no es pot emprar de manera lliure a excepció d'una beta oberta.
 \end{itemize}
+
 \subsection{Propostes descartades}
-\subsection{Comprovació models disponibles}
+El procés de selecció del model va exigeig una avaluació acurada de múltiples candidats per garantir la seva adequació als objectius del projecte. El fet de considerar tants models, cadascun amb els seus punts forts i febles, implica inevitablement un rebuig de molts d'ells per trobar la solució que millor s'adequi al problema. 
+
+Seguint aquestes directrius, s'intenta aconseguir una avaluació exhaustiva i imparcial dels models candidats. En última instància, es trien les opcions més adequades per complir els objectius del projecte, alhora que es treballa dins de les limitacions imposades per la sensibilitat de les dades i els recursos computacionals. La secció següent aprofundeix en les raons que van portar a descartar determinats models durant la fase de recerca.
+
+\subsubsection{Resolució inadequada de extreure informació}
+Un dels principals criteris de selecció dun model és la seva capacitat per extreure les paraules adequades del text que se li ofereix. Els models que no compleixen una prova base que representa l'ús que se li donarà al model son exclosos immediatament. 
+
+La prova en questió es basa en, donat un tiquet d'exemple, fer una pregunta o formular una frase, de manera que la continuació sempre fós una frase que tingués el text. Aquesta prova es modifica depenent de per quina tasca està entrenat cada model. Això serveix per descartar directament els models menys adequats i quedar-se amb el que són capaços de contestar correctament, permentent entrenar només aquells que ja anaven encaminats.
+
+\subsubsection{Accessibilitat en línia i restriccions dels acords de confidencialitat}
+Alguns models han sigut eliminats a causa de la seva accessibilitat només en línia, cosa que no s'ajusta al marc del projecte, que requereix un funcionament \textit{in situ} sense dependència de servidors externs. És inviable emprar models que exigeixin la transferència de dades fora dels servidors controlats, atesa la sensibilitat de les dades i les restrictives disposicions dels acords de confidencialitat vigents. Aquesta restricció és imperativa per mantenir la confidencialitat i la integritat de la informació confidencial.
+
+\subsubsection{Limitació de recursos}
+Tot i que alguns models resulten eficaços per abordar la tasca, han hagut de ser descartats a causa dels seus requisits poc pràctics en matèria de recursos tecnològics. En el context del projecte, la viabilitat de l'aplicació d'un model dins de la infraestructura disponible és molt limitant. Els models que exigien una potència de càlcul o uns excessius recursos de memòria es consideren inviables per a l'entorn d'execució del projecte.
+
+
+\subsection{Comprovació dels models disponibles}
+Avaluem cada model per valorar-ne l'eficàcia a l'hora de respondre les proves que han sigut seleccionades per cobrir els casos més típics. Aquesta secció presenta una descripció dels models que han sigut considerats, incloent-hi els punts forts i febles de cadascun. A través d'una anàlisi dels avantatges i desavantatges de cada model, l'objectiu és trobar raons per a la seva selecció o eliminació.
+
+\begin{table}[htbp]
+    \centering
+    % QA Model
+    \begin{tabular}{|>{\centering\arraybackslash}m{1.5cm}|m{4cm}|m{4cm}|m{4cm}|}
+      \hline
+      \multicolumn{4}{|c|}{\textbf{Models de Question answering}} \\
+      \hline
+      \textbf{Model} & \textbf{Avantatges} & \textbf{Desvantatges} & \textbf{Resultat} \\
+      \hline
+      Model 1 & High accuracy & Limited to specific domains & Promising \\
+      Model 2 & Fast response time & Requires large training dataset & Satisfactory \\
+      \hline
+    \end{tabular}
+    
+    % TG Model
+    \begin{tabular}{|>{\centering\arraybackslash}m{1.5cm}|m{4cm}|m{4cm}|m{4cm}|}
+      \hline
+      \multicolumn{4}{|c|}{\textbf{TG Model}} \\
+      \hline
+      \textbf{Model} & \textbf{Avantatges} & \textbf{Desvantatges} & \textbf{Resultat} \\
+      \hline
+      Model 3 & Multimodal capabilities & High computational cost & Effective \\
+      Model 4 & Robust to noisy input & Limited interpretability & Acceptable \\
+      \hline
+    \end{tabular}
+    
+    % TGT Model
+    \begin{tabular}{|>{\centering\arraybackslash}m{1.5cm}|m{4cm}|m{4cm}|m{4cm}|}
+      \hline
+      \multicolumn{4}{|c|}{\textbf{TGT Model}} \\
+      \hline
+      \textbf{Model} & \textbf{Avantatges} & \textbf{Desvantatges} & \textbf{Resultat} \\
+      \hline
+      Model 5 & Transfer learning benefits & Sensitivity to input variations & Potential \\
+      Model 6 & Adaptable to diverse tasks & Training time can be lengthy & Viable \\
+      \hline
+    \end{tabular}
+    \caption{Comparació dels models disponibles}
+    \label{tab:model-comparison}
+\end{table}
+  
+\begin{comment}
+QA:
+# deepset/roberta-large-squad2: blocking of the malicious portal
+# deepset/deberta-v3-large-squad2: deletion of the emails that have arrived in the mailboxes
+# gpt2-large: caca
+# bart: not usable
+# kaist-ai/prometheus-7b-v1.0 (hi ha una versió de 11b) no funciona, massa gran
+# deepset/bert-large-uncased-whole-word-masking-squad2: blocking of the malicious portal
+# bert-large-uncased-whole-word-masking-finetuned-squad: blocking of the malicious portal
+# botcon/squad_tuned_luke_peft_full: blocking of the malicious portal
+# jkgrad/xlnet-base-squadv2: caca
+# deepakvk/xlnet-base-cased-squad2: caca
+# saburbutt/xlnet_large_tweetqa: caca
+
+Text Generation:
+# gpt2-large: caca
+# bart: not usable
+# kaist-ai/prometheus-7b-v1.0 (hi ha una versió de 11b) no funciona, massa gran
+# HiTZ/GoLLIE-7B: massa gran
+# xlnet-large-cased: caca
+# EleutherAI/gpt-j-6B: massa gran
+# mistralai/Mistral-7B-v0.1: funciona a la web pero es massa gran en local
+# HuggingFaceH4/zephyr-7b-alpha: massa gran
+# EleutherAI/gpt-neo-2.7B: entèn el significat però el format de sortida és massa boig i comença a divagar
+
+T2T Generation:
+# google/flan-t5-large (hi ha versions encara més grans) text2text-generation: deletion of the emails that have arrived in the mailboxes of scope users and the blocking of the malicious portal
+# facebook/m2m100_418M: no aplicable, serveix per traduir
+# valhalla/t5-base-qa-qg-hl phishing campaign emails
+# mohitsha/tiny-random-testing-bert2gpt2: when when when when when when when when when when when when when when when when
+\end{comment}
+
+
 \subsection{Models destacats}
 \subsection{Justificació de la tria}
