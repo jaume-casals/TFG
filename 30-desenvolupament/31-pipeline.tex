@@ -14,7 +14,7 @@ La figura \ref{fig:pipeline} mostra un diagrama de flux que il·lustra el funcio
 
 \begin{figure}[H]
      \centering
-     \includegraphics[width=0.8\textwidth]{example-image-a}
+     \includegraphics[width=0.8\textwidth]{pipeline.png}
      \caption{Diagrama de flux del sistema d'anàlisi automàtica de tiquets d'incidències de ciberseguretat.}
      \label{fig:pipeline}
 \end{figure}
@@ -24,14 +24,17 @@ A continuació es detallen els components i les tecnologies utilitzades a cadasc
 % Explicar com està configurat el OTRS
 % Explicar quines funcions es criden, com s'extreu del excel i les excepcions
 % L'explicació dels tiquets es fa a l'apartat exploració teòrica
+\begin{comment}
 Per extreure els tiquets de la base de dades OTRS de l'Agència, s'ha fet servir l'API REST d'OTRS, que permet accedir a les dades mitjançant peticions HTTP. S'ha implementat un script de Python que utilitza la llibreria requests per fer les peticions i obtenir els tiquets en format JSON. L'script s'encarrega d'autenticar-se amb les credencials de l'Agència, filtrar els tiquets per data, estat i categoria, i emmagatzemar-los en un fitxer local per al processament posterior.
+\end{comment}
 
 \subsection{Preprocessament de tiquets}
 % Explicar quins apartats s'afegeixen als tiquets i quins es queden fora
 % Quins attachments s'ha decidit utilitzar
 % Com es busquen les referències
 % Com s'organitza el tiquet amb els tres anteriors apartats (posar imatge/exemple)
-El preprocessament dels tiquets té com a objectiu preparar el text per analitzar-lo pel model de PLN. S'ha implementat un script de Python que realitza les operacions següents sobre el text de cada tiquet:
+\begin{comment}
+     El preprocessament dels tiquets té com a objectiu preparar el text per analitzar-lo pel model de PLN. S'ha implementat un script de Python que realitza les operacions següents sobre el text de cada tiquet:
 
 \begin{itemize}
      \item Eliminar els elements HTML, les capçaleres, les signatures i els missatges anteriors que puguin contenir els tiquets, ja que no aporten informació rellevant per a l'anàlisi.
@@ -40,8 +43,10 @@ El preprocessament dels tiquets té com a objectiu preparar el text per analitza
 \end{itemize}
 
 El resultat del preprocessament és una llista de tokens per cada tiquet, que s'emmagatzema en un altre fitxer local per a la seva posterior anàlisi.
+\end{comment}
 
-\subsection{Aplicació del model de PLN}
+\subsection{Aplicació del model NLP}
+\begin{comment}
 
 Per aplicar el model de PLN que detecta i extreu els camps rellevants de cada tiquet, s'ha fet servir la llibreria spaCy, que és un framework de codi obert per al processament del llenguatge natural. SpaCy ofereix diversos models preentrenats per a diferents idiomes, que permeten fer tasques com l'anàlisi sintàctica, l'etiquetació morfològica, l'extracció d'entitats nomenades, la classificació de textos, etc.
 
@@ -72,9 +77,14 @@ El procés d'adaptació del model s'ha realitzat seguint els passos descrits a l
 \end{enumerate}
 
 El resultat de l'entrenament és un model de PLN capaç de detectar i extreure els camps rellevants dels tiquets d'incidències de ciberseguretat, que s'aplica a cada tiquet preprocessat i s'emmagatzema el resultat en un altre fitxer local per a la seva posterior anonimització.
+\end{comment}
 
 \subsection{Anonimització de camps}
 
+\begin{comment}
 L'anonimització dels camps extrets té com a objectiu protegir la privadesa i la confidencialitat de les dades personals o sensibles que puguin contenir els tiquets d'incidències de ciberseguretat. Per fer-ho, s'ha utilitzat una funció proporcionada per l'Agència, que rep com a paràmetre el text d'un camp i torna un text anonimitzat, que substitueix les dades per símbols o etiquetes genèriques. Per exemple, si el text del camp és "Juan Pérez", la funció torna "NOM COGNOM", i si el text és "192.168.1.1", la funció torna "IP PRIVADA".
 
 La funció d'anonimització s'ha implementat en un script de Python que rep com a entrada el fitxer amb els camps extrets pel model de PLN, i torna com a sortida un altre fitxer amb els camps anonimitzats, que s'emmagatzemen en un diccionari amb la següent estructura:
+\end{comment}
+
+\subsection{Emmagatzematge del resultat}

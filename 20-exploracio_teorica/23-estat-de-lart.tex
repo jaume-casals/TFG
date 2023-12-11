@@ -38,63 +38,105 @@ Avaluem cada model per valorar-ne l'eficàcia a l'hora de respondre les proves q
 \begin{table}[H]
   \centering
   % QA Model
-  \begin{tabular}{|>{\centering\arraybackslash}m{1.5cm}|m{1.6cm}|m{3.5cm}|m{3.5cm}|m{3.5cm}|}
+  \begin{tabular}{|>{\centering}m{2.3cm}|>{\centering}m{1.6cm}|m{10.7cm}|}
     \hline
-    \multicolumn{5}{|c|}{\textbf{Resposta a preguntes}} \\
+    \multicolumn{3}{|c|}{\textbf{Models de \textit{Question Answering}}} \\
     \hline
-    \textbf{Model} & \textbf{Params.} & \textbf{Avantatges} & \textbf{Desavantatges} & \textbf{Result} \\
+    \textbf{Model} & \textbf{Params.} & \textbf{Observacions} \\
     \hline
-    BERT & 340M & P & Antic & Contesta meitat de la resposta \\
-    BERT (finetuned) & 340M & Ja està reentrenat & C & Contesta meitat de la resposta \\
-    RoBERTa & 355M & Millora de BERT & C & Contesta meitat de la resposta \\
-    DeBERTaV3 & 304M & Millora de RoBERTa & C & Contesta meitat de la resposta \\
-    GPT-2 & 774M & P & Massa general & Escriu altres coses \\
-    BART & 400M & P & Més complicat de reentrenar & Serveix per resumir \\
-    Prometheus & 7B & P & C & Requereix massa recursos \\
-    LUKE & P & P & C & Resposta buida \\
-    XLNet & 110M & P & C & Escriu altres coses \\
-    XLNet (large) & 340M & P & C & Escriu altres coses \\
+    BERT & 340M & És un model antic | Contesta meitat de la resposta \\
+    BERT (finetuned) & 340M & Ja està afinat | Contesta meitat de la resposta \\
+    RoBERTa & 355M & Millora de BERT | Contesta meitat de la resposta \\
+    DeBERTaV3 & 304M & Millora de RoBERTa | Contesta meitat de la resposta \\
+    GPT-2 & 774M & Massa general | Escriu altres coses \\
+    BART & 406M & Més complicat d'afinar | Serveix per resumir \\
+    Prometheus & 7000M & Requereix massa recursos \\
+    LUKE & 483M & Resposta buida \\
+    XLNet & 110M & Escriu altres coses \\
+    XLNet (large) & 340M & Escriu altres coses \\
     \hline
   \end{tabular}
-  
+  \caption{Comparació dels models de \textit{Question Answering} (Resposta a preguntes)}
+  \label{tab:qa-comparison}
+\end{table}
+
+\begin{table}[H]
+  \centering
   % TG Model
-  \begin{tabular}{|>{\centering\arraybackslash}m{1.5cm}|m{1.6cm}|m{3.5cm}|m{3.5cm}|m{3.5cm}|}
+  \begin{tabular}{|>{\centering}m{2.3cm}|m{1.6cm}|m{10.7cm}|}
     \hline
-    \multicolumn{5}{|c|}{\textbf{Generació de text}} \\
+    \multicolumn{3}{|c|}{\textbf{Models de \textit{Text Generation}}} \\
     \hline
-    \textbf{Model} & \textbf{Params.} & \textbf{Avantatges} & \textbf{Desavantatges} & \textbf{Result} \\
+    \textbf{Model} & \textbf{Params.} & \textbf{Observacions} \\
     \hline
-    GPT-2 & 774M & P & Massa general & Escriu altres coses \\
-    BART & 400M & P & Més complicat de reentrenar & Serveix per resumir \\
-    Prometheus & 7B & P & C & Requereix massa recursos \\
-    GoLLIE-7B & 7B & Dissenyat per seguir instruccions & C & Requereix massa recursos \\
-    GPT-J & 6B & Té una versió en català & C & Requereix massa recursos \\
-    GPT-Neo & 2,7B & Té una versió en català & C & Entèn el significat però no contesta amb el format esperat \\
-    Mistral 7B & 7B & P & C & Requereix massa recursos \\
-    Mistral 7B (Instruct) & 7B & Dissenyat per seguir instruccions, Ha sigut reduït (Quantificació) & Molt gran & Respon correctament \\
-    Zephyr 7B $\beta$ & 7B & Reentrenament de Mistral 7B & C & Requereix massa recursos \\
+    GPT-2 & 774M & Massa general | Escriu altres coses \\
+    BART & 406M & Més complicat d'afinar | Serveix per resumir \\
+    Prometheus & 7000M & Requereix massa recursos \\
+    GoLLIE-7B & 7000M & Dissenyat per seguir instruccions | Requereix massa recursos \\
+    GPT-J & 6053M & Té una versió en català | Requereix massa recursos \\
+    GPT-Neo & 2700M & Té una versió en català | Entèn el significat però no contesta amb el format esperat \\
+    Mistral 7B & 7300M & Requereix massa recursos \\
+    Mistral 7B (Instruct) & 7300M & Dissenyat per seguir instruccions | Ha sigut reduït (Quantificació) | Respon correctament \\
+    Zephyr 7B $\beta$ & 7000M & Reentrenament de Mistral 7B | Requereix massa recursos \\
     \hline
   \end{tabular}
-  
+  \caption{Comparació dels models de \textit{Text Generation} (Generació de text)}
+  \label{tab:tg-comparison}
+\end{table}
+
+\begin{table}[H]
+  \centering
   % T2T Model
-  \begin{tabular}{|>{\centering\arraybackslash}m{1.5cm}|m{1.6cm}|m{3.5cm}|m{3.5cm}|m{3.5cm}|}
+  \begin{tabular}{|>{\centering}m{2.3cm}|m{1.6cm}|m{10.7cm}|}
     \hline
-    \multicolumn{5}{|c|}{\textbf{Generació de text a text}} \\
+    \multicolumn{3}{|c|}{\textbf{Models de \textit{Text to Text Generation}}} \\
     \hline
-    \textbf{Model} & \textbf{Params.} & \textbf{Avantatges} & \textbf{Desavantatges} & \textbf{Result} \\
+    \textbf{Model} & \textbf{Params.} & \textbf{Observacions} \\
     \hline
-    FLAN-T5 Small & 80M & P & C & No c \\
-    FLAN-T5 Base & 250M & P & C & deletion of the emails that have arrived in the mailboxes of scope users and the blocking of the malicious portal \\
-    FLAN-T5 Large & 780M & P & C & deletion of the emails that have arrived in the mailboxes of scope users and the blocking of the malicious portal \\
-    FLAN-T5 XL & 3B & P & C & deletion of the emails that have arrived in the mailboxes of scope users and the blocking of the malicious portal \\
-    m2m100\_418M & P & P & C & no aplicable, serveix per traduir \\
-    t5-base-qa-qg-hl & 300M & P & C & phishing campaign emails \\
-    tiny-random-testing-bert2gpt2 & P & P & C & when when when when when when when when when when when when when when when when \\
+    FLAN-T5 Small & 80M & No entèn el significat, Serveix per tasques més petites \\
+    FLAN-T5 Base & 250M & És relativament petit, Contesta correctament \\
+    FLAN-T5 Large & 780M & Contesta correctament \\
+    FLAN-T5 XL & 3B & Massa gran com per ser entrenat, Contesta correctament \\
+    M2M100 & 418M & Massa complicat d'afinar, Serveix per traduir \\
+    FLAN-T5 Base (QA) & 300M & Reentrenat específicament per contestar preguntes, Contesta meitat de la resposta  \\
     \hline
   \end{tabular}
-  \caption{Model Comparison}
-  \label{tab:model-comparison}
+  \caption{Comparació dels models de \textit{Text to Text Generation} (Generació de text a text)}
+  \label{tab:t2t-comparison}
 \end{table}
 
 \subsection{Models destacats}
-\subsection{Justificació de la tria}
+De la comparació dels models anteriors n'hi ha uns quants que han destacat per sobre dels altres. Aquests models han continuat per les proves de selecció i han sigut sotmesos a més testos i a afinaments per quantificar el seu rendiment. D'aquesta manera, es pot escollir el model més adequat pel projecte de manera acurada.
+
+\subsubsection{Mistral 7B (Instruct)}
+\textit{Mistral 7B Instruct} és un model del llenguatge natural que està afinat a partir del model \textit{Mistral 7B}. Aquest reentrenament es va realitzar, segons expliquen els creadors, per demostrar la facilitat que té el model original per adaptar-se a qualsevol tasca. Aquesta és una de les raons que va cridar molt l'atenció aquest model.
+
+Un altre motiu pel qual aquest model és tan interessant és que afirma ser el millor model de la seva mida. Això ha sigut comprovar comparant aquest model amb els més populars de la seva categoria en els \textit{datasets} més populars.
+
+El problema que té aquest model és que té massa paràmetres i tardaria massa temps a ser afinat correctament. De fet, el model sencer no es pot fer servir a les màquines disponibles, havent de recórrer a la versió quantificada del model per poder fer la inferència.
+
+En les proves, dona molt bons resultats, encertant en gairebé totes les preguntes. El seu rendiment és bastant lent, però acceptable pels objectius que es plantegen. Finalment, aquest model s'ha descartat, ja que no es pot assegurar que les màquines de l'\textbf{Agència} tinguin la capacitat per executar aquest model.
+
+\subsubsection{Flan-T5 Base}
+El model \textit{Flan-T5 Base} és un model de processament del llenguatge natural que presenta millores en tots els aspectes respecte al seu model previ: \textit{T5 Base}. Els seus desenvolupadors van escriure: "Amb T5, proposem reformular totes les tasques de NLP en un format unificat de text a text on l'entrada i la sortida són sempre cadenes de text, a diferència dels models d'estil BERT que només poden donar com a sortida una etiqueta de classe o un tram de l'entrada. El nostre marc de text a text ens permet utilitzar el mateix model, funció de pèrdua i hiperparàmetres en qualsevol tasca NLP."
+
+Un punt important d'aquest model és que està entrenat amb 60 llenguatges. Això significa que té una comprensió molt gran de tots els texts que se li puguin donar. A la vegada, no interessa tant que entengui gaires idiomes, ja que el format d'entrada estarà molt centrat en un idioma.
+
+Durant els experiments, demostra una capacitat de comprensió del llenguatge i del tiquet. El principal problema és que, en la majoria dels casos, no compleix correctament l'objectiu especificat, a excepció d'una tasca en concret. Gràcies al potencial que es veu en el model, es continua el procés, afinant el model amb una tasca de NER.
+
+L'afinament finalitza satisfactòriament aportant un \textit{rouge1} de $0,92$. Fent proves amb inferència es veu que aquest model contesta correctament a la majoria, però falla sobretot perquè repeteix més d'una vegada les respostes.
+
+\subsubsection{Flan-T5 Small}
+\textit{Flan-T5 Small} és el germà més petit de la família \textit{Flan-T5}. Tenint això en compte, és lògic pensar que donaria un pitjor rendiment que els altres models. El raonament darrere de la decisió de provar aquest model a fons és aconseguir un model que seria més ràpid, tant en entrenament com en inferència, a canvi de perdre poca precisió en les respostes.
+
+Aquest model, tal com s'havia vist, té la capacitat de formular frases senzilles, però en una primera instància no és capaç de respondre cap pregunta correctament. Després de l'afinament, s'ha comprovat que no assoleix trobar els patrons més bàsics de les dades, donant així un resultat negatiu i descartant el model per futurs passos.
+
+\subsubsection{Flan-T5 Small (LaMini)}
+El model \textit{Flan-T5 Small (LaMini)} més una versió afinada del model \textit{Flan-T5 Small} amb el \textit{dataset} per a seguir instruccions \textit{LaMini}. Amb aquest afinament, el model és capaç de millorar respecte al model del qual ha partit. Els creadors afirmen que té el millor rendiment general donat la seva mida.
+
+Malauradament, no s'ha notat cap millora respecte al model anterior. No només no ha sigut capaç de generar text relacionat amb el text donat sinó que no contesta a les preguntes seguint el format amb el qual ha sigut entrenat. Deguts aquests motius, i veient que és el model més potent de la seva categoria, queda clar que és necessari més paràmetres per poder completar aquesta tasca correctament.
+
+\subsubsection{Flan-T5 Base (LaMini)}
+\subsubsection{Flan-T5 Large}
+
+% \subsection{Justificació de la tria}
