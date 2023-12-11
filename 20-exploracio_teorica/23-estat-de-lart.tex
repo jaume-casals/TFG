@@ -11,7 +11,7 @@ per cada: nom, quin us té (chatbot, etc..) o en que es centra, empresa que ho f
   \item \textbf{PaLM 2:} \textit{PaLM 2} és un gran model lingüístic (LLM) que amplia el llegat de Google en matèria d'aprenentatge automàtic i de recerca responsable de la IA. S'ha entrenat en un corpus divers i multilingüe de text, codi, matemàtiques i pàgines web i va ser usat durant un temps com a xatbot amb \textit{Google Bard}. Tot i que no és de codi obert, es pot accedir a PaLM 2 a través d'una API.
   \item \textbf{Gemini:} \textit{Gemini} de Google és un ambiciós projecte d'intel·ligència artificial. És gran model de llenguatge (LLM) que tingui la capacitat de fer una gran varietat de tasques, incloses les relacionades amb text, imatges i àudio. \textit{Gemini} compta amb un disseny multimodal que permet la integració de diversos tipus d'informació i dona lloc a una àmplia gamma de formats de sortida. No és una plataforma de codi obert, per la qual cosa el codi i les dades no són accessibles al públic. Per altra banda, s'integra amb eines d'IA per a la generació de continguts, com ara la versió més nova de \textit{Google Bard}, que permet la interacció de l'usuari amb aquest model.
   \item \textbf{Claude 2:} \textit{Claude 2} és un model de llenguatge d'intel·ligència artificial avançat desenvolupat per \textit{Anthropic} amb un enfocament a IA segura i beneficiosa. Permet generar textos de primera qualitat i contextualment apropiats per a diverses aplicacions, com ara la generació de codi, l'anàlisi de textos i la redacció de composicions. És accessible al públic mitjançant un lloc web beta (en forma de xatbot), però el codi i les dades utilitzades per la formació i el funcionament no són accessibles pel públic.
-  \item \textbf{Inflection-1:} \textit{Inflection-1} és un gran model de llenguatge (LLM) desenvolupat per \textit{Inflection AI}. És la base de \textit{Pi}, un assistent d'IA que pretén ser un xatbot de companyia, que continua les converses més llargues amb els usuaris i s'adapta a cadascun d'ells en funció d'aquestes converses. \textit{Inflection-1} no està disponible publicament i només és accessible en línia a través del xatbot que fa servir.
+  \item \textbf{Inflection-1:} \textit{Inflection-1} és un gran model de llenguatge (LLM) desenvolupat per \textit{Inflection AI}. És la base de \textit{Pi}, un assistent d'IA que pretén ser un xatbot de companyia, que continua les converses més llargues amb els usuaris i s'adapta a cadascun d'ells en funció d'aquestes converses. \textit{Inflection-1} no està disponible públicament i només és accessible en línia a través del xatbot que fa servir.
   \item \textbf{Grok-1:} \textit{Grok-1} va ser creat per \textit{xAI}. Es tracta del motor que impulsa \textit{Grok}, un xatbot capaç de respondre gairebé qualsevol dubte i fins i tot d'oferir suggeriments sobre les preguntes que s'han de formular. \textit{Grok} està configurat per assistir als usuaris amb la xarxa social que del que és propietari el mateix fundador de l'empresa. \textit{Grok-1} no és un model de codi obert i no es pot emprar de manera lliure a excepció d'una beta oberta.
 \end{itemize}
 
@@ -35,79 +35,66 @@ Tot i que alguns models resulten eficaços per abordar la tasca, han hagut de se
 \subsection{Comprovació dels models disponibles}
 Avaluem cada model per valorar-ne l'eficàcia a l'hora de respondre les proves que han sigut seleccionades per cobrir els casos més típics. Aquesta secció presenta una descripció dels models que han sigut considerats, incloent-hi els punts forts i febles de cadascun. A través d'una anàlisi dels avantatges i desavantatges de cada model, l'objectiu és trobar raons per a la seva selecció o eliminació.
 
-\begin{table}[htbp]
-    \centering
-    % QA Model
-    \begin{tabular}{|>{\centering\arraybackslash}m{1.5cm}|m{4cm}|m{4cm}|m{4cm}|}
-      \hline
-      \multicolumn{4}{|c|}{\textbf{Models de Question answering}} \\
-      \hline
-      \textbf{Model} & \textbf{Avantatges} & \textbf{Desvantatges} & \textbf{Resultat} \\
-      \hline
-      Model 1 & High accuracy & Limited to specific domains & Promising \\
-      Model 2 & Fast response time & Requires large training dataset & Satisfactory \\
-      \hline
-    \end{tabular}
-    
-    % TG Model
-    \begin{tabular}{|>{\centering\arraybackslash}m{1.5cm}|m{4cm}|m{4cm}|m{4cm}|}
-      \hline
-      \multicolumn{4}{|c|}{\textbf{TG Model}} \\
-      \hline
-      \textbf{Model} & \textbf{Avantatges} & \textbf{Desvantatges} & \textbf{Resultat} \\
-      \hline
-      Model 3 & Multimodal capabilities & High computational cost & Effective \\
-      Model 4 & Robust to noisy input & Limited interpretability & Acceptable \\
-      \hline
-    \end{tabular}
-    
-    % TGT Model
-    \begin{tabular}{|>{\centering\arraybackslash}m{1.5cm}|m{4cm}|m{4cm}|m{4cm}|}
-      \hline
-      \multicolumn{4}{|c|}{\textbf{TGT Model}} \\
-      \hline
-      \textbf{Model} & \textbf{Avantatges} & \textbf{Desvantatges} & \textbf{Resultat} \\
-      \hline
-      Model 5 & Transfer learning benefits & Sensitivity to input variations & Potential \\
-      Model 6 & Adaptable to diverse tasks & Training time can be lengthy & Viable \\
-      \hline
-    \end{tabular}
-    \caption{Comparació dels models disponibles}
-    \label{tab:model-comparison}
-\end{table}
+\begin{table}[H]
+  \centering
+  % QA Model
+  \begin{tabular}{|>{\centering\arraybackslash}m{1.5cm}|m{1.6cm}|m{3.5cm}|m{3.5cm}|m{3.5cm}|}
+    \hline
+    \multicolumn{5}{|c|}{\textbf{Resposta a preguntes}} \\
+    \hline
+    \textbf{Model} & \textbf{Params.} & \textbf{Avantatges} & \textbf{Desavantatges} & \textbf{Result} \\
+    \hline
+    BERT & 340M & P & Antic & Contesta meitat de la resposta \\
+    BERT (finetuned) & 340M & Ja està reentrenat & C & Contesta meitat de la resposta \\
+    RoBERTa & 355M & Millora de BERT & C & Contesta meitat de la resposta \\
+    DeBERTaV3 & 304M & Millora de RoBERTa & C & Contesta meitat de la resposta \\
+    GPT-2 & 774M & P & Massa general & Escriu altres coses \\
+    BART & 400M & P & Més complicat de reentrenar & Serveix per resumir \\
+    Prometheus & 7B & P & C & Requereix massa recursos \\
+    LUKE & P & P & C & Resposta buida \\
+    XLNet & 110M & P & C & Escriu altres coses \\
+    XLNet (large) & 340M & P & C & Escriu altres coses \\
+    \hline
+  \end{tabular}
   
-\begin{comment}
-QA:
-# deepset/roberta-large-squad2: blocking of the malicious portal
-# deepset/deberta-v3-large-squad2: deletion of the emails that have arrived in the mailboxes
-# gpt2-large: caca
-# bart: not usable
-# kaist-ai/prometheus-7b-v1.0 (hi ha una versió de 11b) no funciona, massa gran
-# deepset/bert-large-uncased-whole-word-masking-squad2: blocking of the malicious portal
-# bert-large-uncased-whole-word-masking-finetuned-squad: blocking of the malicious portal
-# botcon/squad_tuned_luke_peft_full: blocking of the malicious portal
-# jkgrad/xlnet-base-squadv2: caca
-# deepakvk/xlnet-base-cased-squad2: caca
-# saburbutt/xlnet_large_tweetqa: caca
-
-Text Generation:
-# gpt2-large: caca
-# bart: not usable
-# kaist-ai/prometheus-7b-v1.0 (hi ha una versió de 11b) no funciona, massa gran
-# HiTZ/GoLLIE-7B: massa gran
-# xlnet-large-cased: caca
-# EleutherAI/gpt-j-6B: massa gran
-# mistralai/Mistral-7B-v0.1: funciona a la web pero es massa gran en local
-# HuggingFaceH4/zephyr-7b-alpha: massa gran
-# EleutherAI/gpt-neo-2.7B: entèn el significat però el format de sortida és massa boig i comença a divagar
-
-T2T Generation:
-# google/flan-t5-large (hi ha versions encara més grans) text2text-generation: deletion of the emails that have arrived in the mailboxes of scope users and the blocking of the malicious portal
-# facebook/m2m100_418M: no aplicable, serveix per traduir
-# valhalla/t5-base-qa-qg-hl phishing campaign emails
-# mohitsha/tiny-random-testing-bert2gpt2: when when when when when when when when when when when when when when when when
-\end{comment}
-
+  % TG Model
+  \begin{tabular}{|>{\centering\arraybackslash}m{1.5cm}|m{1.6cm}|m{3.5cm}|m{3.5cm}|m{3.5cm}|}
+    \hline
+    \multicolumn{5}{|c|}{\textbf{Generació de text}} \\
+    \hline
+    \textbf{Model} & \textbf{Params.} & \textbf{Avantatges} & \textbf{Desavantatges} & \textbf{Result} \\
+    \hline
+    GPT-2 & 774M & P & Massa general & Escriu altres coses \\
+    BART & 400M & P & Més complicat de reentrenar & Serveix per resumir \\
+    Prometheus & 7B & P & C & Requereix massa recursos \\
+    GoLLIE-7B & 7B & Dissenyat per seguir instruccions & C & Requereix massa recursos \\
+    GPT-J & 6B & Té una versió en català & C & Requereix massa recursos \\
+    GPT-Neo & 2,7B & Té una versió en català & C & Entèn el significat però no contesta amb el format esperat \\
+    Mistral 7B & 7B & P & C & Requereix massa recursos \\
+    Mistral 7B (Instruct) & 7B & Dissenyat per seguir instruccions, Ha sigut reduït (Quantificació) & Molt gran & Respon correctament \\
+    Zephyr 7B $\beta$ & 7B & Reentrenament de Mistral 7B & C & Requereix massa recursos \\
+    \hline
+  \end{tabular}
+  
+  % T2T Model
+  \begin{tabular}{|>{\centering\arraybackslash}m{1.5cm}|m{1.6cm}|m{3.5cm}|m{3.5cm}|m{3.5cm}|}
+    \hline
+    \multicolumn{5}{|c|}{\textbf{Generació de text a text}} \\
+    \hline
+    \textbf{Model} & \textbf{Params.} & \textbf{Avantatges} & \textbf{Desavantatges} & \textbf{Result} \\
+    \hline
+    FLAN-T5 Small & 80M & P & C & No c \\
+    FLAN-T5 Base & 250M & P & C & deletion of the emails that have arrived in the mailboxes of scope users and the blocking of the malicious portal \\
+    FLAN-T5 Large & 780M & P & C & deletion of the emails that have arrived in the mailboxes of scope users and the blocking of the malicious portal \\
+    FLAN-T5 XL & 3B & P & C & deletion of the emails that have arrived in the mailboxes of scope users and the blocking of the malicious portal \\
+    m2m100\_418M & P & P & C & no aplicable, serveix per traduir \\
+    t5-base-qa-qg-hl & 300M & P & C & phishing campaign emails \\
+    tiny-random-testing-bert2gpt2 & P & P & C & when when when when when when when when when when when when when when when when \\
+    \hline
+  \end{tabular}
+  \caption{Model Comparison}
+  \label{tab:model-comparison}
+\end{table}
 
 \subsection{Models destacats}
 \subsection{Justificació de la tria}
