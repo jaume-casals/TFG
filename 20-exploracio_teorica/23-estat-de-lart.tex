@@ -137,15 +137,15 @@ El model \textit{Flan-T5 Small (LaMini)} \cite{flan-t5} \cite{lamini} és una ve
 Malauradament, no s'ha notat cap millora respecte al model anterior. No només no ha sigut capaç de generar text relacionat amb el text donat sinó que no contesta a les preguntes seguint el format amb el qual ha sigut entrenat. Deguts aquests motius, i veient que és el model més potent de la seva categoria, queda clar que és necessari més paràmetres per poder completar aquesta tasca correctament.
 
 \subsubsection{Flan-T5 Base (LaMini)}
-Repetint el mateix procés que amb la seva versió inferior, \textit{Flan-T5 Base (LaMini)} \cite{flan-t5} \cite{lamini} és la versió afinada del model \textit{Flan-T5 Base} amb el \textit{dataset} per a seguir instruccions \textit{LaMini}. Degut als bons resultats reportats pels mateixos creadors, amb un augment del rendiment en totes les proves comparatives, es decideix afinar aquest model, en busca d'un rendiment encara més superior als resultats obtinguts al \textit{Flan-T5 Base}.
+Repetint el mateix procés que amb la seva versió inferior, \textit{Flan-T5 Base (LaMini)} \cite{flan-t5} \cite{lamini} és la versió afinada del model \textit{Flan-T5 Base} amb el \textit{dataset} per a seguir instruccions \textit{LaMini}. A causa dels bons resultats reportats pels mateixos creadors, amb un augment del rendiment en totes les proves comparatives, es decideix afinar aquest model, en cerca d'un rendiment superior als resultats obtinguts al \textit{Flan-T5 Base}.
 
-El descens sorprenent del rendiment observat durant la prova del model "base lamini" per a la resolució d'una tasca específica, malgrat el seu èxit previ en el seguiment general d'instruccions, planteja diverses causes potencials per a aquest resultat inesperat:
+El descens sorprenent del rendiment observat durant la prova del model \textit{Flan-T5 Base (LaMini)} per a la resolució d'una tasca específica, malgrat el seu èxit previ en el seguiment general d'instruccions, planteja diverses causes potencials per a aquest resultat inesperat:
 
 \begin{itemize}
-  \item \textbf{Qualitat del model:} El conjunt de dades \textit{LaMini} pot tenir característiques perjudicials pel rendiment a la tasca entrenada. Atès que el \textit{LaMini dataset} és generat sintèticament, és possible que no capturi amb precisió la complexitat i els matisos dels escenaris del món real per a realitzar corrrectament les proves en qüestió. La naturalesa sintètica de les dades podria introduir biaixos o patrons poc realistes que afectin negativament la capacitat del model per generalitzar ara la tasca específica.
+  \item \textbf{Qualitat del model:} El conjunt de dades \textit{LaMini} pot tenir característiques perjudicials per al rendiment a la tasca entrenada. Atès que el \textit{LaMini dataset} és generat sintèticament, és possible que no capturi amb precisió la complexitat i els matisos dels escenaris del món real per a dur a terme correctament les proves en qüestió. La naturalesa sintètica de les dades podria introduir biaixos o patrons poc realistes que afectin negativament la capacitat del model per generalitzar ara la tasca específica.
   \item \textbf{Rendiments decreixents a l'afinament:} L'ajust repetitiu del model pot haver resultat en un ajust excessiu, disminuint-ne l'adaptabilitat durant les proves. Els múltiples cicles d'afinament podrien haver trobat inicialment els patrons més rellevants, de manera que quan s'ha ajustat per última vegada, oferiria millores limitades i introduiria soroll potencialment. Tot i destacar en tasques generals de seguiment d'instruccions, el conjunt de dades \textit{LaMini} pot no ajustar-se als requisits específics de la tasca.
 \end{itemize}
 
-\subsubsection{Flan-T5 Large}
+% \subsubsection{Flan-T5 Large}
 
 % \subsection{Justificació de la tria}
