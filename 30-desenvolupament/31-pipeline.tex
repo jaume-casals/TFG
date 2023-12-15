@@ -1,12 +1,31 @@
 \section{Arquitectura del sistema (pipeline)}
-Aquest apartat descriu l'arquitectura del sistema que s'ha desenvolupat per a l'anàlisi automàtica dels tiquets d'incidències de ciberseguretat de l'Agència. L'arquitectura del sistema està encadenada a les màquines que disposem de l'agència i al sistema que tenen ja muntat fins ara. El sistema consta d'una sèrie de scripts de Python que duen a terme les tasques següents:
-%Explicar quines són les màquines de l'agència i que s'ha d'accedir amb VPN
+Aquest apartat descriu l'arquitectura del sistema que s'ha desenvolupat per a l'anàlisi automàtica dels tiquets d'incidències de ciberseguretat de l'\textbf{Agència}. L'arquitectura del sistema està encadenada a les màquines que disposem propietat de l'agència i al sistema que en producció en aquests moments. L'\textbf{Agència} ha posat a disposició del equip tres servidors idèntics per cada secció on estaran les dades i dos portàtils amb accés als servidors a través d'una VPN privada.
+
+\begin{itemize}
+     \item \textbf{Servidor 1 (OTRS):} Servidor on s'emmagatzema la base de dades d'OTRS amb els tiquets al seu interior.
+     \item \textbf{Servidor 2 (Pipeline):} Servidor encarregat d'accedir als altres servidors per llegir i guardar informació i passar-la pel programa desenvolupat per resoldre el problema.
+     \item \textbf{Servidor 3 (Elasticsearch):} Servidor que recull les dades processades i anonimitzades per un futur us.
+\end{itemize}
+
+\begin{itemize}
+     \item \textbf{Portàtil 1 (amb GPU):} Portàtil amb la funció principal d'entrenar el model que serà utilitzat per extreure l'informació dels tiquets. Està configurat per evitar cap bretxa de dades.
+     \item \textbf{Portàtil 2 (sense GPU):} Portàtil amb la capacitat d'accedir al servidors de l'\textbf{Agència} mitjançant una VPN.
+\end{itemize}
+
+\begin{figure}[H]
+     \centering
+     \includegraphics[width=0.8\textwidth]{network.png}
+     \caption{Diagrama de la xarxa del projecte. \\ (Creació pròpia amb recursos de \textbf{yWorks})}
+     \label{fig:network}
+\end{figure}
+
+El sistema consta d'una sèrie de scripts de Python que s'executen seqüencialment i duen a terme les tasques següents:
 
 \begin{enumerate}
-     \item Extreure els tiquets de la base de dades OTRS de l'Agència.
+     \item Extreure els tiquets de la base de dades OTRS de l'\textbf{Agència}.
      \item Preprocessar el text de cada tiquet, eliminant el soroll, normalitzant el format i inserint les referències necessàries.
      \item Aplicar un model de processament del llenguatge natural (NLP) que detecta i extreu els camps rellevants de cada tiquet.
-     \item Anonimitzar els camps extrets mitjançant una funció proporcionada per l'Agència, que substitueix les dades personals o sensibles per símbols o etiquetes genèriques.
+     \item Anonimitzar els camps extrets mitjançant una funció proporcionada per l'\textbf{Agència}, que substitueix les dades personals o sensibles per símbols o etiquetes genèriques.
      \item Emmagatzemar els camps anonimitzats en una base de dades Elasticsearch, que és un motor de cerca i anàlisi distribuïda.
 \end{enumerate}
 
@@ -14,19 +33,35 @@ La figura \ref{fig:pipeline} mostra un diagrama de flux que il·lustra el funcio
 
 \begin{figure}[H]
      \centering
-     \includegraphics[width=0.8\textwidth]{pipeline.png}
-     \caption{Diagrama de flux del sistema d'anàlisi automàtica de tiquets d'incidències de ciberseguretat.}
+     \vspace{1cm} % Adjust the vertical space (padding) at the top
+     \setlength{\fboxsep}{5pt} % Adjust the padding
+     \setlength{\fboxrule}{0pt} % Adjust the border thickness   
+     \fbox{\includegraphics[width=0.8\textwidth]{pipeline.png}}
+     \caption{Diagrama de flux del sistema d'anàlisi automàtica de tiquets d'incidències de ciberseguretat. \\ (Creació pròpia)}
      \label{fig:pipeline}
 \end{figure}
 
-A continuació es detallen els components i les tecnologies utilitzades a cadascuna de les etapes del pipeline.
+En les següents seccions es detallen els components i les tecnologies utilitzades a cadascuna de les etapes del \textit{pipeline}.
 \subsection{Extracció de tiquets d'OTRS}
 % Explicar com està configurat el OTRS
 % Explicar quines funcions es criden, com s'extreu del excel i les excepcions
 % L'explicació dels tiquets es fa a l'apartat exploració teòrica
-\begin{comment}
-Per extreure els tiquets de la base de dades OTRS de l'Agència, s'ha fet servir l'API REST d'OTRS, que permet accedir a les dades mitjançant peticions HTTP. S'ha implementat un script de Python que utilitza la llibreria requests per fer les peticions i obtenir els tiquets en format JSON. L'script s'encarrega d'autenticar-se amb les credencials de l'Agència, filtrar els tiquets per data, estat i categoria, i emmagatzemar-los en un fitxer local per al processament posterior.
-\end{comment}
+Per extreure els tiquets del Servidor OTRS de l'\textbf{Agència}, es fa servir \textit{PyOTRS}, que permet accedir a les dades mitjançant peticions amb la REST API. S'ha implementat un script de Python que utilitza la llibreria mencionada per fer les peticions i obtenir els tiquets. L'script s'encarrega d'autenticar-se amb les credencials cedides per l'\textbf{Agència}, extreure els tiquets especificats a un fitxer Excel i fer un post processament per obtenir tota l'informació del tiquet en un format estandaritzat i sense repeticions innecesàries. A continució es detalla el funcionament del codi seguint l'ordre que recorren els tiquets.
+
+\begin{enumerate}
+     \item \textbf{Iniciar sessió:} Es fan unes configuracions per assegurar que els tiquets es reben amb el format esperat i mitjançant les funcions creades a OTRS. Després es crea un client amb la adreça IP del servidor, el usuari i la contrassenya obtinguts de l'\textbf{Agència}.
+     \item \textbf{Iterar pels tiquets:} Es busca i s'obra el fitxer excel especificat en el qual hi haurà l'informació necessària dels tiquets que s'ha de processar. S'itera per la columna en la que es troben els identificadors del tiquets.
+     \item \textbf{Llegir ID del tiquet:} Per cada fila, es llegeix l'identificador del tiquet i es crida a la següent funció.
+     \item \textbf{Comprovar l'utilització del tiquet:} Abans de començar a extreure els tiquets, es comprova si el tiquet en qüestió ja ha sigut extret abans. Això es fa per evitar cicles infinits amb referències cícliques dins dels tiquets. Es reinicia la llist a de tiquets visitats després de cada iteració.
+     \item \textbf{Extreure tiquet:}
+     \item \textbf{Processament del tiquet:}
+     \item \textbf{Iterar pels articles:}
+     \item \textbf{Processament del cos:}
+     \item \textbf{Processament dels adjunts:}
+     \item \textbf{Processament de les referències:}
+     \item \textbf{Unir i retornar:}
+\end{enumerate}
+
 
 \subsection{Preprocessament de tiquets}
 % Explicar quins apartats s'afegeixen als tiquets i quins es queden fora
