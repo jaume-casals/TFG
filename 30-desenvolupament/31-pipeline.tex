@@ -52,8 +52,8 @@ Per extreure els tiquets del Servidor OTRS de l'\textbf{Agència}, es fa servir 
      \item \textbf{Iniciar sessió:} Es fan unes configuracions per assegurar que els tiquets es reben amb el format esperat i mitjançant les funcions creades a OTRS. Després es crea un client amb la adreça IP del servidor, el usuari i la contrassenya obtinguts de l'\textbf{Agència}.
      \item \textbf{Iterar pels tiquets:} Es busca i s'obra el fitxer excel especificat en el qual hi haurà l'informació necessària dels tiquets que s'ha de processar. S'itera per la columna en la que es troben els identificadors del tiquets.
      \item \textbf{Llegir ID del tiquet:} Per cada fila, es llegeix l'identificador del tiquet i es crida a la següent funció.
-     \item \textbf{Comprovar l'utilització del tiquet:} Abans de començar a extreure els tiquets, es comprova si el tiquet en qüestió ja ha sigut extret abans. Això es fa per evitar cicles infinits amb referències cícliques dins dels tiquets. Es reinicia la llist a de tiquets visitats després de cada iteració.
-     \item \textbf{Extreure tiquet:}
+     \item \textbf{Comprovar l'utilització del tiquet:} Abans de començar a extreure els tiquets, es comprova si el tiquet en qüestió ja ha sigut extret abans. Això es fa per evitar cicles infinits amb referències cícliques dins dels tiquets. Es reinicia la llista de tiquets visitats després de cada iteració.
+     \item \textbf{Extreure tiquet:} S'envia la petició al servidor OTRS mitjançant la funció \texttt{get_ticket_by_number} de \textbf{PyOTRS} 
      \item \textbf{Processament del tiquet:}
      \item \textbf{Iterar pels articles:}
      \item \textbf{Processament del cos:}
