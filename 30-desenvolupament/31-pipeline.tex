@@ -46,20 +46,14 @@ En les següents seccions es detallen els components i les tecnologies utilitzad
 % Explicar com està configurat el OTRS
 % Explicar quines funcions es criden, com s'extreu del excel i les excepcions
 % L'explicació dels tiquets es fa a l'apartat exploració teòrica
-Per extreure els tiquets del Servidor OTRS de l'\textbf{Agència}, es fa servir \textit{PyOTRS}, que permet accedir a les dades mitjançant peticions amb la REST API. S'ha implementat un script de Python que utilitza la llibreria mencionada per fer les peticions i obtenir els tiquets. L'script s'encarrega d'autenticar-se amb les credencials cedides per l'\textbf{Agència}, extreure els tiquets especificats a un fitxer Excel i fer un post processament per obtenir tota l'informació del tiquet en un format estandaritzat i sense repeticions innecesàries. A continució es detalla el funcionament del codi seguint l'ordre que recorren els tiquets.
+Per extreure els tiquets del Servidor OTRS de l'\textbf{Agència}, es fa servir \textit{PyOTRS}, que permet accedir a les dades mitjançant peticions amb la REST API. S'ha implementat un script de Python que utilitza la llibreria mencionada per fer les peticions i obtenir els tiquets. L'script s'encarrega d'autenticar-se amb les credencials cedides per l'\textbf{Agència}, extreure els tiquets especificats a un fitxer Excel i fer un postprocessament per aconseguir tota la informació del tiquet en un format estandarditzat i sense repeticions innecessàries. A continuació es detalla el funcionament del codi seguint l'ordre que recorren els tiquets.
 
-\begin{enumerate}
-     \item \textbf{Iniciar sessió:} Es fan unes configuracions per assegurar que els tiquets es reben amb el format esperat i mitjançant les funcions creades a OTRS. Després es crea un client amb la adreça IP del servidor, el usuari i la contrassenya obtinguts de l'\textbf{Agència}.
-     \item \textbf{Iterar pels tiquets:} Es busca i s'obra el fitxer excel especificat en el qual hi haurà l'informació necessària dels tiquets que s'ha de processar. S'itera per la columna en la que es troben els identificadors del tiquets.
+\begin{enumerate} %Falten les excepcions
+     \item \textbf{Iniciar sessió:} Es fan unes configuracions per assegurar que els tiquets es reben amb el format esperat i mitjançant les funcions creades a OTRS. Després es crea un client amb l'adreça IP del servidor, l'usuari i la contrasenya obtingudes de l'\textbf{Agència}.
+     \item \textbf{Iterar pels tiquets:} Es busca i s'obre el fitxer Excel especificat en el qual hi haurà la informació necessària dels tiquets que s'ha de processar. S'itera per la columna en la qual es troben els identificadors dels tiquets.
      \item \textbf{Llegir ID del tiquet:} Per cada fila, es llegeix l'identificador del tiquet i es crida a la següent funció.
-     \item \textbf{Comprovar l'utilització del tiquet:} Abans de començar a extreure els tiquets, es comprova si el tiquet en qüestió ja ha sigut extret abans. Això es fa per evitar cicles infinits amb referències cícliques dins dels tiquets. Es reinicia la llista de tiquets visitats després de cada iteració.
-     \item \textbf{Extreure tiquet:} S'envia la petició al servidor OTRS mitjançant la funció \texttt{get_ticket_by_number} de \textbf{PyOTRS} 
-     \item \textbf{Processament del tiquet:}
-     \item \textbf{Iterar pels articles:}
-     \item \textbf{Processament del cos:}
-     \item \textbf{Processament dels adjunts:}
-     \item \textbf{Processament de les referències:}
-     \item \textbf{Unir i retornar:}
+     \item \textbf{Comprovar la utilització del tiquet:} Abans de començar a extreure els tiquets, es comprova si el tiquet en qüestió ja ha sigut extret abans. Això es fa per evitar cicles infinits amb referències cícliques dins dels tiquets. Es reinicia la llista de tiquets visitats després de cada iteració.
+     \item \textbf{Extreure tiquet:} S'envia la petició al servidor OTRS mitjançant la funció \linebreak \texttt{get\_ticket\_by\_number} de \textbf{PyOTRS}. El qual retorna un tiquet de la classe \texttt{Ticket}, molt convenientment, pel seu futur processament. En cas que el tiquet amb l'identificador especificat no existeixi, es llançarà un error informant del succés.
 \end{enumerate}
 
 
@@ -69,6 +63,14 @@ Per extreure els tiquets del Servidor OTRS de l'\textbf{Agència}, es fa servir 
 % Com es busquen les referències
 % Com s'organitza el tiquet amb els tres anteriors apartats (posar imatge/exemple)
 \begin{comment}
+\begin{enumerate}
+     \item \textbf{Processament del tiquet:}
+     \item \textbf{Iterar pels articles:}
+     \item \textbf{Processament del cos:}
+     \item \textbf{Processament dels adjunts:}
+     \item \textbf{Processament de les referències:}
+     \item \textbf{Unir i retornar:}
+\end{enumerate}
      El preprocessament dels tiquets té com a objectiu preparar el text per analitzar-lo pel model de PLN. S'ha implementat un script de Python que realitza les operacions següents sobre el text de cada tiquet:
 
 \begin{itemize}

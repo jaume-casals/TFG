@@ -29,15 +29,18 @@ La prova en questió es basa en, donat un tiquet d'exemple, fer una pregunta o f
 Alguns models han sigut eliminats a causa de la seva accessibilitat només en línia, cosa que no s'ajusta al marc del projecte, que requereix un funcionament \textit{in situ} sense dependència de servidors externs. És inviable emprar models que exigeixin la transferència de dades fora dels servidors controlats, atesa la sensibilitat de les dades i les restrictives disposicions dels acords de confidencialitat vigents. Aquesta restricció és imperativa per mantenir la confidencialitat i la integritat de la informació confidencial.
 
 \subsubsection{Limitació de recursos}
+Les exigències computacionals dels algorismes de \textit{deep learning} són considerables, per la qual cosa requereixen grans recursos de maquinari per agilitzar els processos d'entrenament. En concret, l'ús d'unitats de processament gràfic (GPU) d'alt rendiment s'ha tornat essencial per accelerar aquest tipus de tasques. A diferència de les CPU tradicionals, l'arquitectura paral·lela de les GPU millora l'eficiència de les operacions d'alta càrrega computacional inherents als algoritmes de \textit{deep learning}. Per tant, és necessari disposar de GPU amb una potència computacional per poder entrenar i afinar la majoria dels models disponibles.
+
 Tot i que alguns models resulten eficaços per abordar la tasca, han hagut de ser descartats a causa dels seus requisits poc pràctics en matèria de recursos tecnològics. En el context del projecte, la viabilitat de l'aplicació d'un model dins de la infraestructura disponible és molt limitant. Els models que exigien una potència de càlcul o uns excessius recursos de memòria es consideren inviables per a l'entorn d'execució del projecte.
 
 
 \subsection{Comprovació dels models disponibles}
 Avaluem cada model per valorar-ne l'eficàcia a l'hora de respondre les proves que han sigut seleccionades per cobrir els casos més típics. Aquesta secció presenta una descripció dels models que han sigut considerats, incloent-hi els punts forts i febles de cadascun. A través d'una anàlisi dels avantatges i desavantatges de cada model, l'objectiu és trobar raons per a la seva selecció o eliminació.
 
+Per cada model, s'ha descarregat la versió més gran (i, en conseqüència, s'espera que la més efectiva), que ha permès l'equip actual. S'ha executat el model amb una sèrie de tiquets de prova depenent del tipus de tasca per la qual ha sigut entrenat. 
+
 \begin{table}[H]
   \centering
-  % QA Model
   \begin{tabular}{|>{\centering}m{2.3cm}|>{\centering}m{1.6cm}|m{10.7cm}|}
     \hline
     \multicolumn{3}{|c|}{\textbf{Models de \textit{Question Answering}}} \\
@@ -62,7 +65,6 @@ Avaluem cada model per valorar-ne l'eficàcia a l'hora de respondre les proves q
 
 \begin{table}[H]
   \centering
-  % TG Model
   \begin{tabular}{|>{\centering}m{2.3cm}|m{1.6cm}|m{10.7cm}|}
     \hline
     \multicolumn{3}{|c|}{\textbf{Models de \textit{Text Generation}}} \\
@@ -75,9 +77,10 @@ Avaluem cada model per valorar-ne l'eficàcia a l'hora de respondre les proves q
     GoLLIE-7B & 7000M & Dissenyat per seguir instruccions | Requereix massa recursos \\
     GPT-J & 6053M & Té una versió en català | Requereix massa recursos \\
     GPT-Neo & 2700M & Té una versió en català | Entèn el significat però no contesta amb el format esperat \\
+    Llama 2 & 7000M & És pitjor, en general, que Mistral 7B | Requereix massa recursos \\
     Mistral 7B & 7300M & Requereix massa recursos \\
     Mistral 7B (Instruct) & 7300M & Dissenyat per seguir instruccions | Ha sigut reduït (Quantificació) | Respon correctament \\
-    Zephyr 7B $\beta$ & 7000M & Reentrenament de Mistral 7B | Requereix massa recursos \\
+    Zephyr 7B $\beta$ & 7300M & Reentrenament de Mistral 7B | Requereix massa recursos \\
     \hline
   \end{tabular}
   \caption{Comparació dels models de \textit{Text Generation} (Generació de text)}
@@ -86,7 +89,6 @@ Avaluem cada model per valorar-ne l'eficàcia a l'hora de respondre les proves q
 
 \begin{table}[H]
   \centering
-  % T2T Model
   \begin{tabular}{|>{\centering}m{2.3cm}|m{1.6cm}|m{10.7cm}|}
     \hline
     \multicolumn{3}{|c|}{\textbf{Models de \textit{Text to Text Generation}}} \\
@@ -113,14 +115,17 @@ De la comparació dels models anteriors n'hi ha uns quants que han destacat per 
 
 Un altre motiu pel qual aquest model és tan interessant és que afirma ser el millor model de la seva mida. Això ha sigut comprovar comparant aquest model amb els més populars de la seva categoria en els \textit{datasets} més populars.
 
-El problema que té aquest model és que té massa paràmetres i tardaria massa temps a ser afinat correctament. De fet, el model sencer no es pot fer servir a les màquines disponibles, havent de recórrer a la versió quantificada del model per poder fer la inferència.
+El problema que té aquest model és que té massa paràmetres i tardaria massa temps a ser afinat correctament. De fet, el model sencer no es pot fer servir a les màquines disponibles, havent de recórrer a la versió quantificada del model per poder fer la inferència. 
+
+Aquest model s'ha executat més concretament utilitzant el programa \textit{localGPT} \cite{localgpt}. El programa permet, en essència, parlar a un assistent sobre un document indicat. \textit{LocalGPT} primer ingereix un document i després deixa fer preguntes sobre el document, tenint l'habilitat de comprendre'l, llegir-lo i extreure informació per contestar tots els dubtes. A més a més, pot recordar el context de la conversació, el que significa que es poden fer preguntes encadenades fent referència a les anteriors respostes.
 
 En les proves, dona molt bons resultats, encertant en gairebé totes les preguntes. El seu rendiment és bastant lent, però acceptable pels objectius que es plantegen. Finalment, aquest model s'ha descartat, ja que no es pot assegurar que les màquines de l'\textbf{Agència} tinguin la capacitat per executar aquest model.
-%parlar de localGPT
 
 
 \subsubsection{Llama 2}
-% el model inicial del LocalGPT
+\textit{Llama 2} \cite{llama} és un model NLP de codi obert desenvolupat per \textit{Meta}. Aquest model va ser publicat afirmant ser el millor model durant el seu temps en moltes proves de rendiment. Té $7000M$ paràmetres, fent impossible la seva execució localment amb els dispositius disponibles. Per aquest motiu, s'executa la seva versió quantificada. Dona resultats acceptables, però lluny de ser la solució del problema i, molt inferior comparat amb \textit{Mistral 7B}, el seu principal competidor.
+
+Aquest model també és compatible amb el programa \textit{LocalGPT} \cite{localgpt} i, és per això i per la seva mida similar que és tan comparat amb el model \textit{Mistral 7B}. \textit{Llama 2} és el model que està seleccionat per defecte al programa \textit{localGPT}, i per aquesta raó va ser el primer a ser provat. En veure la millora significativa comparat amb el seu model competidor, va ser ràpidament substituït per aquesta versió millorada seva.
 
 
 \subsubsection{Flan-T5 Base}
