@@ -44,11 +44,9 @@ La figura \ref{fig:pipeline} mostra un diagrama de flux que il·lustra el funcio
 En les següents seccions es detallen els components i les tecnologies utilitzades a cadascuna de les etapes del \textit{pipeline}.
 \subsection{Extracció de tiquets d'OTRS}
 % Explicar com està configurat el OTRS
-% Explicar quines funcions es criden, com s'extreu del excel i les excepcions
-% L'explicació dels tiquets es fa a l'apartat exploració teòrica
 Per extreure els tiquets del Servidor OTRS de l'\textbf{Agència}, es fa servir \textit{PyOTRS}, que permet accedir a les dades mitjançant peticions amb la REST API. S'ha implementat un script de Python que utilitza la llibreria mencionada per fer les peticions i obtenir els tiquets. L'script s'encarrega d'autenticar-se amb les credencials cedides per l'\textbf{Agència}, extreure els tiquets especificats a un fitxer Excel i fer un postprocessament per aconseguir tota la informació del tiquet en un format estandarditzat i sense repeticions innecessàries. A continuació es detalla el funcionament del codi seguint l'ordre que recorren els tiquets.
 
-\begin{enumerate} %Falten les excepcions
+\begin{enumerate}
      \item \textbf{Iniciar sessió:} Es fan unes configuracions per assegurar que els tiquets es reben amb el format esperat i mitjançant les funcions creades a OTRS. Després es crea un client amb l'adreça IP del servidor, l'usuari i la contrasenya obtingudes de l'\textbf{Agència}.
      \item \textbf{Iterar pels tiquets:} Es busca i s'obre el fitxer Excel especificat en el qual hi haurà la informació necessària dels tiquets que s'ha de processar. S'itera per la columna en la qual es troben els identificadors dels tiquets.
      \item \textbf{Llegir ID del tiquet:} Per cada fila, es llegeix l'identificador del tiquet i es crida a la següent funció.
@@ -58,29 +56,26 @@ Per extreure els tiquets del Servidor OTRS de l'\textbf{Agència}, es fa servir 
 
 
 \subsection{Preprocessament de tiquets}
+El preprocessament dels tiquets té com a objectiu preparar el text per ser analitzat pel model de NLP. S'ha implementat un script de Python que efectua les operacions següents sobre el text de cada tiquet:
 % Explicar quins apartats s'afegeixen als tiquets i quins es queden fora
 % Quins attachments s'ha decidit utilitzar
 % Com es busquen les referències
 % Com s'organitza el tiquet amb els tres anteriors apartats (posar imatge/exemple)
-\begin{comment}
 \begin{enumerate}
-     \item \textbf{Processament del tiquet:}
-     \item \textbf{Iterar pels articles:}
-     \item \textbf{Processament del cos:}
-     \item \textbf{Processament dels adjunts:}
-     \item \textbf{Processament de les referències:}
-     \item \textbf{Unir i retornar:}
+     \item \textbf{Iterar pels articles:} El processament bàsic del tiquet consisteix a iterar per tots els articles del tiquet i, per cadascun d'ells unir el cos principal de l'article amb els arxius adjunts i les referències a altres tiquets. Fent això repetit per cada article fins a arribar a l'últim i evitant sempre repetir text ja mencionat anteriorment.
+     \item \textbf{Processament del cos:} El primer que s'insereix és el cos principal de l'article que s'està tractant en el moment. Gràcies a una opció d'OTRS, el cos està adjuntat com un fitxer adjunt més en format HTML, permetent molta més flexibilitat a l'hora de modificar el seu contingut. Un problema que es va trobar en tots els tiquets, és que per cada article que es contesta, es torna a enviar tota la conversa fins al moment a sota. És per això que es busca l'element HTML que marca el final del tiquet (Una vora esquerra blava) i s'elimina tot el que hi ha dins. Després es converteix a text normal, s'elimina la firma (indica l'hora, lloc i altra informació irrellevant) amb una expressió regular (regex) i s'elimina tots els salts de línia sobrants.
+     \item \textbf{Processament dels adjunts:} Els fitxers adjunts estan tots codificats amb la codificació \textbf{Base 64}, per tant, el primer pas és descodificar el fitxer. Després depenent del seu format es fa ús de llibreries diferents per acabar amb el fitxer en format text UTF-8. No tots els fitxers poden ser processats per extreure la seva informació, per exemple, s'ha considerat que analitzar les imatges està fora de l'àmbit d'aquest projecte i, per tant, s'ha decidit tractar els seguents formats:
+          \begin{itemize}
+               \item \textbf{Fitxer de text (.txt):}
+               \item \textbf{Fitxer de correu electrònic (.msg):}
+               \item \textbf{Fitxer PDF (.pdf):}
+               \item \textbf{Document de Word (.docx):}
+               \item \textbf{Antic document de Word (.doc):}
+          \end{itemize}
+     \item \textbf{Processament de les referències:} Aquesta funció intenta buscar en el text totes aquelles referències a incidències passades per intentar recrear tot el context necessari per entendre el tiquet. Es defineix un patró d'expressió regular que cerca exactament 16 dígits, que representen un número de tiquet, i cerca totes les aparicions d'aquest patró dins de l'article. Per a cada número de tiquet identificat, es recupera informació detallada sobre el tiquet referenciat utilitzant la funció \texttt{get\_ticket\_by\_number} i indicant, en cas que sigui necessari si ja ha sigut inserida aquesta referència anteriorment.
+     \item \textbf{Unir i retornar:} Finalment, s'uneixen totes les peces en un mateix text, de manera que quedarien els articles ordenats temporalment i, sota de cada article, el text dels fitxers adjunts (si han pogut ser descodificats) i els tiquets als quals es fan referència.
 \end{enumerate}
-     El preprocessament dels tiquets té com a objectiu preparar el text per analitzar-lo pel model de PLN. S'ha implementat un script de Python que realitza les operacions següents sobre el text de cada tiquet:
 
-\begin{itemize}
-     \item Eliminar els elements HTML, les capçaleres, les signatures i els missatges anteriors que puguin contenir els tiquets, ja que no aporten informació rellevant per a l'anàlisi.
-     \item Normalitzar el text, convertint totes les lletres a minúscules, eliminant els signes de puntuació, els números i els caràcters especials, i substituint els espais múltiples per un de sol.
-     \item Tokenitzar el text, és a dir, dividir-lo en unitats mínimes de significat, que en aquest cas són les paraules. S'ha utilitzat la llibreria NLTK per fer aquesta tasca, que ofereix diferents algorismes de tokenització per a diferents idiomes.
-\end{itemize}
-
-El resultat del preprocessament és una llista de tokens per cada tiquet, que s'emmagatzema en un altre fitxer local per a la seva posterior anàlisi.
-\end{comment}
 
 \subsection{Aplicació del model NLP}
 \begin{comment}
