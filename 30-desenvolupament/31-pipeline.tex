@@ -51,7 +51,7 @@ Per extreure els tiquets del Servidor OTRS de l'\textbf{Agència}, es fa servir 
      \item \textbf{Iterar pels tiquets:} Es busca i s'obre el fitxer Excel especificat en el qual hi haurà la informació necessària dels tiquets que s'ha de processar. S'itera per la columna en la qual es troben els identificadors dels tiquets.
      \item \textbf{Llegir ID del tiquet:} Per cada fila, es llegeix l'identificador del tiquet i es crida a la següent funció.
      \item \textbf{Comprovar la utilització del tiquet:} Abans de començar a extreure els tiquets, es comprova si el tiquet en qüestió ja ha sigut extret abans. Això es fa per evitar cicles infinits amb referències cícliques dins dels tiquets. Es reinicia la llista de tiquets visitats després de cada iteració.
-     \item \textbf{Extreure tiquet:} S'envia la petició al servidor OTRS mitjançant la funció \linebreak \texttt{get\_ticket\_by\_number} de \textbf{PyOTRS}. El qual retorna un tiquet de la classe \texttt{Ticket}, molt convenientment, pel seu futur processament. En cas que el tiquet amb l'identificador especificat no existeixi, es llançarà un error informant del succés.
+     \item \textbf{Extreure tiquet:} S'envia la petició al servidor OTRS mitjançant la funció \linebreak \pyth{get_ticket_by_number} de \textbf{PyOTRS}. El qual retorna un tiquet de la classe \pyth{Ticket}, molt convenientment, pel seu futur processament. En cas que el tiquet amb l'identificador especificat no existeixi, es llançarà un error informant del succés.
 \end{enumerate}
 
 
@@ -72,51 +72,39 @@ El preprocessament dels tiquets té com a objectiu preparar el text per ser anal
                \item \textbf{Document de Word (.docx):}
                \item \textbf{Antic document de Word (.doc):}
           \end{itemize}
-     \item \textbf{Processament de les referències:} Aquesta funció intenta buscar en el text totes aquelles referències a incidències passades per intentar recrear tot el context necessari per entendre el tiquet. Es defineix un patró d'expressió regular que cerca exactament 16 dígits, que representen un número de tiquet, i cerca totes les aparicions d'aquest patró dins de l'article. Per a cada número de tiquet identificat, es recupera informació detallada sobre el tiquet referenciat utilitzant la funció \texttt{get\_ticket\_by\_number} i indicant, en cas que sigui necessari si ja ha sigut inserida aquesta referència anteriorment.
+     \item \textbf{Processament de les referències:} Aquesta funció intenta buscar en el text totes aquelles referències a incidències passades per intentar recrear tot el context necessari per entendre el tiquet. Es defineix un patró d'expressió regular que cerca exactament 16 dígits, que representen un número de tiquet, i cerca totes les aparicions d'aquest patró dins de l'article. Per a cada número de tiquet identificat, es recupera informació detallada sobre el tiquet referenciat utilitzant la funció \pyth{get_ticket_by_number} i indicant, en cas que sigui necessari si ja ha sigut inserida aquesta referència anteriorment.
      \item \textbf{Unir i retornar:} Finalment, s'uneixen totes les peces en un mateix text, de manera que quedarien els articles ordenats temporalment i, sota de cada article, el text dels fitxers adjunts (si han pogut ser descodificats) i els tiquets als quals es fan referència.
 \end{enumerate}
 
 
-\subsection{Aplicació del model NLP}
-\begin{comment}
+\subsection{Aplicació del model}
+Per aplicar el model NLP que detecta i extreu els camps rellevants de cada tiquet, s'ha fet servir la llibreria \textit{Transformers}.
+\textit{Transformers} és una biblioteca de codi obert desenvolupada per \textit{Hugging Face} \cite{Hugging-Face} que ofereix models preentrenats i eines per a tasques de processament del llenguatge natural. Aquesta llibreria facilita molt l'aplicació del model i, després d'instalar totes les dependències requerides, s'utilitza la següent commanda per inicialitzar un \textit{pipeline}, que amaga tot el procés d'inferència:
 
-Per aplicar el model de PLN que detecta i extreu els camps rellevants de cada tiquet, s'ha fet servir la llibreria spaCy, que és un framework de codi obert per al processament del llenguatge natural. SpaCy ofereix diversos models preentrenats per a diferents idiomes, que permeten fer tasques com l'anàlisi sintàctica, l'etiquetació morfològica, l'extracció d'entitats nomenades, la classificació de textos, etc.
+\begin{python}
+t2t_gen_pipe = pipeline(
+     "text2text-generation",
+     model='./trained_model/',
+     tokenizer='google/flan-t5-base',
+     device='cuda'
+     )     
+output_text = t2t_gen_pipe(input_ticket_str, max_new_tokens=300, beams=5)[0]['generated_text']
+\end{python}
 
-En aquest cas, s'ha utilitzat el model preentrenat per a l'espanyol, que s'anomena \\ $es_core\_news\_sm$. Aquest model és capaç de reconèixer les entitats anomenades següents: persona, organització, lloc, producte, esdeveniment, obra d'art, llei, data, hora, percentatge, diners, quantitat, ordinal i cardinal. Tot i això, no totes aquestes entitats són rellevants per a l'anàlisi dels tiquets d'incidències de ciberseguretat, ia més hi ha alguns camps que no es corresponen amb cap d'aquestes entitats, com el tipus d'incidència o el nivell de prioritat.
+Aquest codi inicialitza un \textit{pipeline} amb la funció de generació de text a text (la tasca del model \textit{Flan-T5}), el model afinat anteriorment, el tokenitzador per defecte del model i s'indica que es faci ús dels drivers de cuda, per aprofitar tota la potència computacional de la GPU. Amb aquest \textit{pipeline}, s'indica l'entrada, el nombre màxim de tokens que pot generar el model (el model té la capacitat per parar sol, però s'indica un màxim com a mesura de seguretat) i el nombre de \textit{beams} (possibles solucions candidates, diferents unes de les altres) durant el \textit{beam search}.
 
-Per tant, s'ha realitzat un procés d'adaptació del model preentrenat, que consisteix a afegir noves entitats i reentrenar el model amb un conjunt de dades etiquetat específicament per al domini dels tiquets de ciberseguretat. El conjunt de dades etiquetatge s'ha obtingut a partir d'una mostra de tiquets reals de l'Agència, que s'han anotat manualment amb les entitats següents:
-
-\begin{itemize}
-     \item TIPUS: el tipus d'incidència, que pot ser phishing, malware, ransomware, atac DDoS, etc.
-     \item PRIORITAT: el nivell de prioritat assignat al tiquet, que pot ser baixa, mitjana, alta o crítica.
-     \item USUARI: nom o àlies de l'usuari afectat per la incidència.
-     \item DISPOSITIU: el nom o l'adreça IP del dispositiu compromès per la incidència.
-     \item DATA: la data en què es va produir o es va reportar la incidència.
-     \item HORA: l'hora en què es va produir o es va reportar la incidència.
-     \item ORG: l'organització a què pertany l'usuari o dispositiu afectat, que es manté com una entitat preexistent del model.
-     \item LOC: el lloc des del qual es va originar o detectar la incidència, que es manté com una entitat preexistent del model.
-\end{itemize}
-
-El procés d'adaptació del model s'ha realitzat seguint els passos descrits a la documentació de spaCy, que consisteixen en:
-
-\begin{enumerate}
-     \item Crear un objecte de la classe Language a partir del model preentrenat.
-     \item Afegir les noves entitats al component de reconeixement d'entitats nomenades (NER) del model, mitjançant el mètode add\_label.
-     \item Deshabilitar els altres components del model, com l'analitzador sintàctic o l'etiquetador morfològic, ja que no es faran servir i poden interferir amb l'entrenament del NER.
-     \item Crear un objecte de classe EntityRecognizer a partir del component NER del model, i assignar-li un optimitzador, una funció de pèrdua i unes mètriques d'avaluació.
-     \item Entrenar l'objecte EntityRecognizer amb el conjunt de dades etiquetatge, mitjançant el mètode update, que rep com a paràmetres els textos i les anotacions de les entitats, i torna la pèrdua i les mètriques a cada iteració.
-     \item Desar el model adaptat en un fitxer local, mitjançant el mètode to\_disk.
-\end{enumerate}
-
-El resultat de l'entrenament és un model de PLN capaç de detectar i extreure els camps rellevants dels tiquets d'incidències de ciberseguretat, que s'aplica a cada tiquet preprocessat i s'emmagatzema el resultat en un altre fitxer local per a la seva posterior anonimització.
-\end{comment}
 
 \subsection{Anonimització de camps}
+L'anonimització dels camps extrets té com a objectiu protegir la privadesa i la confidencialitat de les dades personals o sensibles que puguin contenir els tiquets d'incidències de ciberseguretat. Per fer-ho, s'ha utilitzat una funció proporcionada per l'\textbf{Agència}, que rep com a paràmetre el text d'un camp i torna un text anonimitzat, que substitueix les dades per símbols o etiquetes genèriques. Per exemple, si el text del camp és "Marc Vila", la funció torna "NOM COGNOM", i si el text és "192.168.1.1", la funció torna "IP PRIVADA".
 
-\begin{comment}
-L'anonimització dels camps extrets té com a objectiu protegir la privadesa i la confidencialitat de les dades personals o sensibles que puguin contenir els tiquets d'incidències de ciberseguretat. Per fer-ho, s'ha utilitzat una funció proporcionada per l'Agència, que rep com a paràmetre el text d'un camp i torna un text anonimitzat, que substitueix les dades per símbols o etiquetes genèriques. Per exemple, si el text del camp és "Juan Pérez", la funció torna "NOM COGNOM", i si el text és "192.168.1.1", la funció torna "IP PRIVADA".
+La funció d'anonimització s'ha implementat en un script de Python que rep com a entrada el fitxer amb els camps extrets pel model de NLP, i torna com a sortida un altre fitxer amb els camps anonimitzats.
 
-La funció d'anonimització s'ha implementat en un script de Python que rep com a entrada el fitxer amb els camps extrets pel model de PLN, i torna com a sortida un altre fitxer amb els camps anonimitzats, que s'emmagatzemen en un diccionari amb la següent estructura:
-\end{comment}
 
 \subsection{Emmagatzematge del resultat}
+A l'etapa final de la cadena de processament dels tiquets, l'\textbf{Agència} ha utilitzat \textit{Elasticsearch} com a solució d'emmagatzematge per als camps extrets. \textit{Elasticsearch} és conegut per les seves capacitats de cerca distribuïda i en temps real, cosa que el fa eficient per gestionar i consultar grans volums de dades estructurades.
+
+El procés comença establint una connexió amb el \textit{Servidor Elasticsearch} mitjançant una funció d'inici de sessió. Aquesta funció empra la llibreria de Python \texttt{Elasticsearch} per verificar la connectivitat amb l'adreça IP del \textbf{Servidor 2} especificada.
+
+Un cop s'estableix una connexió amb èxit, es crida la funció per pujar els camps extrets d'un tiquet a la base de dades. La funció pren com a paràmetres un diccionari que representa els camps extrets del tiquet, la connexió Elasticsearch establerta i alguns camps necessaris com el nombre del tiquet i l'identificador.
+
+A continuació, utilitza una funció pròpia de la llibreria \texttt{Elasticsearch} per inserir el tiquet a l'índex especificat, amb l'identificador del tiquet com a clau primària.
