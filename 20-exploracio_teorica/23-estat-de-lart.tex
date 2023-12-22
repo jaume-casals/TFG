@@ -1,9 +1,7 @@
 \section{Estat de l'art}
-En aquesta secció es revisarà l'estat de l'art dels models que poden solucionar el problema plantejat. Per aconseguir la millor solució, s'ha proposat mantenir un rang de cerca ampli, i considerar moltes propostes que en un principi no havien sigut plantejades.
+En aquesta secció es revisa l'estat de l'art dels models que poden solucionar el problema plantejat. Per aconseguir la millor solució, s'ha proposat mantenir un rang de cerca ampli, i considerar moltes propostes que en un principi no havien sigut plantejades.
 \subsection{Aplicacions comercials}
 Lògicament, un model de generació del llenguatge natural pot ser una eina molt potent si es busca el propòsit adequat. És per això, que moltes empreses han decidit invertir en aquest sector per assolir aquests models tan potents. Aquests models són, generalment, l'estat de l'art en aquest àmbit, ja que disposen de molts recursos per obtenir el millor resultat possible. A continuació es presenten els models comercialitzats més importants en l'àmbit global:
-
-per cada: nom, quin us té (chatbot, etc..) o en que es centra, empresa que ho fa, model de negoci (online, offline sobretot), etc?
 
 \begin{itemize}
   \item \textbf{GPT-4:} \textit{GPT-4} és un gran model multimodal que pot agafar entrades d'imatge i text i produir sortides de text. Representa el darrer avenç en la investigació d'\textit{OpenAI} sobre l'ampliació del \textit{deep learning}. El seu principal ús és per crear xatbots (bots conversacionals) generals, que poden conversar sobre temes molt diversos i, fins i tot, cercar a la xarxa per aportar informació extra. Alguns exemples són \textit{ChatGPT} i \textit{Bing Chat}, tots dos són serveis en línia i, per tant, no aplicables per al projecte.
@@ -16,17 +14,17 @@ per cada: nom, quin us té (chatbot, etc..) o en que es centra, empresa que ho f
 \end{itemize}
 
 \subsection{Propostes descartades}
-El procés de selecció del model va exigeig una avaluació acurada de múltiples candidats per garantir la seva adequació als objectius del projecte. El fet de considerar tants models, cadascun amb els seus punts forts i febles, implica inevitablement un rebuig de molts d'ells per trobar la solució que millor s'adequi al problema. 
+El procés de selecció del model va exigir una avaluació acurada de múltiples candidats per garantir la seva adequació als objectius del projecte. El fet de considerar tants models, cadascun amb els seus punts forts i febles, ha implicat inevitablement un rebuig de molts d'ells per trobar la solució que millor s'adeqüi al problema. 
 
-Seguint aquestes directrius, s'intenta aconseguir una avaluació exhaustiva i imparcial dels models candidats. En última instància, es trien les opcions més adequades per complir els objectius del projecte, alhora que es treballa dins de les limitacions imposades per la sensibilitat de les dades i els recursos computacionals. La secció següent aprofundeix en les raons que van portar a descartar determinats models durant la fase de recerca.
+Seguint aquestes directrius, s'ha intentat aconseguir una avaluació exhaustiva i imparcial dels models candidats. En última instància, s'han triat les opcions més adequades per complir els objectius del projecte, alhora que es treballa dins de les limitacions imposades per la sensibilitat de les dades i els recursos computacionals. La secció següent aprofundeix en les raons que van portar a descartar determinats models durant la fase de recerca.
 
-\subsubsection{Resolució inadequada de extreure informació}
-Un dels principals criteris de selecció dun model és la seva capacitat per extreure les paraules adequades del text que se li ofereix. Els models que no compleixen una prova base que representa l'ús que se li donarà al model son exclosos immediatament. 
+\subsubsection{Resolució inadequada d'extreure informació}
+Un dels principals criteris de selecció d'un model ha sigut la seva capacitat per extreure les paraules adequades del text que se li ofereix. Els models que no han complert una prova base que representa l'ús que se li donarà al model són exclosos immediatament. 
 
-La prova en questió es basa en, donat un tiquet d'exemple, fer una pregunta o formular una frase, de manera que la continuació sempre fós una frase que tingués el text. Aquesta prova es modifica depenent de per quina tasca està entrenat cada model. Això serveix per descartar directament els models menys adequats i quedar-se amb el que són capaços de contestar correctament, permentent entrenar només aquells que ja anaven encaminats.
+La prova en qüestió es basa en, donat un tiquet d'exemple, fer una pregunta o formular una frase, de manera que la continuació sempre sigui una frase que estigui continguda en el text. Aquesta prova s'ha modificat depenent de per quina tasca està entrenat cada model. Això ha servit per descartar directament els models menys adequats i quedar-se amb el que són capaços de contestar correctament, permetent entrenar només aquells que ja anaven encaminats.
 
 \subsubsection{Accessibilitat en línia i restriccions dels acords de confidencialitat}
-Alguns models han sigut eliminats a causa de la seva accessibilitat només en línia, cosa que no s'ajusta al marc del projecte, que requereix un funcionament \textit{in situ} sense dependència de servidors externs. És inviable emprar models que exigeixin la transferència de dades fora dels servidors controlats, atesa la sensibilitat de les dades i les restrictives disposicions dels acords de confidencialitat vigents. Aquesta restricció és imperativa per mantenir la confidencialitat i la integritat de la informació confidencial.
+Alguns models han sigut eliminats a causa de la seva accessibilitat només en línia, cosa que no s'ajusta al marc del projecte, que requereix un funcionament \textit{in situ} sense dependència de servidors externs. És inviable emprar models que exigeixin la transferència de dades fora dels servidors controlats, atesa la sensibilitat de les dades i les restrictives disposicions dels acords de confidencialitat vigents. Aquesta restricció ha sigut imperativa per mantenir la confidencialitat i la integritat de la informació confidencial.
 
 \subsubsection{Limitació de recursos}
 Les exigències computacionals dels algorismes de \textit{deep learning} són considerables, per la qual cosa requereixen grans recursos de maquinari per agilitzar els processos d'entrenament. En concret, l'ús d'unitats de processament gràfic (GPU) d'alt rendiment s'ha tornat essencial per accelerar aquest tipus de tasques. A diferència de les CPU tradicionals, l'arquitectura paral·lela de les GPU millora l'eficiència de les operacions d'alta càrrega computacional inherents als algoritmes de \textit{deep learning}. Per tant, és necessari disposar de GPU amb una potència computacional per poder entrenar i afinar la majoria dels models disponibles.
@@ -119,7 +117,7 @@ El problema que té aquest model és que té massa paràmetres i tardaria massa 
 
 Aquest model s'ha executat més concretament utilitzant el programa \textit{localGPT} \cite{localgpt}. El programa permet, en essència, parlar a un assistent sobre un document indicat. \textit{LocalGPT} primer ingereix un document i després deixa fer preguntes sobre el document, tenint l'habilitat de comprendre'l, llegir-lo i extreure informació per contestar tots els dubtes. A més a més, pot recordar el context de la conversació, el que significa que es poden fer preguntes encadenades fent referència a les anteriors respostes.
 
-En les proves, dona molt bons resultats, encertant en gairebé totes les preguntes. El seu rendiment és bastant lent, però acceptable pels objectius que es plantegen. Finalment, aquest model s'ha descartat, ja que no es pot assegurar que les màquines de l'\textbf{Agència} tinguin la capacitat per executar aquest model.
+En les proves, ha donat molt bons resultats, encertant en gairebé totes les preguntes. El seu temps d'execució és bastant lent, però acceptable pels objectius que es plantegen. Finalment, aquest model s'ha descartat, ja que no es pot assegurar que les màquines de l'\textbf{Agència} tinguin la capacitat per executar aquest model.
 
 
 \subsubsection{Llama 2}
@@ -133,19 +131,19 @@ El model \textit{Flan-T5 Base} \cite{flan-t5} és un model de processament del l
 
 Un punt important d'aquest model és que està entrenat amb 60 llenguatges. Això significa que té una comprensió molt gran de tots els texts que se li puguin donar. A la vegada, no interessa tant que entengui gaires idiomes, ja que el format d'entrada estarà molt centrat en un idioma.
 
-Durant els experiments, demostra una capacitat de comprensió del llenguatge i del tiquet. El principal problema és que, en la majoria dels casos, no compleix correctament l'objectiu especificat, a excepció d'una tasca en concret. Gràcies al potencial que es veu en el model, es continua el procés, afinant el model amb una tasca de NER.
+Durant els experiments, ha demostrat una capacitat de comprensió del llenguatge i del tiquet. El principal problema és que, en la majoria dels casos, no compleix correctament l'objectiu especificat, a excepció d'una tasca en concret. Gràcies al potencial que s'ha vist en el model, es continua el procés, afinant el model amb una tasca de NER.
 
-L'afinament finalitza satisfactòriament aportant un \textit{rouge1} de $0,96$. Fent proves amb inferència es veu que aquest model contesta correctament a la majoria, però falla sobretot perquè repeteix més d'una vegada les respostes.
+L'afinament ha finalitzat satisfactòriament aportant un \textit{rouge1} de $0,96$. Fent proves amb inferència s'ha vist que aquest model contesta correctament a la majoria, però ha fallat sobretot perquè repeteix més d'una vegada les respostes.
 
 \subsubsection{Flan-T5 Small}
 \textit{Flan-T5 Small} \cite{flan-t5} és el germà més petit de la família \textit{Flan-T5}. Tenint això en compte, és lògic pensar que donaria un pitjor rendiment que els altres models. El raonament darrere de la decisió de provar aquest model a fons és aconseguir un model que seria més ràpid, tant en entrenament com en inferència, a canvi de perdre poca precisió en les respostes.
 
-Aquest model, tal com s'havia vist, té la capacitat de formular frases senzilles, però en una primera instància no és capaç de respondre cap pregunta correctament. Després de l'afinament, s'ha comprovat que no assoleix trobar els patrons més bàsics de les dades, donant així un resultat negatiu i descartant el model per futurs passos.
+Aquest model, tal com s'havia vist, té la capacitat de formular frases senzilles, però en una primera instància no ha sigut capaç de respondre cap pregunta correctament. Després de l'afinament, s'ha comprovat que no ha assolit trobar els patrons més bàsics de les dades, donant així un resultat negatiu i descartant el model per futurs passos.
 
 \subsubsection{Flan-T5 Small (LaMini)}
 El model \textit{Flan-T5 Small (LaMini)} \cite{flan-t5} \cite{lamini} és una versió afinada del model \textit{Flan-T5 Small} amb el \textit{dataset} per a seguir instruccions \textit{LaMini}. Amb aquest afinament, el model és capaç de millorar respecte al model del qual ha partit. Els creadors afirmen que té el millor rendiment general donat la seva mida.
 
-Malauradament, no s'ha notat cap millora respecte al model anterior. No només no ha sigut capaç de generar text relacionat amb el text donat sinó que no contesta a les preguntes seguint el format amb el qual ha sigut entrenat. Deguts aquests motius, i veient que és el model més potent de la seva categoria, queda clar que és necessari més paràmetres per poder completar aquesta tasca correctament.
+Malauradament, no s'ha notat cap millora respecte al model anterior. No només no ha sigut capaç de generar text relacionat amb el text donat sinó que no ha contestat a les preguntes seguint el format amb el qual ha sigut entrenat. Deguts aquests motius, i veient que és el model més potent de la seva categoria, ha quedat clar que és necessari més paràmetres per poder completar aquesta tasca correctament.
 
 \subsubsection{Flan-T5 Base (LaMini)}
 Repetint el mateix procés que amb la seva versió inferior, \textit{Flan-T5 Base (LaMini)} \cite{flan-t5} \cite{lamini} és la versió afinada del model \textit{Flan-T5 Base} amb el \textit{dataset} per a seguir instruccions \textit{LaMini}. A causa dels bons resultats reportats pels mateixos creadors, amb un augment del rendiment en totes les proves comparatives, es decideix afinar aquest model, en cerca d'un rendiment superior als resultats obtinguts al \textit{Flan-T5 Base}.
