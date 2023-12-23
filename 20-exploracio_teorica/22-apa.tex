@@ -23,12 +23,23 @@ Segons la tasca a resoldre, l'aprenentatge autònom es pot dividir principalment
 \end{itemize}
 
 \subsubsection{Deep learning}
-
 El \textit{deep learning} (aprenentatge profund en català) és un subcamp del \textit{machine learning} que aprofita les xarxes neuronals per analitzar dades. 
 
 Les xarxes neuronals consisteixen en capes de neurones artificials que adquireixen patrons i característiques complexos a partir de les dades d'entrada. Fa servir aquestes xarxes neuronals amb múltiples capes per extreure'n característiques i patrons complexos de les dades. Cada capa neuronal obté informació de la capa anterior, fa càlculs i transmet el resultat a la següent capa. 
 
 Els models de \textit{deep learning} poden aprendre de grans quantitats de dades i assolir una precisió i eficiència elevades. Destaquen sobretot, perquè són capaços de fer tasques complexes que els algoritmes d'aprenentatge autònom tradicionals consideren difícils, com ara la visió per ordinador i el processament del llenguatge natural. Tot i això, l'aprenentatge profund requereix més recursos i temps per l'entrenament i execució que el \textit{machine learning}.
+
+
+\subsubsection{Fine-Tuning}
+El \textit{Fine-Tuning} o afinament en el context del \textit{deep learning} és el procés d'ajustar una xarxa neuronal preentrenada per a una tasca específica. Aquest enfocament evita entrenar una xarxa neuronal des de zero, adaptant un model que ja ha estat entrenat en un conjunt de dades ampli i general. Aquest enfocament és especialment útil quan el conjunt de dades pel \textit{Fine-Tuning} és més petit i pot no ser adequat per entrenar un model d'alt rendiment des del principi.
+
+La tècnica consisteix a ajustar els pesos i paràmetres del model preentrenat durant l'entrenament al conjunt de dades específiques. Aquest procés permet que el model aprengui matisos i informació específics de la tasca, alhora que conserva els valuosos coneixements adquirits a la fase de preentrenament.
+
+
+\subsubsection{Few-shot learning}
+El \textit{Few-shot learning} o aprenentatge d'uns pocs cops, inclòs el \textit{One-shot learning} o aprenentatge d'un sol cop, aborda escenaris en què un model s'entrena per fer prediccions basant-se en un nombre limitat d'exemples. En els entorns tradicionals, els models solen requerir grans quantitats de dades d'entrenament per aconseguir un rendiment satisfactori. En contraposició, en el \textit{Few-shot learning}, l'objectiu és que un model funcioni bé fins i tot quan se li presenten només unes poques instàncies d'exemple durant la inferència, evitant així un reentrenament.
+
+El funcionament és tan senzill com exposar un exemple o diversos exemples del problema ja solucionat amb la seva resposta i fer contestar al model en el mateix missatge un problema similar. El raonament és que el model entén el que s'espera que hagi de retornar i produeix així una inferència molt més satisfactòria.
 
 \subsection{Processament del Llenguatge Natural} \label{ssec:definicio_NLP}
 El processament del llenguatge natural (\textit{NLP} per les seves sigles en anglès) es refereix a la disciplina de dissenyar màquines capaçes de comprendre el llenguatge humà, o dades semblants al llenguatge humà, de la manera com s'escriu, es parla i s'organitza. Els models d'aprenentatge profund poden aprendre a representar el llenguatge natural d'una manera significativa i utilitzar aquestes representacions per realitzar diverses tasques de \textit{NLP} \cite{Hugging-Face}. Per cadascuna d'elles es descriu i s'indica si és adequada pel projecte que es desenvolupa.
