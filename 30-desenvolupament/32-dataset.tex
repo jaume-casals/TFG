@@ -1,1 +1,21 @@
-\section{Creació dataset sintètic}
+\section{Creació del dataset sintètic}
+% Parlar de perquè necessitem un dataset sintètic
+% Perque hem escullit aquest
+% explicar el dataset, els seus camps, etc
+% fer una anàlisi del dataset
+
+Durant el desenvolupament i millora dels models del projecte, es va plantejar un repte important: la manca d'un conjunt complet de dades del món real. Les dades del món real són crucials per entrenar i avaluar models que puguin funcionar en aplicacions pràctiques. L'obtenció d'un \textit{dataset} prou ampli i divers per als models que es desenvolupen va ser un repte ja que, al no disposar de les dades originals amb les que s'hauria de treballar, es va haver de buscar un \textit{dataset} similar. La naturalesa sensible de les dades i restriccions de propietat associades als informes d'incidències dificulten la cerca d'un conjunt de dades similar.
+
+Per tant, es va prendre la decisió d'utilitzar un \textit{dataset} sintètic, que és una col·lecció simulada de dades generades per imitar escenaris del món real. Tot i que no reprodueix les complexitats i matisos de les dades reals, les dades sintètiques serveixen com una valuosa eina per provar i refinar models quan les dades reals són inaccessibles o limitades.
+
+
+\subsection{Descripció general}
+El \textit{dataset} escollit és \textit{Named Entity Recognition in Indian court judgments} \cite{dataset} (Reconeixement d'Entitats Nomenades a Sentències Judicials de l'Índia). Aquest \textit{dataset} sintètic és una col·lecció seleccionada de sentències judicials que han sigut anotades centrant-se en entitats amb més rellevancia dins del context judicial. Aquesta elecció ha estat guiada per les següents consideracions que l'han convertit en un candidat adequat per avaluar el rendiment dels models:
+
+\begin{itemize}
+  \item \textbf{Entitats complexes:} Les sentències dels tribunals indis solen contenir terminologia jurídica complexa, noms diversos i algunes entitats llargues que suposen un repte per als sistemes NER. Aquesta complexitat proporciona un terreny de proves per als models, cosa que permet avaluar la seva capacitat per extreure amb precisió entitats intricades i variades, tal i com apareixen als tiquets reals.
+  \item \textbf{Sensibilitat al context:} El conjunt de dades escollit fa especial èmfasi en la importància del context en el reconeixement d'entitats. En els documents jurídics, els noms es poden referir a múltiples entitats en funció del context, una característica que reflecteix els reptes s'esperava trobar al conjunt de tiquets proporcionats per l'\textbf{Agència}. Aquesta consideració s'alineava amb les complexitats contextuals que preveiem en escenaris d'incidències on una única entitat (per exemple, una adreça de correu electrònic) pot representar diferents papers (atacant, destinatari, usuaris afectats) en funció del context. Comprendre i abordar aquests matisos específics del context ha sigut crucial per al desenvolupament de models precisos.
+\end{itemize}
+
+
+\subsection{Anàlisi del dataset}
