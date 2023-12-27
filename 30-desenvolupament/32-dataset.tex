@@ -4,18 +4,43 @@
 % explicar el dataset, els seus camps, etc
 % fer una anàlisi del dataset
 
-Durant el desenvolupament i millora dels models del projecte, es va plantejar un repte important: la manca d'un conjunt complet de dades del món real. Les dades del món real són crucials per entrenar i avaluar models que puguin funcionar en aplicacions pràctiques. L'obtenció d'un \textit{dataset} prou ampli i divers per als models que es desenvolupen va ser un repte ja que, al no disposar de les dades originals amb les que s'hauria de treballar, es va haver de buscar un \textit{dataset} similar. La naturalesa sensible de les dades i restriccions de propietat associades als informes d'incidències dificulten la cerca d'un conjunt de dades similar.
+Durant el desenvolupament i millora dels models del projecte, es va plantejar un repte important: la manca d'un conjunt complet de dades del món real. Les dades del món real són crucials per entrenar i avaluar models que puguin funcionar en aplicacions pràctiques. L'obtenció d'un \textit{dataset} prou ampli i divers per als models que es desenvolupen va ser un repte, ja que, com que no es disposava de les dades originals amb les quals s'hauria de treballar, es va haver de buscar un \textit{dataset} similar. La naturalesa sensible de les dades i restriccions de propietat associades als informes d'incidències dificulten la cerca d'un conjunt de dades similar.
 
 Per tant, es va prendre la decisió d'utilitzar un \textit{dataset} sintètic, que és una col·lecció simulada de dades generades per imitar escenaris del món real. Tot i que no reprodueix les complexitats i matisos de les dades reals, les dades sintètiques serveixen com una valuosa eina per provar i refinar models quan les dades reals són inaccessibles o limitades.
 
 
 \subsection{Descripció general}
-El \textit{dataset} escollit és \textit{Named Entity Recognition in Indian court judgments} \cite{dataset} (Reconeixement d'Entitats Nomenades a Sentències Judicials de l'Índia). Aquest \textit{dataset} sintètic és una col·lecció seleccionada de sentències judicials que han sigut anotades centrant-se en entitats amb més rellevancia dins del context judicial. Aquesta elecció ha estat guiada per les següents consideracions que l'han convertit en un candidat adequat per avaluar el rendiment dels models:
+El \textit{dataset} escollit és \textit{Named Entity Recognition in Indian court judgments} \cite{dataset} (Reconeixement d'Entitats Nomenades a Sentències Judicials de l'Índia). Aquest \textit{dataset} sintètic és una col·lecció seleccionada de sentències judicials que han sigut anotades centrant-se en entitats amb més rellevància dins del context judicial. Aquesta elecció ha estat guiada per les següents consideracions que l'han convertit en un candidat adequat per avaluar el rendiment dels models:
 
 \begin{itemize}
-  \item \textbf{Entitats complexes:} Les sentències dels tribunals indis solen contenir terminologia jurídica complexa, noms diversos i algunes entitats llargues que suposen un repte per als sistemes NER. Aquesta complexitat proporciona un terreny de proves per als models, cosa que permet avaluar la seva capacitat per extreure amb precisió entitats intricades i variades, tal i com apareixen als tiquets reals.
+  \item \textbf{Entitats complexes:} Les sentències dels tribunals indis solen contenir terminologia jurídica complexa, noms diversos i algunes entitats llargues que suposen un repte per als sistemes NER. Aquesta complexitat proporciona un terreny de proves per als models, cosa que permet avaluar la seva capacitat per extreure amb precisió entitats intricades i variades, tal com apareixen als tiquets reals.
   \item \textbf{Sensibilitat al context:} El conjunt de dades escollit fa especial èmfasi en la importància del context en el reconeixement d'entitats. En els documents jurídics, els noms es poden referir a múltiples entitats en funció del context, una característica que reflecteix els reptes s'esperava trobar al conjunt de tiquets proporcionats per l'\textbf{Agència}. Aquesta consideració s'alineava amb les complexitats contextuals que preveiem en escenaris d'incidències on una única entitat (per exemple, una adreça de correu electrònic) pot representar diferents papers (atacant, destinatari, usuaris afectats) en funció del context. Comprendre i abordar aquests matisos específics del context ha sigut crucial per al desenvolupament de models precisos.
 \end{itemize}
 
 
 \subsection{Anàlisi del dataset}
+Per com funcionen els judicis a l'Índia, una sentència típica d'un tribunal es pot dividir en dues parts: el preàmbul i la sentència. La separació entre el preàmbul i la sentència sol estar marcat per una paraula clau com "JUDGMENT" o "ORDER". 
+\begin{itemize}
+  \item \textbf{Preàmbul:} El preàmbul d'una sentència conté les dades importants de la sentència tals com els noms de les parts, jutges, advocats, etc. Aquestes dades no solen tenir frases gramaticalment completes, sinó que estan formatades.
+  \item \textbf{Sentència:} Per altra banda, el text que segueix el preàmbul fins al final de la sentència es diu simplement "sentència".
+\end{itemize}
+Per a l'ús que se li ha donat, s'ha considerat que els preàmbuls i les sentències poden ser combinades en el mateix conjunt de dades per aconseguir més dades i més diversitat.
+
+El \textit{dataset} conté les següents entitats extretes:
+\begin{itemize}
+  \item \textbf{TRIBUNAL:} Nom de qualsevol tribunal esmentat.
+  \item \textbf{SOL·LICITANT:} Nom dels sol·licitants del cas actual.
+  \item \textbf{DEMANDAT:} Nom dels demandats/acusats/oposició del cas actual.
+  \item \textbf{JUTGE:} Nom dels jutges del cas actual i dels casos anteriors.
+  \item \textbf{ADVOCAT:} Nom dels advocats d'ambdues parts.
+  \item \textbf{DATA:} Qualsevol data esmentada a la sentència.
+  \item \textbf{ORG:} Nom de les organitzacions esmentades al text a part del tribunal.
+  \item \textbf{GPE:} Llocs geopolítics que inclouen noms d'estats, ciutats i pobles.
+  \item \textbf{ESTATUT:} Nom de la llei esmentada a la sentència.
+  \item \textbf{DISPOSICIÓ:} Seccions, subseccions, articles, lleis, normes d'un estatut.
+  \item \textbf{PRECEDENT:} Tots els casos judicials anteriors referits a la sentència com a precedent.
+  \item \textbf{NÚMERO\_CAS:} Tots els altres números de casos esmentats a la sentència (a part del precedent).
+  \item \textbf{TESTIMONI:} Nom dels testimonis de la sentència actual.
+  \item \textbf{ALTRES\_PERSONES:} Nom de totes les persones no catalogades com a \linebreak sol·licitant, demandat, jutge, advocat o testimoni.
+\end{itemize}
+
