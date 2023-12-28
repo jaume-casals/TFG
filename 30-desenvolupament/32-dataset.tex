@@ -46,11 +46,13 @@ El \textit{dataset} conté les següents entitats extretes:
   \item \textbf{ALTRES\_PERSONES:} Nom de totes les persones no catalogades com a \linebreak sol·licitant, demandat, jutge, advocat o testimoni.
 \end{itemize}
 
+A partir del nombre d'entitats recopilades mostrades a la taula \ref{tab:recompte_entitats}, es va veure que cap entitat domina el conjunt de dades, i que la distribució està relativament equilibrada entre les diferents classes. Encara que hi ha algunes variacions, cap dels tipus d'entitat té una majoria ni està gaire infrarepresentat.
+
 \begin{table}[H]
     \centering
-    \begin{tabular}{lccc}
+    \begin{tabular}{lccr}
         \toprule
-        Entity & Recompte Sentències & Recompte Preàmbles & Recompte Total \\
+        Entitat & Recompte Sentències & Recompte Preàmbuls & Total \\
         \midrule
         \textbf{TRIBUNAL} & 1293 & 1074 & \textbf{2367} \\
         \textbf{SOL·LICITANT} & 464 & 2604 & \textbf{3068} \\
@@ -70,56 +72,15 @@ El \textit{dataset} conté les següents entitats extretes:
         \textbf{Total} & 17485 & 12479 & \textbf{29964} \\
         \bottomrule
     \end{tabular}
-    \caption{Recompte de les entitats recopilades al \textit{dataset}.}
-    \label{tab:entity_counts}
+    \caption{Recompte de les entitats recopilades en les sentències, els preàmbuls i en total.}
+    \label{tab:recompte_entitats}
 \end{table}
 
+A l'hora de recopilar les sentències, és probable que les sentències més esmentades siguin les més importants. Però limitar-se a prendre les sentències més citades d'un determinat tribunal donaria lloc a un biaix en determinats tipus de casos (per exemple, casos criminals). Per tant, cal controlar els tipus de casos per tenir en compte la varietat de sentències. Així doncs, al \textit{dataset} hi ha els 8 tipus de casos més freqüents: civils, constitucionals, criminals, financers, industrials i laborals, de terreny i propietat, de vehicles i d'impostos.
 
-\begin{table}[H]
-  \begin{tabular}{l|cccccccc|c}
-    \textbf{Nom\_Tribunal} &
-      \textbf{Civil} &
-      \textbf{Constitució} &
-      \textbf{Criminal} &
-      \textbf{Financer} &
-      \textbf{Industrial i Laboral} &
-      \textbf{Terrenys i Propietats} &
-      \textbf{Vehicles} &
-      \textbf{Impostos} &
-      \textbf{Total} \\
-    \hline
-    \textbf{Tribunal Suprem de l'Índia}                  & 200  & 200  & 200  & 200  & 200  & 200  & 200  & 200  & 1600 \\
-    \textbf{Tribunal Superior de Delhi}                        & 100  & 100  & 99   & 100  & 100  & 100  & 100  & 100  & 799  \\
-    \textbf{Tribunal Superior de Bombai}                       & 100  & 100  & 100  & 87   & 100  & 53   & 100  & 100  & 740  \\
-    \textbf{Tribunal Superior de Madras}                       & 100  & 100  & 100  & 35   & 100  & 100  & 100  & 100  & 735  \\
-    \textbf{Tribunal Superior de Patna}                        & 100  & 100  & 0    & 116  & 100  & 111  & 100  & 100  & 727  \\
-    \textbf{Tribunal Superior de Rajasthan}                    & 100  & 100  & 100  & 110  & 58   & 70   & 71   & 100  & 709  \\
-    \textbf{Tribunal Superior de Madhya Pradesh}               & 96   & 100  & 100  & 77   & 88   & 91   & 55   & 100  & 707  \\
-    \textbf{Tribunal Superior de Karnataka}                    & 95   & 99   & 97   & 51   & 90   & 79   & 96   & 97   & 704  \\
-    \textbf{Tribunal Superior de Calcuta}                     & 70   & 100  & 79   & 72   & 17   & 164  & 100  & 100  & 702  \\
-    \textbf{Tribunal Superior de Kerala}                       & 0    & 100  & 100  & 94   & 100  & 100  & 100  & 100  & 694  \\
-    \textbf{Tribunal Superior de Panjab-Haryana}               & 100  & 100  & 100  & 77   & 53   & 76   & 83   & 100  & 689  \\
-    \textbf{Tribunal Superior de Gujarat}                      & 79   & 100  & 100  & 98   & 14   & 86   & 100  & 100  & 677  \\
-    \textbf{Tribunal de Districte de Delhi}                    & 99   & 100  & 91   & 98   & 63   & 100  & 100  & 0    & 651  \\
-    \textbf{Tribunal Superior d'Allahabad}                    & 100  & 100  & 100  & 40   & 22   & 74   & 100  & 100  & 636  \\
-    \textbf{Tribunal Superior d'Andhra}                       & 100  & 100  & 100  & 75   & 18   & 38   & 100  & 86   & 617  \\
-    \textbf{Tribunal Superior d'Orissa}                       & 0    & 0    & 0    & 77   & 0    & 89   & 0    & 0    & 166  \\
-    \textbf{Tribunal d'Apel·lació de l'Impost sobre la Renda}           & 0    & 0    & 0    & 0    & 0    & 0    & 0    & 80   & 80   \\
-    \textbf{Tribunal Superior d'Himachal Pradesh}             & 0    & 0    & 0    & 18   & 0    & 44   & 0    & 0    & 62   \\
-    \textbf{Tribunal Superior de Gauhati}                      & 0    & 0    & 0    & 39   & 0    & 16   & 0    & 0    & 55   \\
-    \textbf{Tribunal de Districte de Bangalore}                & 0    & 0    & 8    & 2    & 36   & 0    & 0    & 0    & 46   \\
-    \textbf{Tribunal Superior de Jharkhand}                    & 0    & 0    & 0    & 24   & 0    & 18   & 0    & 0    & 42   \\
-    \textbf{Tribunal Superior de Chhattisgarh}                  & 0    & 0    & 0    & 16   & 0    & 16   & 0    & 0    & 32   \\
-    \textbf{Tribunal Superior de Jammu i Caixmir}             & 0    & 0    & 0    & 15   & 0    & 16   & 0    & 0    & 31   \\
-    \textbf{Tribunal Superior d'Uttarakhand}                  & 0    & 0    & 0    & 7    & 0    & 13   & 0    & 0    & 20   \\
-    \textbf{Tribunal de Duanes, Impostos Especials i Or}       & 0    & 0    & 0    & 0    & 0    & 0    & 0    & 19   & 19   \\
-    \textbf{Tribunal Superior de Sikkim}                       & 0    & 0    & 0    & 9    & 0    & 6    & 0    & 0    & 15   \\
-    \textbf{Tribunal Superior de Meghalaya}                 & 0    & 0    & 0    & 5    & 0    & 7    & 0    & 0    & 12   \\
-    \textbf{Tribunal Superior de Tripura}                      & 0    & 0    & 0    & 0    & 0    & 2    & 0    & 0    & 2    \\
-    \textbf{Tribunal de Duanes, Impostos Especials i Impostos sobre Serveis}  & 0    & 0    & 0    & 0    & 0    & 0    & 0    & 1    & 1   
-    \hline
-    \textbf{Total}                                   & 0    & 0    & 0    & 0    & 0    & 0    & 0    & 1    & 1   
-  \end{tabular}
-  \caption{Distribució de les sentències per tipus de cas i tribunal.}
-  \label{tab:distribucio_cas_tribunal}
-\end{table}  
+Per mostrar que aquesta distribució és equilibrada, es pot veure el recompte fet a la taula \ref{tab:distribucio_cas_tribunal}, on es mostra el recompte de les sentències per tipus de cas i per tribunal de les sentències.
+
+\subsubsection{Preprocessament del dataset}
+
+\subsubsection{Exploració de les dades}
+
