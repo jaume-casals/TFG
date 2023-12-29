@@ -18,9 +18,7 @@ El \textit{dataset} escollit és \textit{Named Entity Recognition in Indian cour
 \end{itemize}
 
 
-\subsection{Anàlisi del dataset}
-
-\subsubsection{Visió general de les dades}
+\subsection{Visió general de les dades}
 Per com funcionen els judicis a l'Índia, una sentència típica d'un tribunal es pot dividir en dues parts: el preàmbul i la sentència. La separació entre el preàmbul i la sentència sol estar marcat per una paraula clau com "JUDGMENT" o "ORDER". 
 \begin{itemize}
   \item \textbf{Preàmbul:} El preàmbul d'una sentència conté les dades importants de la sentència tals com els noms de les parts, jutges, advocats, etc. Aquestes dades no solen tenir frases gramaticalment completes, sinó que estan formatades.
@@ -46,6 +44,28 @@ El \textit{dataset} conté les següents entitats extretes:
   \item \textbf{ALTRES\_PERSONES:} Nom de totes les persones no catalogades com a \linebreak sol·licitant, demandat, jutge, advocat o testimoni.
 \end{itemize}
 
+
+
+\subsection{Preprocessament del dataset}
+El \textit{dataset} originalment està en format \texttt{.json}, un format que pot ser còmode per la tasca de NER, però per generació de text és més útil tenir-ho en altres formats. Per transformar el conjunt de dades en format \texttt{.csv} s'han executat els següents passos:
+
+\begin{enumerate}
+  \item \textbf{Llegir el \textit{dataset}:} Per començar, s'ha carregat el \textit{dataset} des dels fitxers JSON on s'emmagatzemen les dades utilitzant la llibreria \texttt{json}.
+  \item \textbf{Unir totes les sentències:} Les sentències i els preàmbuls que estaven en arxius diferents s'han unit en la mateixa variable, pel motiu mencionat anteriorment.
+  \item \textbf{Escriure la capçalera:} La capçalera d'un arxiu \texttt{.csv} és el títol de les columnes. En aquest cas ha sigut "sentence" i "output" pel text d'entrada i les entitats de sortida, respectivament.
+  \item \textbf{Iterar per les sentències:} Cada sentència conté un camp identificador, un d'anotacions, un de dades i un de metadades.
+  \item \textbf{Escriure el text:} S'ha escrit el text en el fitxer de sortida amb el format esperat per un \texttt{.csv}.
+  \item \textbf{Recórrer les anotacions:} S'ha iterat per cada anotació d'una sentència on hi ha les entitats extretes del text.
+  \item \textbf{Escriure les entitats:} Cada entitat, ha sigut escrita a la seva categoria separada per comes. En cas que un tipus d'entitat no tingui cap entrada, s'ha escrit \pyth{'#not_found#'}.
+\end{enumerate}
+
+Aquest procés s'ha repetit pels arxius de \textit{train} i de \textit{test}, que estaven separats. Addicionalment, s'ha separat 1000 entrades de l'arxiu \textit{train} en un anomenat \textit{validation} per tenir tots els arxius necessaris per a l'entrenament.
+
+
+
+\subsection{Exploració de les dades}
+
+\subsubsection{Recompte d'entitats per tipus}
 A partir del nombre d'entitats recopilades mostrades a la taula \ref{tab:recompte_entitats}, es va veure que cap entitat domina el conjunt de dades, i que la distribució està relativament equilibrada entre les diferents classes. Encara que hi ha algunes variacions, cap dels tipus d'entitat té una majoria ni està gaire infrarepresentat.
 
 \begin{table}[H]
@@ -76,11 +96,10 @@ A partir del nombre d'entitats recopilades mostrades a la taula \ref{tab:recompt
     \label{tab:recompte_entitats}
 \end{table}
 
+\subsubsection{Recompte per tipus de cas i per tribunal}
 A l'hora de recopilar les sentències, és probable que les sentències més esmentades siguin les més importants. Però limitar-se a prendre les sentències més citades d'un determinat tribunal donaria lloc a un biaix en determinats tipus de casos (per exemple, casos criminals). Per tant, cal controlar els tipus de casos per tenir en compte la varietat de sentències. Així doncs, al \textit{dataset} hi ha els 8 tipus de casos més freqüents: civils, constitucionals, criminals, financers, industrials i laborals, de terreny i propietat, de vehicles i d'impostos.
 
 Per mostrar que aquesta distribució és equilibrada, es pot veure el recompte fet a la taula \ref{tab:distribucio_cas_tribunal}, on es mostra el recompte de les sentències per tipus de cas i per tribunal de les sentències.
 
-\subsubsection{Preprocessament del dataset}
-
-\subsubsection{Exploració de les dades}
-
+\subsubsection{Recompte de sentències per llargada}
+%Dos boxplots i histograma
