@@ -71,9 +71,9 @@ A partir del nombre d'entitats recopilades mostrades a la taula \ref{tab:recompt
 \begin{table}[H]
     \centering
     \begin{tabular}{lccr}
-        \toprule
+        \Xhline{2\arrayrulewidth}
         Entitat & Recompte Sentències & Recompte Preàmbuls & Total \\
-        \midrule
+        \hline
         \textbf{TRIBUNAL} & 1293 & 1074 & \textbf{2367} \\
         \textbf{SOL·LICITANT} & 464 & 2604 & \textbf{3068} \\
         \textbf{DEMANDAT} & 324 & 3538 & \textbf{3862} \\
@@ -88,18 +88,20 @@ A partir del nombre d'entitats recopilades mostrades a la taula \ref{tab:recompt
         \textbf{NÚMERO\_CAS} & 1040 & NA & \textbf{1040} \\
         \textbf{TESTIMONI} & 881 & NA & \textbf{881} \\
         \textbf{ALTRES\_PERSONES} & 2653 & NA & \textbf{2653} \\
-        \midrule
+        \hline
         \textbf{Total} & 17485 & 12479 & \textbf{29964} \\
-        \bottomrule
+        \Xhline{2\arrayrulewidth}
     \end{tabular}
     \caption{Recompte de les entitats recopilades en les sentències, els preàmbuls i en total.}
     \label{tab:recompte_entitats}
 \end{table}
 
-\subsubsection{Recompte per tipus de cas i per tribunal}
+\subsubsection{Recompte de sentències per tipus de cas i per tribunal}
 A l'hora de recopilar les sentències, és probable que les sentències més esmentades siguin les més importants. Però limitar-se a prendre les sentències més citades d'un determinat tribunal donaria lloc a un biaix en determinats tipus de casos (per exemple, casos criminals). Per tant, cal controlar els tipus de casos per tenir en compte la varietat de sentències. Així doncs, al \textit{dataset} hi ha els 8 tipus de casos més freqüents: civils, constitucionals, criminals, financers, industrials i laborals, de terreny i propietat, de vehicles i d'impostos.
 
 Per mostrar que aquesta distribució és equilibrada, es pot veure el recompte fet a la taula \ref{tab:distribucio_cas_tribunal}, on es mostra el recompte de les sentències per tipus de cas i per tribunal de les sentències.
 
 \subsubsection{Recompte de sentències per llargada}
 %Dos boxplots i histograma
+
+\subsubsection{Recompte d'entitats per llargada}
