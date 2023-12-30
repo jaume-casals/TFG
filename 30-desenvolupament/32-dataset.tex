@@ -96,6 +96,7 @@ A partir del nombre d'entitats recopilades mostrades a la taula \ref{tab:recompt
     \label{tab:recompte_entitats}
 \end{table}
 
+L'equilibri entre les classes d'entitats es pot veure més clarament en la figura \ref{fig:diagrama_sectors_tipus_entitats} on es compara percentualment la proporció d'entitats al \textit{dataset}.
 \begin{figure}[H]
   \centering
   \includegraphics[width=\textwidth]{formatge_tipus_entitats.png}
@@ -110,8 +111,11 @@ Per mostrar que aquesta distribució és equilibrada, es pot veure el recompte f
 
 
 \subsubsection{Recompte de sentències per llargada}
-%Dos boxplots i histograma
-\begin{figure}[h]
+A l'exploració del conjunt de dades, un aspecte que ha cobrat importància és la distribució de les longituds de les sentències. Aquesta anàlisi proporciona informació sobre la variabilitat de les longituds d'entrada i ha ajudat a descobrir l'estructura general i els possibles \textit{outliers} o valors atípics del conjunt de dades.
+
+En primer lloc, es va generar un \textit{boxplot} (diagrama de caixa) per visualitzar les longituds dels texts d'entrada del \textit{dataset} com es pot veure a la figura \ref{fig:box_longitud_sentencies_tot}. El diagrama de caixa va revelar un valor atípic: una sentència que era significativament més llarga que totes les altres. Es va descobrir que aquesta frase era un error, i que no tenia sentit. A més a més, es van identificar quatre sentències atípiques les quals superaven els 4.000 caràcters. Es va decidir eliminar aquests valors atípics per evitar anàlisis esbiaixades i garantir que el model s'entreni amb dades representatives i significatives.
+
+\begin{figure}[H]
   \centering
   \begin{subfigure}{.5\textwidth}
     \centering
@@ -129,6 +133,10 @@ Per mostrar que aquesta distribució és equilibrada, es pot veure el recompte f
   \label{fig:box_longitud_sentencies}
 \end{figure}
 
+Després d'eliminar els valors atípics identificats, es va generar un nou \textit{boxplot} per visualitzar la nova distribució de la longitud de les frases \ref{fig:box_longitud_sentencies_out}. 
+
+Addicionalment, a la figura \ref{fig:histograma_sentencies_out} es pot veure que s'ha creat un histograma per oferir una visió més detallada de la distribució de freqüències dins dels diferents rangs de longitud.
+
 \begin{figure}[H]
   \centering
   \includegraphics[width=\textwidth]{hist_sent_out.png}
@@ -138,12 +146,18 @@ Per mostrar que aquesta distribució és equilibrada, es pot veure el recompte f
 
 
 \subsubsection{Recompte d'entitats per llargada}
+L'anàlisi de la longitud de les entitats proporciona informació sobre l'estructura i la composició del \textit{dataset}, revelant possibles patrons i anomalies. L'histograma a la figura \ref{fig:histograma_entitats_tipus} il·lustra la distribució de les longituds de les entitats entre els diferents tipus. Cada barra representa un interval de longituds de dos caràcters per un tipus concret d'entitat, i l'alçada de la barra indica el recompte d'entitats compreses en aquest interval de longitud.
+
+Observant la figura \ref{fig:histograma_entitats_tipus} es pot veure que la categoria "DEMANDAT" ha destacat per mostrar un nombre significatiu d'entitats amb longituds superiors o iguals a 100 caràcters.
+
 \begin{figure}[H]
   \centering
   \includegraphics[width=\textwidth]{hist_ent_categoria.png}
   \caption[Histograma de la longitud de les entitats, per categoria]{Histograma de la longitud de les entitats, per categoria. \\ (Creació pròpia)}
   \label{fig:histograma_entitats_tipus}
 \end{figure}
+
+Tal com es veu la figura \ref{fig:histograma_entitats_total}, s'ha generat també un histograma complet combinant tots els tipus d'entitats. L'histograma unificat proporciona una visió global de la distribució de la longitud a tot el \textit{dataset}. Les entitats de diferents categories tendeixen a tenir una longitud semblant. Més concretament, el 55\% de les entitats tenen entre 8 i 18 caràcters i el 90\% de les entitats en tenen menys de 36. Aquesta uniformitat en la distribució de la longitud suggereix que les entitats es representen de forma coherent en el \textit{dataset}.
 
 \begin{figure}[H]
   \centering
