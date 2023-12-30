@@ -89,7 +89,7 @@ t2t_gen_pipe = pipeline(
 output_text = t2t_gen_pipe(input_ticket_str, max_new_tokens=300, beams=5)[0]['generated_text']
 \end{python}
 
-Aquest codi inicialitza un \textit{pipeline} amb la funció de generació de text a text (la tasca del model \textit{Flan-T5}), el model afinat anteriorment, el tokenitzador per defecte del model i s'indica que es faci ús dels drivers de cuda, per aprofitar tota la potència computacional de la GPU. Amb aquest \textit{pipeline}, s'indica l'entrada, el nombre màxim de tokens que pot generar el model (el model té la capacitat per parar sol, però s'indica un màxim com a mesura de seguretat) i el nombre de \textit{beams} (possibles solucions candidates, diferents unes de les altres) durant el \textit{beam search}.
+Aquest codi inicialitza un \textit{pipeline} amb la funció de generació de text a text (la tasca del model \textit{Flan-T5}), el model afinat anteriorment, el \textit{tokenitzador} per defecte del model i s'indica que es faci ús dels drivers de cuda, per aprofitar tota la potència computacional de la GPU. Amb aquest \textit{pipeline}, s'indica l'entrada, el nombre màxim de \textit{tokens} que pot generar el model (el model té la capacitat per parar sol, però s'indica un màxim com a mesura de seguretat) i el nombre de \textit{beams} (possibles solucions candidates, diferents unes de les altres) durant el \textit{beam search}.
 
 
 \subsection{Anonimització de camps}
