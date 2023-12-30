@@ -96,12 +96,58 @@ A partir del nombre d'entitats recopilades mostrades a la taula \ref{tab:recompt
     \label{tab:recompte_entitats}
 \end{table}
 
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=\textwidth]{formatge_tipus_entitats.png}
+  \caption[Diagrama de sectors del nombre d'entitats a les sentències]{Diagrama de sectors comparant el nombre d'entitats a les sentències. \\ (Creació pròpia)}
+  \label{fig:diagrama_sectors_tipus_entitats}
+\end{figure}
+
 \subsubsection{Recompte de sentències per tipus de cas i per tribunal}
 A l'hora de recopilar les sentències, és probable que les sentències més esmentades siguin les més importants. Però limitar-se a prendre les sentències més citades d'un determinat tribunal donaria lloc a un biaix en determinats tipus de casos (per exemple, casos criminals). Per tant, cal controlar els tipus de casos per tenir en compte la varietat de sentències. Així doncs, al \textit{dataset} hi ha els 8 tipus de casos més freqüents: civils, constitucionals, criminals, financers, industrials i laborals, de terreny i propietat, de vehicles i d'impostos.
 
 Per mostrar que aquesta distribució és equilibrada, es pot veure el recompte fet a la taula \ref{tab:distribucio_cas_tribunal}, on es mostra el recompte de les sentències per tipus de cas i per tribunal de les sentències.
 
+
 \subsubsection{Recompte de sentències per llargada}
 %Dos boxplots i histograma
+\begin{figure}[h]
+  \centering
+  \begin{subfigure}{.5\textwidth}
+    \centering
+    \includegraphics[width=.7\linewidth]{box_sent.png}
+    \caption{Amb totes les sentències.}
+    \label{fig:box_longitud_sentencies_tot}
+  \end{subfigure}%
+  \begin{subfigure}{.5\textwidth}
+    \centering
+    \includegraphics[width=.7\linewidth]{box_sent_out.png}
+    \caption{Sense \textit{outliers}.}
+    \label{fig:box_longitud_sentencies_out}
+  \end{subfigure}
+  \caption[Boxplot de la longitud de les sentències]{Boxplot de la longitud de les sentències, abans i després d'eliminar els \textit{outliers}. \\ (Creació pròpia)}
+  \label{fig:box_longitud_sentencies}
+\end{figure}
+
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=\textwidth]{hist_sent_out.png}
+  \caption[Histograma de la longitud de les sentències]{Histograma de la longitud de les sentències, sense \textit{outliers}. \\ (Creació pròpia)}
+  \label{fig:histograma_sentencies_out}
+\end{figure}
+
 
 \subsubsection{Recompte d'entitats per llargada}
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=\textwidth]{hist_ent_categoria.png}
+  \caption[Histograma de la longitud de les entitats, per categoria]{Histograma de la longitud de les entitats, per categoria. \\ (Creació pròpia)}
+  \label{fig:histograma_entitats_tipus}
+\end{figure}
+
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=\textwidth]{hist_ent_tot.png}
+  \caption[Histograma de la longitud de totes les entitats]{Histograma de la longitud de totes les entitats. \\ (Creació pròpia)}
+  \label{fig:histograma_entitats_total}
+\end{figure}
