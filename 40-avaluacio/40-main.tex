@@ -1,3 +1,30 @@
-\chapter{Avaluació amb resultats reals}
+\chapter{Avaluació dels models}
 
-\import{./}{40-avaluacio/41-eficacia}
+\import{,/}{40-avaluacio/41-eficacia}
+Flan-5-base
+Primer entreno (a partir del model base):
+eph train_loss    val_loss    rouge-1      rouge-2      rouge-l      rouge-lsum
+1   0,058600      0,045664    94,662000    92,672200    93,843900    93,955200
+2   0,037800      0,036199    96,162300    94,540800    95,625900    95,725100
+3   0,037000      0,033193    96,582400    94,774100    95,661300    95,871000
+
+Evaluació (sense etiquetes):
+                              rouge-1     rouge-2       rouge-l      rouge-lsum
+Checkpoint 1                  0,896914    0,873145      0,896744     0,887331
+Checkpoint 2                  0,905884    0,884014      0,896744     0,896622
+Checkpoint 3                  0,924220    0,902566      0,915530     0,915385
+
+Segon entreno i segona avaluació (a partir del checkpoint-3):
+                              rouge-1     rouge-2       rouge-l      rouge-lsum
+Checkpoint 4                  0,958487    0,942900      0,951954      0,952023
+Checkpoint 5                  0,967221    0,952377      0,962029      0,962040
+
+
+
+Flan-5-small
+eph train_loss    val_loss    rouge-1      rouge-2      rouge-l      rouge-lsum
+1   0,084300      0,041435    94,860800    92,509900    93,701900    93,847300
+2   0,055400      0,036852    96,138100    93,952500    94,945400    95,066000
+3   0,043400      0,033490    96,615800    94,744300    95,594300    95,733500
+4   0,040100      0,032499    96,625700    94,810800    95,742300    95,899300
+5   0,037100      0,032393    96,587400    94,784100    95,711300    95,861000
