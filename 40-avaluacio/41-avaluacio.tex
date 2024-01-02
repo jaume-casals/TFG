@@ -1,0 +1,170 @@
+\section{Anàlisi dels resultats}
+
+\subsection{Flan-T5-Base}
+\begin{table}[H]
+    \caption{Primer entreno (amb etiquetes)}
+    \begin{tabular}{lcccccc}
+    \toprule
+    Epoch & train\_loss & val\_loss & rouge-1 & rouge-2 & rouge-l & rouge-lsum \\
+    \midrule
+    1 & 0.058 & 0.045 & 94.662 & 92.672 & 93.843 & 93.955 \\
+    2 & 0.037 & 0.036 & 96.162 & 94.540 & 95.625 & 95.725 \\
+    3 & ... & ... & ... & ... & ... & ... \\
+    \bottomrule
+    \end{tabular}
+\end{table}
+
+(S'entrena durant dos epochs més sense etiquetes)
+
+\begin{table}[H]
+    \caption{Avaluació (sense etiquetes)}
+    \begin{tabular}{lcccccc}
+    \toprule
+    Model & rouge-1 & rouge-2 & rouge-l & rouge-lsum & coincidència exacta \\
+    \midrule
+    Model base & 0.00 & 0.00 & 0.00 & 0.00 & 0.00 \\
+    Checkpoint 2 & 95.84 & 94.27 & 95.19 & 95.20 & 61.82 \\
+    Checkpoint 3 & 96.70 & 95.21 & 96.20 & 96.21 & 64.99 \\
+    Checkpoint 4 & 95.97 & 94.50 & 95.37 & 95.38 & 64.24 \\
+    Checkpoint 5 & 96.57 & 95.17 & 96.05 & 96.09 & 66.01 \\
+    \bottomrule
+    \end{tabular}
+\end{table}
+
+
+
+
+
+
+
+\subsection{Flan-T5-Base (LaMini)}
+\begin{table}[H]
+    \begin{tabular}{lcccccc}
+    \toprule
+    Epoch & train\_loss & val\_loss & rouge-1 & rouge-2 & rouge-l & rouge-lsum \\
+    \midrule
+    1 & ...   & ...   & ...    & ...    & ...    & ... \\
+    2 & 0.013 & 0.022 & 97.800 & 96.553 & 97.248 & 97.350 \\
+    \bottomrule
+    \end{tabular}
+\end{table}
+
+\begin{table}[H]
+    \caption{Segon entreno (sense etiquetes)}
+    \begin{tabular}{lcccccc}
+    \toprule
+    Epoch & train\_loss & val\_loss & rouge-1 & rouge-2 & rouge-l & rouge-lsum \\
+    \midrule
+    3 & ...  & ...    & ...    & ...    & ...    & ... \\
+    4 & 0.012 & 0.029 & 96.594 & 95.267 & 96.109 & 96.136 \\
+    5 & 0.005 & 0.029 & 96.794 & 95.538 & 96.257 & 96.290 \\
+    \bottomrule
+    \end{tabular}
+\end{table}
+
+\begin{table}[H]
+    \caption{Evaluació (sense etiquetes)}
+    \begin{tabular}{lcccccc}
+    \toprule
+    Model & rouge-1 & rouge-2 & rouge-l & rouge-lsum & coincidència exacta \\
+    \midrule
+    Model base   & 0.00  & 0.00  & 0.00  & 0.00  & 0.00 \\
+    Checkpoint 1 & 95.31 & 93.48 & 94.76 & 94.75 & 58.28 \\
+    Checkpoint 2 & 96.74 & 95.37 & 96.18 & 96.18 & 67.87 \\
+    Checkpoint 3 & 96.39 & 95.03 & 95.90 & 95.90 & 66.66 \\
+    Checkpoint 4 & 96.55 & 95.22 & 96.08 & 96.06 & 66.75 \\
+    Checkpoint 5 & 96.75 & 95.45 & 96.19 & 96.19 & 69.36 \\
+    \bottomrule
+    \end{tabular}
+\end{table}
+
+
+
+
+
+
+\subsection{Flan-T5-Small}
+\begin{table}[H]
+    \caption{Primer entreno (amb etiquetes)}
+    \begin{tabular}{lcccccc}
+    \toprule
+    Epoch & train\_loss & val\_loss & rouge-1 & rouge-2 & rouge-l & rouge-lsum \\
+    \midrule
+    1 & 0.084 & 0.041 & 94.86 & 92.50 & 93.70 & 93.84 \\
+    2 & 0.055 & 0.036 & 96.13 & 93.95 & 94.94 & 95.06 \\
+    3 & 0.043 & 0.033 & 96.61 & 94.74 & 95.59 & 95.73 \\
+    4 & 0.040 & 0.032 & 96.62 & 94.81 & 95.74 & 95.89 \\
+    5 & 0.037 & 0.032 & 96.58 & 94.78 & 95.71 & 95.86 \\
+    \bottomrule
+    \end{tabular}
+\end{table}
+
+\begin{table}[H]
+    \caption{Evaluació (sense etiquetes)}
+    \begin{tabular}{lcccccc}
+    \toprule
+    Model & rouge-1 & rouge-2 & rouge-l & rouge-lsum & coincidència exacta \\
+    \midrule
+    Model base & 0.00 & 0.00 & 0.00 & 0.00 & 0.00 \\
+    Checkpoint 4 & 95.07 & 93.20 & 94.40 & 94.40 & 54.09 \\
+    Checkpoint 5 & 95.07 & 93.17 & 94.39 & 94.39 & 54.74 \\
+    \bottomrule
+    \end{tabular}
+\end{table}
+
+
+
+
+
+
+\subsection{Flan-T5-Small (LaMini)}
+\begin{table}[H]
+    \caption{Primer entreno (amb etiquetes)}
+    \begin{tabular}{lcccccc}
+    \toprule
+    Epoch & train\_loss & val\_loss & rouge-1 & rouge-2 & rouge-l & rouge-lsum \\
+    \midrule
+    1 & ... & ... & ... & ... & ... & ... \\
+    2 & ... & ... & ... & ... & ... & ... \\
+    3 & 0.066 & 0.043 & 95.55 & 92.75 & 93.87 & 94.12 \\
+    4 & 0.064 & 0.042 & 95.61 & 92.88 & 93.93 & 94.19 \\
+    5 & ... & ... & ... & ... & ... & ... \\
+    \bottomrule
+    \end{tabular}
+\end{table}
+
+\begin{table}[H]
+    \caption{Evaluació (sense etiquetes)}
+    \begin{tabular}{lcccccc}
+    \toprule
+    Model & rouge-1 & rouge-2 & rouge-l & rouge-lsum & coincidència exacta \\
+    \midrule
+    Model base & 0.00 & 0.00 & 0.00 & 0.00 & 0.00 \\
+    Checkpoint 1 & 90.27 & 86.79 & 88.56 & 88.59 & 31.09 \\
+    Checkpoint 2 & 92.51 & 89.48 & 91.03 & 91.05 & 37.80 \\
+    Checkpoint 3 & 92.83 & 89.96 & 91.39 & 91.41 & 40.31 \\
+    Checkpoint 4 & 93.36 & 90.62 & 92.07 & 92.08 & 43.01 \\
+    Checkpoint 5 & 93.48 & 90.77 & 92.16 & 92.16 & 43.38 \\
+    \bottomrule
+    \end{tabular}
+\end{table}
+
+
+
+
+
+\subsection{Flan-T5-Base (PEFT)}
+\begin{table}[H]
+    \centering
+    \caption{Entreno (amb etiquetes)}
+    \label{tab:additional-training}
+    \begin{tabular}{lcccccc}
+    \toprule
+    Epoch & train\_loss & val\_loss & rouge-1 & rouge-2 & rouge-l & rouge-lsum \\
+    \midrule
+    1 & 0.114 & 0.042 & 20.847 & 16.240 & 20.715 & 20.733 \\
+    2 & 0.057 & 0.036 & 20.757 & 16.301 & 20.672 & 20.673 \\
+    3 & 0.048 & 0.034 & 20.748 & 16.288 & 20.655 & 20.660 \\
+    \bottomrule
+    \end{tabular}
+\end{table}

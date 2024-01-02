@@ -93,12 +93,12 @@ Per cada model, s'ha descarregat la versió més gran (i, en conseqüència, s'e
     \hline
     \textbf{Model} & \textbf{Params.} & \textbf{Observacions} \\
     \hline
-    FLAN-T5 Small & 80M & No entèn el significat, Serveix per tasques més petites \\
-    FLAN-T5 Base & 250M & És relativament petit, Contesta correctament \\
+    Flan-T5-Small & 80M & No entèn el significat, Serveix per tasques més petites \\
+    Flan-T5-Base & 250M & És relativament petit, Contesta correctament \\
     FLAN-T5 Large & 780M & Contesta correctament \\
     FLAN-T5 XL & 3B & Massa gran com per ser entrenat, Contesta correctament \\
     M2M100 & 418M & Massa complicat d'afinar, Serveix per traduir \\
-    FLAN-T5 Base (QA) & 300M & Reentrenat específicament per contestar preguntes, Contesta meitat de la resposta  \\
+    Flan-T5-Base (QA) & 300M & Reentrenat específicament per contestar preguntes, Contesta meitat de la resposta  \\
     \hline
   \end{tabular}
   \caption{Comparació dels models de \textit{Text to Text Generation} (Generació de text a text)}
@@ -126,8 +126,8 @@ En les proves, ha donat molt bons resultats, encertant en gairebé totes les pre
 Aquest model també és compatible amb el programa \textit{LocalGPT} \cite{localgpt} i, és per això i per la seva mida similar que és tan comparat amb el model \textit{Mistral 7B}. \textit{Llama 2} és el model que està seleccionat per defecte al programa \textit{localGPT}, i per aquesta raó va ser el primer a ser provat. En veure la millora significativa comparat amb el seu model competidor, va ser ràpidament substituït per aquesta versió millorada seva.
 
 
-\subsubsection{Flan-T5 Base}
-El model \textit{Flan-T5 Base} \cite{flan-t5} és un model de processament del llenguatge natural que presenta millores en tots els aspectes respecte al seu model previ: \textit{T5 Base}. Els seus desenvolupadors van escriure: "Amb T5, proposem reformular totes les tasques de NLP en un format unificat de text a text on l'entrada i la sortida són sempre cadenes de text, a diferència dels models d'estil BERT que només poden donar com a sortida una etiqueta de classe o un tram de l'entrada. El nostre marc de text a text ens permet utilitzar el mateix model, funció de pèrdua i hiperparàmetres en qualsevol tasca NLP."
+\subsubsection{Flan-T5-Base}
+El model \textit{Flan-T5-Base} \cite{flan-t5} és un model de processament del llenguatge natural que presenta millores en tots els aspectes respecte al seu model previ: \textit{T5 Base}. Els seus desenvolupadors van escriure: "Amb T5, proposem reformular totes les tasques de NLP en un format unificat de text a text on l'entrada i la sortida són sempre cadenes de text, a diferència dels models d'estil BERT que només poden donar com a sortida una etiqueta de classe o un tram de l'entrada. El nostre marc de text a text ens permet utilitzar el mateix model, funció de pèrdua i hiperparàmetres en qualsevol tasca NLP."
 
 Un punt important d'aquest model és que està entrenat amb 60 llenguatges. Això significa que té una comprensió molt gran de tots els texts que se li puguin donar. A la vegada, no interessa tant que entengui gaires idiomes, ja que el format d'entrada estarà molt centrat en un idioma.
 
@@ -135,20 +135,20 @@ Durant els experiments, ha demostrat una capacitat de comprensió del llenguatge
 
 L'afinament ha finalitzat satisfactòriament aportant un \textit{rouge1} de $0,96$. Fent proves amb inferència s'ha vist que aquest model contesta correctament a la majoria, però ha fallat sobretot perquè repeteix més d'una vegada les respostes.
 
-\subsubsection{Flan-T5 Small}
-\textit{Flan-T5 Small} \cite{flan-t5} és el germà més petit de la família \textit{Flan-T5}. Tenint això en compte, és lògic pensar que donaria un pitjor rendiment que els altres models. El raonament darrere de la decisió de provar aquest model a fons és aconseguir un model que seria més ràpid, tant en entrenament com en inferència, a canvi de perdre poca precisió en les respostes.
+\subsubsection{Flan-T5-Small}
+\textit{Flan-T5-Small} \cite{flan-t5} és el germà més petit de la família \textit{Flan-T5}. Tenint això en compte, és lògic pensar que donaria un pitjor rendiment que els altres models. El raonament darrere de la decisió de provar aquest model a fons és aconseguir un model que seria més ràpid, tant en entrenament com en inferència, a canvi de perdre poca precisió en les respostes.
 
 Aquest model, tal com s'havia vist, té la capacitat de formular frases senzilles, però en una primera instància no ha sigut capaç de respondre cap pregunta correctament. Després de l'afinament, s'ha comprovat que no ha assolit trobar els patrons més bàsics de les dades, donant així un resultat negatiu i descartant el model per futurs passos.
 
-\subsubsection{Flan-T5 Small (LaMini)}
-El model \textit{Flan-T5 Small (LaMini)} \cite{flan-t5} \cite{lamini} és una versió afinada del model \textit{Flan-T5 Small} amb el \textit{dataset} per a seguir instruccions \textit{LaMini}. Amb aquest afinament, el model és capaç de millorar respecte al model del qual ha partit. Els creadors afirmen que té el millor rendiment general donat la seva mida.
+\subsubsection{Flan-T5-Small (LaMini)}
+El model \textit{Flan-T5-Small (LaMini)} \cite{flan-t5} \cite{lamini} és una versió afinada del model \textit{Flan-T5-Small} amb el \textit{dataset} per a seguir instruccions \textit{LaMini}. Amb aquest afinament, el model és capaç de millorar respecte al model del qual ha partit. Els creadors afirmen que té el millor rendiment general donat la seva mida.
 
 Malauradament, no s'ha notat cap millora respecte al model anterior. No només no ha sigut capaç de generar text relacionat amb el text donat sinó que no ha contestat a les preguntes seguint el format amb el qual ha sigut entrenat. Deguts aquests motius, i veient que és el model més potent de la seva categoria, ha quedat clar que és necessari més paràmetres per poder completar aquesta tasca correctament.
 
-\subsubsection{Flan-T5 Base (LaMini)}
-Repetint el mateix procés que amb la seva versió inferior, \textit{Flan-T5 Base (LaMini)} \cite{flan-t5} \cite{lamini} és la versió afinada del model \textit{Flan-T5 Base} amb el \textit{dataset} per a seguir instruccions \textit{LaMini}. A causa dels bons resultats reportats pels mateixos creadors, amb un augment del rendiment en totes les proves comparatives, es decideix afinar aquest model, en cerca d'un rendiment superior als resultats obtinguts al \textit{Flan-T5 Base}.
+\subsubsection{Flan-T5-Base (LaMini)}
+Repetint el mateix procés que amb la seva versió inferior, \textit{Flan-T5-Base (LaMini)} \cite{flan-t5} \cite{lamini} és la versió afinada del model \textit{Flan-T5-Base} amb el \textit{dataset} per a seguir instruccions \textit{LaMini}. A causa dels bons resultats reportats pels mateixos creadors, amb un augment del rendiment en totes les proves comparatives, es decideix afinar aquest model, en cerca d'un rendiment superior als resultats obtinguts al \textit{Flan-T5-Base}.
 
-El descens sorprenent del rendiment observat durant la prova del model \textit{Flan-T5 Base (LaMini)} per a la resolució d'una tasca específica, malgrat el seu èxit previ en el seguiment general d'instruccions, planteja diverses causes potencials per a aquest resultat inesperat:
+El descens sorprenent del rendiment observat durant la prova del model \textit{Flan-T5-Base (LaMini)} per a la resolució d'una tasca específica, malgrat el seu èxit previ en el seguiment general d'instruccions, planteja diverses causes potencials per a aquest resultat inesperat:
 
 \begin{itemize}
   \item \textbf{Qualitat del model:} El conjunt de dades \textit{LaMini} pot tenir característiques perjudicials per al rendiment a la tasca entrenada. Atès que el \textit{LaMini dataset} ha sigut generat sintèticament, és possible que no capturi amb precisió la complexitat i els matisos dels escenaris del món real per a dur a terme correctament les proves en qüestió. La naturalesa sintètica de les dades podria introduir biaixos o patrons poc realistes que afectin negativament la capacitat del model per generalitzar ara la tasca específica.
