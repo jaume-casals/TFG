@@ -38,71 +38,71 @@ Avaluem cada model per valorar-ne l'eficàcia a l'hora de respondre les proves q
 Per cada model, s'ha descarregat la versió més gran (i, en conseqüència, s'espera que la més efectiva), que ha permès l'equip actual. S'ha executat el model amb una sèrie de tiquets de prova depenent del tipus de tasca per la qual ha sigut entrenat. 
 
 \begin{table}[H]
-  \centering
-  \begin{tabular}{|>{\centering}m{2.3cm}|>{\centering}m{1.6cm}|m{10.7cm}|}
-    \hline
-    \multicolumn{3}{|c|}{\textbf{Models de \textit{Question Answering}}} \\
-    \hline
-    \textbf{Model} & \textbf{Params.} & \textbf{Observacions} \\
-    \hline
-    BERT & 340M & És un model antic | Contesta meitat de la resposta \\
-    BERT (fine-tuned) & 340M & Ja està afinat | Contesta meitat de la resposta \\
-    RoBERTa & 355M & Millora de BERT | Contesta meitat de la resposta \\
-    DeBERTaV3 & 304M & Millora de RoBERTa | Contesta meitat de la resposta \\
-    GPT-2 & 774M & Massa general | Escriu altres coses \\
-    BART & 406M & Més complicat d'afinar | Serveix per resumir \\
-    Prometheus & 7000M & Requereix massa recursos \\
-    LUKE & 483M & Resposta buida \\
-    XLNet & 110M & Escriu altres coses \\
-    XLNet (large) & 340M & Escriu altres coses \\
-    \hline
-  \end{tabular}
-  \caption{Comparació dels models de \textit{Question Answering} (Resposta a preguntes)}
-  \label{tab:qa-comparison}
+    \centering
+    \begin{tabular}{|>{\centering}m{2.3cm}|>{\centering}m{1.6cm}|m{10.7cm}|}
+        \hline
+        \multicolumn{3}{|c|}{\textbf{Models de \textit{Question Answering}}} \\
+        \hline
+        \textbf{Model} & \textbf{Params.} & \textbf{Observacions} \\
+        \hline
+        BERT & 340M & És un model antic | Contesta meitat de la resposta \\
+        BERT (fine-tuned) & 340M & Ja està afinat | Contesta meitat de la resposta \\
+        RoBERTa & 355M & Millora de BERT | Contesta meitat de la resposta \\
+        DeBERTaV3 & 304M & Millora de RoBERTa | Contesta meitat de la resposta \\
+        GPT-2 & 774M & Massa general | Escriu altres coses \\
+        BART & 406M & Més complicat d'afinar | Serveix per resumir \\
+        Prometheus & 7000M & Requereix massa recursos \\
+        LUKE & 483M & Resposta buida \\
+        XLNet & 110M & Escriu altres coses \\
+        XLNet (large) & 340M & Escriu altres coses \\
+        \hline
+    \end{tabular}
+    \caption{Comparació dels models de \textit{Question Answering} (Resposta a preguntes)}
+    \label{tab:qa-comparison}
 \end{table}
 
 \begin{table}[H]
-  \centering
-  \begin{tabular}{|>{\centering}m{2.3cm}|m{1.6cm}|m{10.7cm}|}
-    \hline
-    \multicolumn{3}{|c|}{\textbf{Models de \textit{Text Generation}}} \\
-    \hline
-    \textbf{Model} & \textbf{Params.} & \textbf{Observacions} \\
-    \hline
-    GPT-2 & 774M & Massa general | Escriu altres coses \\
-    BART & 406M & Més complicat d'afinar | Serveix per resumir \\
-    Prometheus & 7000M & Requereix massa recursos \\
-    GoLLIE-7B & 7000M & Dissenyat per seguir instruccions | Requereix massa recursos \\
-    GPT-J & 6053M & Té una versió en català | Requereix massa recursos \\
-    GPT-Neo & 2700M & Té una versió en català | Entèn el significat però no contesta amb el format esperat \\
-    Llama 2 & 7000M & És pitjor, en general, que Mistral 7B | Requereix massa recursos \\
-    Mistral 7B & 7300M & Requereix massa recursos \\
-    Mistral 7B (Instruct) & 7300M & Dissenyat per seguir instruccions | Ha sigut reduït (Quantificació) | Respon correctament \\
-    Zephyr 7B $\beta$ & 7300M & Reentrenament de Mistral 7B | Requereix massa recursos \\
-    \hline
-  \end{tabular}
-  \caption{Comparació dels models de \textit{Text Generation} (Generació de text)}
-  \label{tab:tg-comparison}
+    \centering
+    \begin{tabular}{|>{\centering}m{2.3cm}|m{1.6cm}|m{10.7cm}|}
+        \hline
+        \multicolumn{3}{|c|}{\textbf{Models de \textit{Text Generation}}} \\
+        \hline
+        \textbf{Model} & \textbf{Params.} & \textbf{Observacions} \\
+        \hline
+        GPT-2 & 774M & Massa general | Escriu altres coses \\
+        BART & 406M & Més complicat d'afinar | Serveix per resumir \\
+        Prometheus & 7000M & Requereix massa recursos \\
+        GoLLIE-7B & 7000M & Dissenyat per seguir instruccions | Requereix massa recursos \\
+        GPT-J & 6053M & Té una versió en català | Requereix massa recursos \\
+        GPT-Neo & 2700M & Té una versió en català | Entèn el significat però no contesta amb el format esperat \\
+        Llama 2 & 7000M & És pitjor, en general, que Mistral 7B | Requereix massa recursos \\
+        Mistral 7B & 7300M & Requereix massa recursos \\
+        Mistral 7B (Instruct) & 7300M & Dissenyat per seguir instruccions | Ha sigut reduït (Quantificació) | Respon correctament \\
+        Zephyr 7B $\beta$ & 7300M & Reentrenament de Mistral 7B | Requereix massa recursos \\
+        \hline
+    \end{tabular}
+    \caption{Comparació dels models de \textit{Text Generation} (Generació de text)}
+    \label{tab:tg-comparison}
 \end{table}
 
 \begin{table}[H]
-  \centering
-  \begin{tabular}{|>{\centering}m{2.3cm}|m{1.6cm}|m{10.7cm}|}
-    \hline
-    \multicolumn{3}{|c|}{\textbf{Models de \textit{Text to Text Generation}}} \\
-    \hline
-    \textbf{Model} & \textbf{Params.} & \textbf{Observacions} \\
-    \hline
-    Flan-T5-Small & 80M & No entèn el significat, Serveix per tasques més petites \\
-    Flan-T5-Base & 250M & És relativament petit, Contesta correctament \\
-    FLAN-T5 Large & 780M & Contesta correctament \\
-    FLAN-T5 XL & 3B & Massa gran com per ser entrenat, Contesta correctament \\
-    M2M100 & 418M & Massa complicat d'afinar, Serveix per traduir \\
-    Flan-T5-Base (QA) & 300M & Reentrenat específicament per contestar preguntes, Contesta meitat de la resposta  \\
-    \hline
-  \end{tabular}
-  \caption{Comparació dels models de \textit{Text to Text Generation} (Generació de text a text)}
-  \label{tab:t2t-comparison}
+    \centering
+    \begin{tabular}{|>{\centering}m{2.3cm}|m{1.6cm}|m{10.7cm}|}
+        \hline
+        \multicolumn{3}{|c|}{\textbf{Models de \textit{Text to Text Generation}}} \\
+        \hline
+        \textbf{Model} & \textbf{Params.} & \textbf{Observacions} \\
+        \hline
+        Flan-T5-Small & 80M & No entèn el significat, Serveix per tasques més petites \\
+        Flan-T5-Base & 250M & És relativament petit, Contesta correctament \\
+        FLAN-T5 Large & 780M & Contesta correctament \\
+        FLAN-T5 XL & 3B & Massa gran com per ser entrenat, Contesta correctament \\
+        M2M100 & 418M & Massa complicat d'afinar, Serveix per traduir \\
+        Flan-T5-Base (QA) & 300M & Reentrenat específicament per contestar preguntes, Contesta meitat de la resposta  \\
+        \hline
+    \end{tabular}
+    \caption{Comparació dels models de \textit{Text to Text Generation} (Generació de text a text)}
+    \label{tab:t2t-comparison}
 \end{table}
 
 \subsection{Models destacats}

@@ -1,26 +1,47 @@
 \section{Anàlisi dels resultats}
+En aquesta secció s'ofereix una anàlisi dels resultats obtinguts amb els models que han sigut entrenats anteriorment amb el procediment de \textit{fine-tuning} explicat a la secció \ref{sec:fine-tune}.
+
+Alguns resultats s'han perdut durant el procés d'entrenament. Aquesta pèrdua de dades és deguda a les característiques de la plataforma utilitzada per executar el codi, els quaderns Jupyter, que tant en un entorn local o mitjançant \textit{Google Colab} és possible no obtenir aquests resultats si no es prenen les mesures adequades. Malauradament, aquests resultats d'entrenament perduts no es poden recuperar sense tornar a entrenar els models. Aquest desafiament inesperat ha demostrat la importància de la transparència en el procés de recerca, tot reconeixent tant els èxits com els reptes trobats durant l'experimentació.
+
+En cada secció es poden veure dos tipus de taules:
+\begin{itemize}
+    \item \textbf{Taula d'entrenament:} Es mostra el progés que s'ha aconseguit guardar de cada entrenament. Al final de cada \textit{Epoch} s'indiquen les mètriques de:
+
+    \item \textbf{Taula d'avaluació:} 
+\end{itemize}
+
+\begin{itemize}
+    \item \textit{Train\_Loss}: Error durant l'entrenament. Calculat automàticament per 
+    \item \textit{Val\_Loss} Error durant la validació
+    \item \textit{ROUGE-1}
+    \item \textit{ROUGE-2}
+    \item \textit{ROUGE-L}
+    \item \textit{ROUGE-Lsum}
+    \item \textit{Coincidència exacta}
+\end{itemize}
 
 \subsection{Flan-T5-Base}
 \begin{table}[H]
-    \caption{Primer entreno (amb etiquetes)}
+    \centering
     \begin{tabular}{lcccccc}
     \toprule
-    Epoch & train\_loss & val\_loss & rouge-1 & rouge-2 & rouge-l & rouge-lsum \\
+    Epoch & Train\_Loss & Val\_Loss & ROUGE-1 & ROUGE-2 & ROUGE-L & ROUGE-Lsum \\
     \midrule
     1 & 0.058 & 0.045 & 94.662 & 92.672 & 93.843 & 93.955 \\
     2 & 0.037 & 0.036 & 96.162 & 94.540 & 95.625 & 95.725 \\
     3 & ... & ... & ... & ... & ... & ... \\
     \bottomrule
     \end{tabular}
+    \caption[Primer entrenament del model \textit{Flan-T5-Base}]{Primer entrenament del model \textit{Flan-T5-Base} (amb etiquetes)}
 \end{table}
 
-(S'entrena durant dos epochs més sense etiquetes)
+(S'entrena durant dues epochs més sense etiquetes)
 
 \begin{table}[H]
-    \caption{Avaluació (sense etiquetes)}
+    \centering
     \begin{tabular}{lcccccc}
     \toprule
-    Model & rouge-1 & rouge-2 & rouge-l & rouge-lsum & coincidència exacta \\
+    Model & ROUGE-1 & ROUGE-2 & ROUGE-L & ROUGE-Lsum & Coincidència exacta \\
     \midrule
     Model base & 0.00 & 0.00 & 0.00 & 0.00 & 0.00 \\
     Checkpoint 2 & 95.84 & 94.27 & 95.19 & 95.20 & 61.82 \\
@@ -29,6 +50,7 @@
     Checkpoint 5 & 96.57 & 95.17 & 96.05 & 96.09 & 66.01 \\
     \bottomrule
     \end{tabular}
+    \caption[Avaluació del model \textit{Flan-T5-Base}]{Avaluació del model \textit{Flan-T5-Base} (sense etiquetes)}
 \end{table}
 
 
@@ -39,34 +61,37 @@
 
 \subsection{Flan-T5-Base (LaMini)}
 \begin{table}[H]
+    \centering
     \begin{tabular}{lcccccc}
     \toprule
-    Epoch & train\_loss & val\_loss & rouge-1 & rouge-2 & rouge-l & rouge-lsum \\
+    Epoch & Train\_Loss & Val\_Loss & ROUGE-1 & ROUGE-2 & ROUGE-L & ROUGE-Lsum \\
     \midrule
     1 & ...   & ...   & ...    & ...    & ...    & ... \\
     2 & 0.013 & 0.022 & 97.800 & 96.553 & 97.248 & 97.350 \\
     \bottomrule
     \end{tabular}
+    \caption[Primer entrenament del model \textit{Flan-T5-Base (LaMini)}]{Primer entrenament del model \textit{Flan-T5-Base (LaMini)} (amb etiquetes)}
 \end{table}
 
 \begin{table}[H]
-    \caption{Segon entreno (sense etiquetes)}
+    \centering
     \begin{tabular}{lcccccc}
     \toprule
-    Epoch & train\_loss & val\_loss & rouge-1 & rouge-2 & rouge-l & rouge-lsum \\
+    Epoch & Train\_Loss & Val\_Loss & ROUGE-1 & ROUGE-2 & ROUGE-L & ROUGE-Lsum \\
     \midrule
     3 & ...  & ...    & ...    & ...    & ...    & ... \\
     4 & 0.012 & 0.029 & 96.594 & 95.267 & 96.109 & 96.136 \\
     5 & 0.005 & 0.029 & 96.794 & 95.538 & 96.257 & 96.290 \\
     \bottomrule
     \end{tabular}
+    \caption[Segon entrenament del model \textit{Flan-T5-Base (LaMini)}]{Segon entrenament del model \textit{Flan-T5-Base (LaMini)} (sense etiquetes)}
 \end{table}
 
 \begin{table}[H]
-    \caption{Evaluació (sense etiquetes)}
+    \centering
     \begin{tabular}{lcccccc}
     \toprule
-    Model & rouge-1 & rouge-2 & rouge-l & rouge-lsum & coincidència exacta \\
+    Model & ROUGE-1 & ROUGE-2 & ROUGE-L & ROUGE-Lsum & Coincidència exacta \\
     \midrule
     Model base   & 0.00  & 0.00  & 0.00  & 0.00  & 0.00 \\
     Checkpoint 1 & 95.31 & 93.48 & 94.76 & 94.75 & 58.28 \\
@@ -76,6 +101,7 @@
     Checkpoint 5 & 96.75 & 95.45 & 96.19 & 96.19 & 69.36 \\
     \bottomrule
     \end{tabular}
+    \caption[Avaluació del model \textit{Flan-T5-Base (LaMini)}]{Avaluació del model \textit{Flan-T5-Base (LaMini)} (sense etiquetes)}
 \end{table}
 
 
@@ -85,10 +111,10 @@
 
 \subsection{Flan-T5-Small}
 \begin{table}[H]
-    \caption{Primer entreno (amb etiquetes)}
+    \centering
     \begin{tabular}{lcccccc}
     \toprule
-    Epoch & train\_loss & val\_loss & rouge-1 & rouge-2 & rouge-l & rouge-lsum \\
+    Epoch & Train\_Loss & Val\_Loss & ROUGE-1 & ROUGE-2 & ROUGE-L & ROUGE-Lsum \\
     \midrule
     1 & 0.084 & 0.041 & 94.86 & 92.50 & 93.70 & 93.84 \\
     2 & 0.055 & 0.036 & 96.13 & 93.95 & 94.94 & 95.06 \\
@@ -97,19 +123,21 @@
     5 & 0.037 & 0.032 & 96.58 & 94.78 & 95.71 & 95.86 \\
     \bottomrule
     \end{tabular}
+    \caption[Entrenament del model \textit{Flan-T5-Small}]{Entrenament del model \textit{Flan-T5-Small} (amb etiquetes)}
 \end{table}
 
 \begin{table}[H]
-    \caption{Evaluació (sense etiquetes)}
+    \centering
     \begin{tabular}{lcccccc}
     \toprule
-    Model & rouge-1 & rouge-2 & rouge-l & rouge-lsum & coincidència exacta \\
+    Model & ROUGE-1 & ROUGE-2 & ROUGE-L & ROUGE-Lsum & Coincidència exacta \\
     \midrule
     Model base & 0.00 & 0.00 & 0.00 & 0.00 & 0.00 \\
     Checkpoint 4 & 95.07 & 93.20 & 94.40 & 94.40 & 54.09 \\
     Checkpoint 5 & 95.07 & 93.17 & 94.39 & 94.39 & 54.74 \\
     \bottomrule
     \end{tabular}
+    \caption[Avaluació del model \textit{Flan-T5-Small}]{Avaluació del model \textit{Flan-T5-Small} (sense etiquetes)}
 \end{table}
 
 
@@ -119,10 +147,10 @@
 
 \subsection{Flan-T5-Small (LaMini)}
 \begin{table}[H]
-    \caption{Primer entreno (amb etiquetes)}
+    \centering
     \begin{tabular}{lcccccc}
     \toprule
-    Epoch & train\_loss & val\_loss & rouge-1 & rouge-2 & rouge-l & rouge-lsum \\
+    Epoch & Train\_Loss & Val\_Loss & ROUGE-1 & ROUGE-2 & ROUGE-L & ROUGE-Lsum \\
     \midrule
     1 & ... & ... & ... & ... & ... & ... \\
     2 & ... & ... & ... & ... & ... & ... \\
@@ -131,13 +159,15 @@
     5 & ... & ... & ... & ... & ... & ... \\
     \bottomrule
     \end{tabular}
+    \caption[Entrenament del model \textit{Flan-T5-Small (LaMini)}]{Entrenament del model \textit{Flan-T5-Small (LaMini)} (amb etiquetes)}
 \end{table}
 
 \begin{table}[H]
+    \centering
     \caption{Evaluació (sense etiquetes)}
     \begin{tabular}{lcccccc}
     \toprule
-    Model & rouge-1 & rouge-2 & rouge-l & rouge-lsum & coincidència exacta \\
+    Model & ROUGE-1 & ROUGE-2 & ROUGE-L & ROUGE-Lsum & Coincidència exacta \\
     \midrule
     Model base & 0.00 & 0.00 & 0.00 & 0.00 & 0.00 \\
     Checkpoint 1 & 90.27 & 86.79 & 88.56 & 88.59 & 31.09 \\
@@ -147,6 +177,7 @@
     Checkpoint 5 & 93.48 & 90.77 & 92.16 & 92.16 & 43.38 \\
     \bottomrule
     \end{tabular}
+    \caption[Avaluació del model \textit{Flan-T5-Small (LaMini)}]{Avaluació del model \textit{Flan-T5-Small (LaMini)} (sense etiquetes)}
 \end{table}
 
 
@@ -156,15 +187,15 @@
 \subsection{Flan-T5-Base (PEFT)}
 \begin{table}[H]
     \centering
-    \caption{Entreno (amb etiquetes)}
     \label{tab:additional-training}
     \begin{tabular}{lcccccc}
     \toprule
-    Epoch & train\_loss & val\_loss & rouge-1 & rouge-2 & rouge-l & rouge-lsum \\
+    Epoch & Train\_Loss & Val\_Loss & ROUGE-1 & ROUGE-2 & ROUGE-L & ROUGE-Lsum \\
     \midrule
     1 & 0.114 & 0.042 & 20.847 & 16.240 & 20.715 & 20.733 \\
     2 & 0.057 & 0.036 & 20.757 & 16.301 & 20.672 & 20.673 \\
     3 & 0.048 & 0.034 & 20.748 & 16.288 & 20.655 & 20.660 \\
     \bottomrule
     \end{tabular}
+    \caption[Entrenament del model \textit{Flan-T5-Base} amb PEFT]{Entrenament del model \textit{Flan-T5-Base} amb PEFT (amb etiquetes)}
 \end{table}
