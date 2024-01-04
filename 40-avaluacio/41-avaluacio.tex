@@ -5,27 +5,18 @@ Alguns resultats s'han perdut durant el procés d'entrenament. Aquesta pèrdua d
 
 En cada secció es poden veure dos tipus de taules:
 \begin{itemize}
-    \item \textbf{Taula d'entrenament:} Es mostra el progés que s'ha aconseguit guardar de cada entrenament. Al final de cada \textit{Epoch} s'indiquen les mètriques de:
-
-    \item \textbf{Taula d'avaluació:} 
-\end{itemize}
-
-\begin{itemize}
-    \item \textit{Train\_Loss}: Error durant l'entrenament. Calculat automàticament per 
-    \item \textit{Val\_Loss} Error durant la validació
-    \item \textit{ROUGE-1}
-    \item \textit{ROUGE-2}
-    \item \textit{ROUGE-L}
-    \item \textit{ROUGE-Lsum}
-    \item \textit{Coincidència exacta}
+    \item \textbf{Taula d'entrenament:} Es mostra el progés que s'ha aconseguit guardar de cada entrenament. Al final de cada \textit{Epoch} s'indiquen les mètriques de \textit{Train\_Loss} (escurçat a \textit{Train}), \textit{Validation\_Loss} (escurçat a Val), \textit{ROUGE-1}, \textit{ROUGE-2}, \textit{ROUGE-L} i \textit{ROUGE-Lsum}.
+    \item \textbf{Taula d'avaluació:} Es fa una recopilació dels resultats aconseguits amb cada \textit{checkpoint} o punt de control que s'ha recuperat. A part de les mètriques de \textit{ROUGE}, es va afegir la mètrica de ``Coincidència exacta'' (escurçat a ``Exacte'') que simplement indica el percentatge de resultats generats que han coincidit exactament amb el resultat real.
 \end{itemize}
 
 \subsection{Flan-T5-Base}
+L'entrenament inicial de la versió base del model \textit{Flan-T5} es resumeix a la taula següent, que mostra les mètriques clau durant les primeres \textit{Epochs}. 
+
 \begin{table}[H]
     \centering
     \begin{tabular}{lcccccc}
     \toprule
-    Epoch & Train\_Loss & Val\_Loss & ROUGE-1 & ROUGE-2 & ROUGE-L & ROUGE-Lsum \\
+    Epoch & Train & Val & ROUGE-1 & ROUGE-2 & ROUGE-L & ROUGE-Lsum \\
     \midrule
     1 & 0.058 & 0.045 & 94.662 & 92.672 & 93.843 & 93.955 \\
     2 & 0.037 & 0.036 & 96.162 & 94.540 & 95.625 & 95.725 \\
@@ -35,25 +26,27 @@ En cada secció es poden veure dos tipus de taules:
     \caption[Primer entrenament del model \textit{Flan-T5-Base}]{Primer entrenament del model \textit{Flan-T5-Base} (amb etiquetes)}
 \end{table}
 
-(S'entrena durant dues epochs més sense etiquetes)
+Després d'aquest entrenament inicial, el model es va sotmetre a dos cicles addicionals. Aquest segon entrenament s'ha realitzat amb la segona funció de postprocessament, la qual no té en compte les etiquetes a l'hora de calcular l'error amb les diferents mètriques.
+
+Els resultats de l'avaluació després d'aquest període d'entrenament estès es detallen a la taula següent.
 
 \begin{table}[H]
     \centering
     \begin{tabular}{lcccccc}
     \toprule
-    Model & ROUGE-1 & ROUGE-2 & ROUGE-L & ROUGE-Lsum & Coincidència exacta \\
+    Model & ROUGE-1 & ROUGE-2 & ROUGE-L & ROUGE-Lsum & Exacte \\
     \midrule
-    Model base & 0.00 & 0.00 & 0.00 & 0.00 & 0.00 \\
-    Checkpoint 2 & 95.84 & 94.27 & 95.19 & 95.20 & 61.82 \\
-    Checkpoint 3 & 96.70 & 95.21 & 96.20 & 96.21 & 64.99 \\
-    Checkpoint 4 & 95.97 & 94.50 & 95.37 & 95.38 & 64.24 \\
-    Checkpoint 5 & 96.57 & 95.17 & 96.05 & 96.09 & 66.01 \\
+    Model base   & 0.00  & 0.00  & 0.00  & 0.00  & 0.00\% \\
+    Checkpoint 2 & 95.84 & 94.27 & 95.19 & 95.20 & 61.82\% \\
+    Checkpoint 3 & 96.70 & 95.21 & 96.20 & 96.21 & 64.99\% \\
+    Checkpoint 4 & 95.97 & 94.50 & 95.37 & 95.38 & 64.24\% \\
+    Checkpoint 5 & 96.57 & 95.17 & 96.05 & 96.09 & 66.01\% \\
     \bottomrule
     \end{tabular}
     \caption[Avaluació del model \textit{Flan-T5-Base}]{Avaluació del model \textit{Flan-T5-Base} (sense etiquetes)}
 \end{table}
 
-
+Observant el resultat, es va poder veure que el model va mostrar una millora del rendiment necessària, com indica l'augment de les puntuacions ROUGE als punts de control següents. La puntuació de coincidència exacta, una mesura de la capacitat del model per proporcionar respostes literals, també mostra una tendència positiva, assolint el seu punt màxim al \textit{Checkpoint 5}. La raó per la qual es creu que el model va disminuir el seu rendiment al finalitzar el \textit{Checkpoint 4}, és perquè va ser la primera \textit{epoch} on el model s'avaluava sense les etiquetes i això pot haver causat una disminució de la puntuació, però no necessariament de la qualitat del model.
 
 
 
@@ -64,7 +57,7 @@ En cada secció es poden veure dos tipus de taules:
     \centering
     \begin{tabular}{lcccccc}
     \toprule
-    Epoch & Train\_Loss & Val\_Loss & ROUGE-1 & ROUGE-2 & ROUGE-L & ROUGE-Lsum \\
+    Epoch & Train & Val & ROUGE-1 & ROUGE-2 & ROUGE-L & ROUGE-Lsum \\
     \midrule
     1 & ...   & ...   & ...    & ...    & ...    & ... \\
     2 & 0.013 & 0.022 & 97.800 & 96.553 & 97.248 & 97.350 \\
@@ -77,7 +70,7 @@ En cada secció es poden veure dos tipus de taules:
     \centering
     \begin{tabular}{lcccccc}
     \toprule
-    Epoch & Train\_Loss & Val\_Loss & ROUGE-1 & ROUGE-2 & ROUGE-L & ROUGE-Lsum \\
+    Epoch & Train & Val & ROUGE-1 & ROUGE-2 & ROUGE-L & ROUGE-Lsum \\
     \midrule
     3 & ...  & ...    & ...    & ...    & ...    & ... \\
     4 & 0.012 & 0.029 & 96.594 & 95.267 & 96.109 & 96.136 \\
@@ -91,14 +84,14 @@ En cada secció es poden veure dos tipus de taules:
     \centering
     \begin{tabular}{lcccccc}
     \toprule
-    Model & ROUGE-1 & ROUGE-2 & ROUGE-L & ROUGE-Lsum & Coincidència exacta \\
+    Model & ROUGE-1 & ROUGE-2 & ROUGE-L & ROUGE-Lsum & Exacte \\
     \midrule
-    Model base   & 0.00  & 0.00  & 0.00  & 0.00  & 0.00 \\
-    Checkpoint 1 & 95.31 & 93.48 & 94.76 & 94.75 & 58.28 \\
-    Checkpoint 2 & 96.74 & 95.37 & 96.18 & 96.18 & 67.87 \\
-    Checkpoint 3 & 96.39 & 95.03 & 95.90 & 95.90 & 66.66 \\
-    Checkpoint 4 & 96.55 & 95.22 & 96.08 & 96.06 & 66.75 \\
-    Checkpoint 5 & 96.75 & 95.45 & 96.19 & 96.19 & 69.36 \\
+    Model base   & 0.00  & 0.00  & 0.00  & 0.00  & 0.00\% \\
+    Checkpoint 1 & 95.31 & 93.48 & 94.76 & 94.75 & 58.28\% \\
+    Checkpoint 2 & 96.74 & 95.37 & 96.18 & 96.18 & 67.87\% \\
+    Checkpoint 3 & 96.39 & 95.03 & 95.90 & 95.90 & 66.66\% \\
+    Checkpoint 4 & 96.55 & 95.22 & 96.08 & 96.06 & 66.75\% \\
+    Checkpoint 5 & 96.75 & 95.45 & 96.19 & 96.19 & 69.36\% \\
     \bottomrule
     \end{tabular}
     \caption[Avaluació del model \textit{Flan-T5-Base (LaMini)}]{Avaluació del model \textit{Flan-T5-Base (LaMini)} (sense etiquetes)}
@@ -114,7 +107,7 @@ En cada secció es poden veure dos tipus de taules:
     \centering
     \begin{tabular}{lcccccc}
     \toprule
-    Epoch & Train\_Loss & Val\_Loss & ROUGE-1 & ROUGE-2 & ROUGE-L & ROUGE-Lsum \\
+    Epoch & Train & Val & ROUGE-1 & ROUGE-2 & ROUGE-L & ROUGE-Lsum \\
     \midrule
     1 & 0.084 & 0.041 & 94.86 & 92.50 & 93.70 & 93.84 \\
     2 & 0.055 & 0.036 & 96.13 & 93.95 & 94.94 & 95.06 \\
@@ -130,11 +123,11 @@ En cada secció es poden veure dos tipus de taules:
     \centering
     \begin{tabular}{lcccccc}
     \toprule
-    Model & ROUGE-1 & ROUGE-2 & ROUGE-L & ROUGE-Lsum & Coincidència exacta \\
+    Model & ROUGE-1 & ROUGE-2 & ROUGE-L & ROUGE-Lsum & Exacte \\
     \midrule
-    Model base & 0.00 & 0.00 & 0.00 & 0.00 & 0.00 \\
-    Checkpoint 4 & 95.07 & 93.20 & 94.40 & 94.40 & 54.09 \\
-    Checkpoint 5 & 95.07 & 93.17 & 94.39 & 94.39 & 54.74 \\
+    Model base   & 0.00  & 0.00  & 0.00  & 0.00  & 0.00\% \\
+    Checkpoint 4 & 95.07 & 93.20 & 94.40 & 94.40 & 54.09\% \\
+    Checkpoint 5 & 95.07 & 93.17 & 94.39 & 94.39 & 54.74\% \\
     \bottomrule
     \end{tabular}
     \caption[Avaluació del model \textit{Flan-T5-Small}]{Avaluació del model \textit{Flan-T5-Small} (sense etiquetes)}
@@ -150,7 +143,7 @@ En cada secció es poden veure dos tipus de taules:
     \centering
     \begin{tabular}{lcccccc}
     \toprule
-    Epoch & Train\_Loss & Val\_Loss & ROUGE-1 & ROUGE-2 & ROUGE-L & ROUGE-Lsum \\
+    Epoch & Train & Val & ROUGE-1 & ROUGE-2 & ROUGE-L & ROUGE-Lsum \\
     \midrule
     1 & ... & ... & ... & ... & ... & ... \\
     2 & ... & ... & ... & ... & ... & ... \\
@@ -167,14 +160,14 @@ En cada secció es poden veure dos tipus de taules:
     \caption{Evaluació (sense etiquetes)}
     \begin{tabular}{lcccccc}
     \toprule
-    Model & ROUGE-1 & ROUGE-2 & ROUGE-L & ROUGE-Lsum & Coincidència exacta \\
+    Model & ROUGE-1 & ROUGE-2 & ROUGE-L & ROUGE-Lsum & Exacte \\
     \midrule
-    Model base & 0.00 & 0.00 & 0.00 & 0.00 & 0.00 \\
-    Checkpoint 1 & 90.27 & 86.79 & 88.56 & 88.59 & 31.09 \\
-    Checkpoint 2 & 92.51 & 89.48 & 91.03 & 91.05 & 37.80 \\
-    Checkpoint 3 & 92.83 & 89.96 & 91.39 & 91.41 & 40.31 \\
-    Checkpoint 4 & 93.36 & 90.62 & 92.07 & 92.08 & 43.01 \\
-    Checkpoint 5 & 93.48 & 90.77 & 92.16 & 92.16 & 43.38 \\
+    Model base   & 0.00  & 0.00  & 0.00  & 0.00  & 0.00\% \\
+    Checkpoint 1 & 90.27 & 86.79 & 88.56 & 88.59 & 31.09\% \\
+    Checkpoint 2 & 92.51 & 89.48 & 91.03 & 91.05 & 37.80\% \\
+    Checkpoint 3 & 92.83 & 89.96 & 91.39 & 91.41 & 40.31\% \\
+    Checkpoint 4 & 93.36 & 90.62 & 92.07 & 92.08 & 43.01\% \\
+    Checkpoint 5 & 93.48 & 90.77 & 92.16 & 92.16 & 43.38\% \\
     \bottomrule
     \end{tabular}
     \caption[Avaluació del model \textit{Flan-T5-Small (LaMini)}]{Avaluació del model \textit{Flan-T5-Small (LaMini)} (sense etiquetes)}
@@ -190,7 +183,7 @@ En cada secció es poden veure dos tipus de taules:
     \label{tab:additional-training}
     \begin{tabular}{lcccccc}
     \toprule
-    Epoch & Train\_Loss & Val\_Loss & ROUGE-1 & ROUGE-2 & ROUGE-L & ROUGE-Lsum \\
+    Epoch & Train & Val & ROUGE-1 & ROUGE-2 & ROUGE-L & ROUGE-Lsum \\
     \midrule
     1 & 0.114 & 0.042 & 20.847 & 16.240 & 20.715 & 20.733 \\
     2 & 0.057 & 0.036 & 20.757 & 16.301 & 20.672 & 20.673 \\

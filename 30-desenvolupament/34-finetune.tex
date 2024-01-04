@@ -7,7 +7,7 @@ A continuació es mostren els primers passos pel \textit{fine-tuning} del model:
 
 \begin{enumerate}
     \item \textbf{Carregar \textit{dataset}:} Es llegeixen els fitxers on s'ha emmagatzemat les dades en format \texttt{.csv}.
-    \item \textbf{Carregar \textit{tokenitzador}:} S'utilitza la funció \pyth{from_pretrained} de la llibreria \pyth{transformers} per carregar el \textit{tokenitzador} del model oficial de Google: "google/flan-t5-small". Aquest model ha canviat segons el que s'entreni en cada moment, agafant inclús models no oficials de l'empresa però compatibles igualment amb l'estructura emprada.
+    \item \textbf{Carregar \textit{tokenitzador}:} S'utilitza la funció \pyth{from_pretrained} de la llibreria \pyth{transformers} per carregar el \textit{tokenitzador} del model oficial de Google: ``google/flan-t5-small''. Aquest model ha canviat segons el que s'entreni en cada moment, agafant inclús models no oficials de l'empresa però compatibles igualment amb l'estructura emprada.
 \end{enumerate}
 
 
@@ -26,7 +26,7 @@ En aquesta secció s'analitza la fase de postprocessament del nostre model. L'ob
 
 \begin{enumerate}
     \setcounter{enumi}{4}
-    \item \textbf{Carregar el model:} El model ha sigut carregat fent servir el mateix mètode per carregar el \textit{tokenitzador}, i és fent ús de la funció \pyth{from_pretrained} i s'ha obtingut de la mateixa font "google/flan-t5-small" (o la que es faci servir en el moment).
+    \item \textbf{Carregar el model:} El model ha sigut carregat fent servir el mateix mètode per carregar el \textit{tokenitzador}, i és fent ús de la funció \pyth{from_pretrained} i s'ha obtingut de la mateixa font ``google/flan-t5-small'' (o la que es faci servir en el moment).
     \item \textbf{Primera funció de postprocessament:} La primera funció de postprocessament senzillament descodifica els \textit{tokens} generats pel model en text, neteja qualsevol excedent d'espai que hi hagi i el divideix en frases per poder ser avaluades.
     \item \textbf{Segona funció de postprocessament:} La segona funció és pràcticament idèntica a la primera, però elimina les etiquetes que escriu el model abans de donar la resposta. Això s'ha fet perquè experimentalment s'ha vist que si el model simplement escriu les etiquetes, ja aconsegueix un resultat elevat. Eliminant aquest factor de l'avaluació permet assolir un resultat quantificat més representatiu de la realitat. Aquesta segona funció només es pot aplicar quan el model ja ha sigut entrenat per suficient temps i sempre genera, com a mínim les etiquetes esperades.
     \item \textbf{Funció d'avaluació:} Per a avaluar el rendiment del model s'ha usat la mètrica \textit{ROUGE} a través de la llibreria \textit{evaluate}. Aquesta funció retorna les mètriques de \textit{ROUGE-1}, \textit{ROUGE-2}, \textit{ROUGE-L} i \textit{ROUGE-Lsum}.

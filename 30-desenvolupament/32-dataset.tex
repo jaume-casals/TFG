@@ -19,10 +19,10 @@ El \textit{dataset} escollit és \textit{Named Entity Recognition in Indian cour
 
 
 \subsection{Visió general de les dades}
-Per com funcionen els judicis a l'Índia, una sentència típica d'un tribunal es pot dividir en dues parts: el preàmbul i la sentència. La separació entre el preàmbul i la sentència sol estar marcat per una paraula clau com "JUDGMENT" o "ORDER". 
+Per com funcionen els judicis a l'Índia, una sentència típica d'un tribunal es pot dividir en dues parts: el preàmbul i la sentència. La separació entre el preàmbul i la sentència sol estar marcat per una paraula clau com ``JUDGMENT'' o ``ORDER''. 
 \begin{itemize}
   \item \textbf{Preàmbul:} El preàmbul d'una sentència conté les dades importants de la sentència tals com els noms de les parts, jutges, advocats, etc. Aquestes dades no solen tenir frases gramaticalment completes, sinó que estan formatades.
-  \item \textbf{Sentència:} Per altra banda, el text que segueix el preàmbul fins al final de la sentència es diu simplement "sentència".
+  \item \textbf{Sentència:} Per altra banda, el text que segueix el preàmbul fins al final de la sentència es diu simplement ``sentència''.
 \end{itemize}
 Per a l'ús que se li ha donat, s'ha considerat que els preàmbuls i les sentències poden ser combinades en el mateix conjunt de dades per aconseguir més dades i més diversitat.
 
@@ -52,7 +52,7 @@ El \textit{dataset} originalment està en format \texttt{.json}, un format que p
 \begin{enumerate}
   \item \textbf{Llegir el \textit{dataset}:} Per començar, s'ha carregat el \textit{dataset} des dels fitxers JSON on s'emmagatzemen les dades utilitzant la llibreria \texttt{json}.
   \item \textbf{Unir totes les sentències:} Les sentències i els preàmbuls que estaven en arxius diferents s'han unit en la mateixa variable, pel motiu mencionat anteriorment.
-  \item \textbf{Escriure la capçalera:} La capçalera d'un arxiu \texttt{.csv} és el títol de les columnes. En aquest cas ha sigut "sentence" i "output" pel text d'entrada i les entitats de sortida, respectivament.
+  \item \textbf{Escriure la capçalera:} La capçalera d'un arxiu \texttt{.csv} és el títol de les columnes. En aquest cas ha sigut ``sentence'' i ``output'' pel text d'entrada i les entitats de sortida, respectivament.
   \item \textbf{Iterar per les sentències:} Cada sentència conté un camp identificador, un d'anotacions, un de dades i un de metadades.
   \item \textbf{Escriure el text:} S'ha escrit el text en el fitxer de sortida amb el format esperat per un \texttt{.csv}.
   \item \textbf{Recórrer les anotacions:} S'ha iterat per cada anotació d'una sentència on hi ha les entitats extretes del text.
@@ -148,7 +148,7 @@ Addicionalment, a la figura \ref{fig:histograma_sentencies_out} es pot veure que
 \subsubsection{Recompte d'entitats per llargada}
 L'anàlisi de la longitud de les entitats proporciona informació sobre l'estructura i la composició del \textit{dataset}, revelant possibles patrons i anomalies. L'histograma a la figura \ref{fig:histograma_entitats_tipus} il·lustra la distribució de les longituds de les entitats entre els diferents tipus. Cada barra representa un interval de longituds de dos caràcters per un tipus concret d'entitat, i l'alçada de la barra indica el recompte d'entitats compreses en aquest interval de longitud.
 
-Observant la figura \ref{fig:histograma_entitats_tipus} es pot veure que la categoria "DEMANDAT" ha destacat per mostrar un nombre significatiu d'entitats amb longituds superiors o iguals a 100 caràcters.
+Observant la figura \ref{fig:histograma_entitats_tipus} es pot veure que la categoria ``DEMANDAT'' ha destacat per mostrar un nombre significatiu d'entitats amb longituds superiors o iguals a 100 caràcters.
 
 \begin{figure}[H]
   \centering

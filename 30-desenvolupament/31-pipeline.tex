@@ -93,7 +93,7 @@ Aquest codi inicialitza un \textit{pipeline} amb la funció de generació de tex
 
 
 \subsection{Anonimització de camps}
-L'anonimització dels camps extrets té com a objectiu protegir la privadesa i la confidencialitat de les dades personals o sensibles que puguin contenir els tiquets d'incidències de ciberseguretat. Per fer-ho, s'ha utilitzat una funció proporcionada per \textbf{i2CAT}, que rep com a paràmetre el text d'un camp i torna un text anonimitzat, que substitueix les dades per símbols o etiquetes genèriques. Per exemple, si el text del camp és "Marc Vila", la funció torna "NOM COGNOM", i si el text és "192.168.1.1", la funció torna "IP PRIVADA".
+L'anonimització dels camps extrets té com a objectiu protegir la privadesa i la confidencialitat de les dades personals o sensibles que puguin contenir els tiquets d'incidències de ciberseguretat. Per fer-ho, s'ha utilitzat una funció proporcionada per \textbf{i2CAT}, que rep com a paràmetre el text d'un camp i torna un text anonimitzat, que substitueix les dades per símbols o etiquetes genèriques. Per exemple, si el text del camp és ``Marc Vila'', la funció torna ``NOM COGNOM'', i si el text és ``192.168.1.1'', la funció torna ``IP PRIVADA''.
 
 La funció d'anonimització s'ha implementat en un script de Python que rep com a entrada el fitxer amb els camps extrets pel model de NLP, i torna com a sortida un altre fitxer amb els camps anonimitzats.
 
