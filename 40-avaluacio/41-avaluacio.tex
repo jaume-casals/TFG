@@ -1,12 +1,12 @@
 \section{Anàlisi dels resultats}
 En aquesta secció s'ofereix una anàlisi dels resultats obtinguts amb els models que han sigut entrenats anteriorment amb el procediment de \textit{fine-tuning} explicat a la secció \ref{sec:fine-tune}.
 
-Alguns resultats s'han perdut durant el procés d'entrenament. Aquesta pèrdua de dades és deguda a les característiques de la plataforma utilitzada per executar el codi, els quaderns Jupyter, que tant en un entorn local o mitjançant \textit{Google Colab} és possible no obtenir aquests resultats si no es prenen les mesures adequades. Malauradament, aquests resultats d'entrenament perduts no es poden recuperar sense tornar a entrenar els models. Aquest desafiament inesperat ha demostrat la importància de la transparència en el procés de recerca, tot reconeixent tant els èxits com els reptes trobats durant l'experimentació.
+Alguns resultats s'han perdut durant el procés d'entrenament. Aquesta pèrdua de dades és deguda a les característiques de la plataforma utilitzada per executar el codi, els quaderns Jupyter, que tant en un entorn local o mitjançant \textit{Google Colab} és possible no assolir aquests resultats si no es prenen les mesures adequades. Malauradament, aquests resultats d'entrenament perduts no es poden recuperar sense tornar a entrenar els models. Aquest desafiament inesperat ha demostrat la importància de la transparència en el procés de recerca, tot reconeixent tant els èxits com els reptes trobats durant l'experimentació.
 
 En cada secció es poden veure dos tipus de taules:
 \begin{itemize}
-    \item \textbf{Taula d'entrenament:} Es mostra el progés que s'ha aconseguit guardar de cada entrenament. Al final de cada \textit{Epoch} s'indiquen les mètriques de \textit{Train\_Loss} (escurçat a \textit{Train}), \textit{Validation\_Loss} (escurçat a Val), \textit{ROUGE-1}, \textit{ROUGE-2}, \textit{ROUGE-L} i \textit{ROUGE-Lsum}.
-    \item \textbf{Taula d'avaluació:} Es fa una recopilació dels resultats aconseguits amb cada \textit{checkpoint} o punt de control que s'ha recuperat. A part de les mètriques de \textit{ROUGE}, es va afegir la mètrica de ``Coincidència exacta'' (escurçat a ``Exacte'') que simplement indica el percentatge de resultats generats que han coincidit exactament amb el resultat real.
+    \item \textbf{Taula d'entrenament:} Es mostra el progrés que s'ha aconseguit guardar de cada entrenament. Al final de cada \textit{Epoch} s'indiquen les mètriques de \textit{Train\_Loss} (escurçat a \textit{Train}), \textit{Validation\_Loss} (escurçat a Val), \textit{ROUGE-1}, \textit{ROUGE-2}, \textit{ROUGE-L} i \textit{ROUGE-Lsum}.
+    \item \textbf{Taula d'avaluació:} Es fa una recopilació dels resultats obtinguts amb cada \textit{checkpoint} o punt de control que s'ha recuperat. A part de les mètriques de \textit{ROUGE}, es va afegir la mètrica de ``Coincidència exacta'' (escurçat a ``Exacte'') que simplement indica el percentatge de resultats generats que han coincidit exactament amb el resultat real.
 \end{itemize}
 
 \subsection{Flan-T5-Base}
@@ -18,8 +18,8 @@ L'entrenament inicial de la versió base del model \textit{Flan-T5} es resumeix 
     \toprule
     Epoch & Train & Val & ROUGE-1 & ROUGE-2 & ROUGE-L & ROUGE-Lsum \\
     \midrule
-    1 & 0.058 & 0.045 & 94.662 & 92.672 & 93.843 & 93.955 \\
-    2 & 0.037 & 0.036 & 96.162 & 94.540 & 95.625 & 95.725 \\
+    1 & 0,058 & 0,045 & 94,662 & 92,672 & 93,843 & 93,955 \\
+    2 & 0,037 & 0,036 & 96,162 & 94,540 & 95,625 & 95,725 \\
     3 & ... & ... & ... & ... & ... & ... \\
     \bottomrule
     \end{tabular}
@@ -36,24 +36,24 @@ Els resultats de l'avaluació després d'aquest període d'entrenament estès es
     \toprule
     Model & ROUGE-1 & ROUGE-2 & ROUGE-L & ROUGE-Lsum & Exacte \\
     \midrule
-    Model base   & 0.00  & 0.00  & 0.00  & 0.00  & 0.00\% \\
-    Checkpoint 2 & 95.84 & 94.27 & 95.19 & 95.20 & 61.82\% \\
-    Checkpoint 3 & 96.70 & 95.21 & 96.20 & 96.21 & 64.99\% \\
-    Checkpoint 4 & 95.97 & 94.50 & 95.37 & 95.38 & 64.24\% \\
-    Checkpoint 5 & 96.57 & 95.17 & 96.05 & 96.09 & 66.01\% \\
+    Model base   & 0,00  & 0,00  & 0,00  & 0,00  & 0,00\% \\
+    Checkpoint 2 & 95,84 & 94,27 & 95,19 & 95,20 & 61,82\% \\
+    Checkpoint 3 & 96,70 & 95,21 & 96,20 & 96,21 & 64,99\% \\
+    Checkpoint 4 & 95,97 & 94,50 & 95,37 & 95,38 & 64,24\% \\
+    Checkpoint 5 & 96,57 & 95,17 & 96,05 & 96,09 & 66,01\% \\
     \bottomrule
     \end{tabular}
     \caption[Avaluació del model \textit{Flan-T5-Base}]{Avaluació del model \textit{Flan-T5-Base} (sense etiquetes)}
 \end{table}
 
-Observant el resultat, es va poder veure que el model va mostrar una millora del rendiment necessària, com indica l'augment de les puntuacions ROUGE als punts de control següents. La puntuació de coincidència exacta, una mesura de la capacitat del model per proporcionar respostes literals, també mostra una tendència positiva, assolint el seu punt màxim al \textit{Checkpoint 5}. La raó per la qual es creu que el model va disminuir el seu rendiment al finalitzar el \textit{Checkpoint 4}, és perquè va ser la primera \textit{epoch} on el model s'avaluava sense les etiquetes i això pot haver causat una disminució de la puntuació, però no necessariament de la qualitat del model.
+Observant el resultat, es va poder veure que el model va mostrar una millora del rendiment necessària, com indica l'augment de les puntuacions \textit{ROUGE} als punts de control següents. La puntuació de coincidència exacta, una mesura de la capacitat del model per proporcionar respostes literals, també mostra una tendència positiva, assolint el seu punt màxim al \textit{Checkpoint 5}. La raó per la qual es creu que el model va disminuir el seu rendiment en finalitzar el \textit{Checkpoint 4}, és perquè va ser la primera \textit{epoch} on el model s'avaluava sense les etiquetes i això pot haver causat una disminució de la puntuació, però no necessàriament de la qualitat del model.
 
 
 
 
 
 \subsection{Flan-T5-Base (LaMini)}
-L'entrenament inicial, com es mostra a la taula següent, dóna resultats prometedors després de només la segona \textit{epoch}.
+L'entrenament inicial, com es mostra a la taula següent, dona resultats prometedors després de només la segona \textit{epoch}.
 \begin{table}[H]
     \centering
     \begin{tabular}{lcccccc}
@@ -61,13 +61,13 @@ L'entrenament inicial, com es mostra a la taula següent, dóna resultats promet
     Epoch & Train & Val & ROUGE-1 & ROUGE-2 & ROUGE-L & ROUGE-Lsum \\
     \midrule
     1 & ...   & ...   & ...    & ...    & ...    & ... \\
-    2 & 0.013 & 0.022 & 97.800 & 96.553 & 97.248 & 97.350 \\
+    2 & 0,013 & 0,022 & 97,800 & 96,553 & 97,248 & 97,350 \\
     \bottomrule
     \end{tabular}
     \caption[Primer entrenament del model \textit{Flan-T5-Base (LaMini)}]{Primer entrenament del model \textit{Flan-T5-Base (LaMini)} (amb etiquetes)}
 \end{table}
 
-L'entrenament posterior sense etiquetes mostra un refinament més gran de les capacitats del model, amb la quarta i cinquena \textit{epochs} mostrant les següents tendències. Es pot observar un lleuger empitjorament de les mètriques, que segurament és degut a el canvi a no utilitzar les etiquetes pel càlcul de les mateixes.
+L'entrenament posterior sense etiquetes mostra un refinament més gran de les capacitats del model, amb la quarta i cinquena \textit{epochs} mostrant les següents tendències. Es pot observar un lleuger empitjorament de les mètriques, que segurament és degut al canvi a no utilitzar les etiquetes pel càlcul d'aquestes.
 
 \begin{table}[H]
     \centering
@@ -76,14 +76,14 @@ L'entrenament posterior sense etiquetes mostra un refinament més gran de les ca
     Epoch & Train & Val & ROUGE-1 & ROUGE-2 & ROUGE-L & ROUGE-Lsum \\
     \midrule
     3 & ...  & ...    & ...    & ...    & ...    & ... \\
-    4 & 0.012 & 0.029 & 96.594 & 95.267 & 96.109 & 96.136 \\
-    5 & 0.005 & 0.029 & 96.794 & 95.538 & 96.257 & 96.290 \\
+    4 & 0,012 & 0,029 & 96,594 & 95,267 & 96,109 & 96,136 \\
+    5 & 0,005 & 0,029 & 96,794 & 95,538 & 96,257 & 96,290 \\
     \bottomrule
     \end{tabular}
     \caption[Segon entrenament del model \textit{Flan-T5-Base (LaMini)}]{Segon entrenament del model \textit{Flan-T5-Base (LaMini)} (sense etiquetes)}
 \end{table}
 
-La taula següent resumeix els resultats de lavaluació, que demostren la millora contínua del model a través dels diversos \textit{checkpoints}.
+La taula següent resumeix els resultats de l'avaluació, que demostren la millora contínua del model a través dels diversos \textit{checkpoints}.
 
 \begin{table}[H]
     \centering
@@ -91,12 +91,12 @@ La taula següent resumeix els resultats de lavaluació, que demostren la millor
     \toprule
     Model & ROUGE-1 & ROUGE-2 & ROUGE-L & ROUGE-Lsum & Exacte \\
     \midrule
-    Model base   & 0.00  & 0.00  & 0.00  & 0.00  & 0.00\% \\
-    Checkpoint 1 & 95.31 & 93.48 & 94.76 & 94.75 & 58.28\% \\
-    Checkpoint 2 & 96.74 & 95.37 & 96.18 & 96.18 & 67.87\% \\
-    Checkpoint 3 & 96.39 & 95.03 & 95.90 & 95.90 & 66.66\% \\
-    Checkpoint 4 & 96.55 & 95.22 & 96.08 & 96.06 & 66.75\% \\
-    Checkpoint 5 & 96.75 & 95.45 & 96.19 & 96.19 & 69.36\% \\
+    Model base   & 0,00  & 0,00  & 0,00  & 0,00  & 0,00\% \\
+    Checkpoint 1 & 95,31 & 93,48 & 94,76 & 94,75 & 58,28\% \\
+    Checkpoint 2 & 96,74 & 95,37 & 96,18 & 96,18 & 67,87\% \\
+    Checkpoint 3 & 96,39 & 95,03 & 95,90 & 95,90 & 66,66\% \\
+    Checkpoint 4 & 96,55 & 95,22 & 96,08 & 96,06 & 66,75\% \\
+    Checkpoint 5 & 96,75 & 95,45 & 96,19 & 96,19 & 69,36\% \\
     \bottomrule
     \end{tabular}
     \caption[Avaluació del model \textit{Flan-T5-Base (LaMini)}]{Avaluació del model \textit{Flan-T5-Base (LaMini)} (sense etiquetes)}
@@ -114,11 +114,11 @@ A la taula següent es resumeix el procés d'entrenament del model \textit{Flan-
     \toprule
     Epoch & Train & Val & ROUGE-1 & ROUGE-2 & ROUGE-L & ROUGE-Lsum \\
     \midrule
-    1 & 0.084 & 0.041 & 94.86 & 92.50 & 93.70 & 93.84 \\
-    2 & 0.055 & 0.036 & 96.13 & 93.95 & 94.94 & 95.06 \\
-    3 & 0.043 & 0.033 & 96.61 & 94.74 & 95.59 & 95.73 \\
-    4 & 0.040 & 0.032 & 96.62 & 94.81 & 95.74 & 95.89 \\
-    5 & 0.037 & 0.032 & 96.58 & 94.78 & 95.71 & 95.86 \\
+    1 & 0,084 & 0,041 & 94,86 & 92,50 & 93,70 & 93,84 \\
+    2 & 0,055 & 0,036 & 96,13 & 93,95 & 94,94 & 95,06 \\
+    3 & 0,043 & 0,033 & 96,61 & 94,74 & 95,59 & 95,73 \\
+    4 & 0,040 & 0,032 & 96,62 & 94,81 & 95,74 & 95,89 \\
+    5 & 0,037 & 0,032 & 96,58 & 94,78 & 95,71 & 95,86 \\
     \bottomrule
     \end{tabular}
     \caption[Entrenament del model \textit{Flan-T5-Small}]{Entrenament del model \textit{Flan-T5-Small} (amb etiquetes)}
@@ -131,9 +131,9 @@ El progrés del model durant l'entrenament indica una disminució dels errors ta
     \toprule
     Model & ROUGE-1 & ROUGE-2 & ROUGE-L & ROUGE-Lsum & Exacte \\
     \midrule
-    Model base   & 0.00  & 0.00  & 0.00  & 0.00  & 0.00\% \\
-    Checkpoint 4 & 95.07 & 93.20 & 94.40 & 94.40 & 54.09\% \\
-    Checkpoint 5 & 95.07 & 93.17 & 94.39 & 94.39 & 54.74\% \\
+    Model base   & 0,00  & 0,00  & 0,00  & 0,00  & 0,00\% \\
+    Checkpoint 4 & 95,07 & 93,20 & 94,40 & 94,40 & 54,09\% \\
+    Checkpoint 5 & 95,07 & 93,17 & 94,39 & 94,39 & 54,74\% \\
     \bottomrule
     \end{tabular}
     \caption[Avaluació del model \textit{Flan-T5-Small}]{Avaluació del model \textit{Flan-T5-Small} (sense etiquetes)}
@@ -153,8 +153,8 @@ La taula següent presenta el progrés de l'entrenament del model Flan-T5-Small 
     \midrule
     1 & ... & ... & ... & ... & ... & ... \\
     2 & ... & ... & ... & ... & ... & ... \\
-    3 & 0.066 & 0.043 & 95.55 & 92.75 & 93.87 & 94.12 \\
-    4 & 0.064 & 0.042 & 95.61 & 92.88 & 93.93 & 94.19 \\
+    3 & 0,066 & 0,043 & 95,55 & 92,75 & 93,87 & 94,12 \\
+    4 & 0,064 & 0,042 & 95,61 & 92,88 & 93,93 & 94,19 \\
     5 & ... & ... & ... & ... & ... & ... \\
     \bottomrule
     \end{tabular}
@@ -170,12 +170,12 @@ Després de l'entrenament continuat, es va avaluar el model sense etiquetes. Els
     \toprule
     Model & ROUGE-1 & ROUGE-2 & ROUGE-L & ROUGE-Lsum & Exacte \\
     \midrule
-    Model base   & 0.00  & 0.00  & 0.00  & 0.00  & 0.00\% \\
-    Checkpoint 1 & 90.27 & 86.79 & 88.56 & 88.59 & 31.09\% \\
-    Checkpoint 2 & 92.51 & 89.48 & 91.03 & 91.05 & 37.80\% \\
-    Checkpoint 3 & 92.83 & 89.96 & 91.39 & 91.41 & 40.31\% \\
-    Checkpoint 4 & 93.36 & 90.62 & 92.07 & 92.08 & 43.01\% \\
-    Checkpoint 5 & 93.48 & 90.77 & 92.16 & 92.16 & 43.38\% \\
+    Model base   & 0,00  & 0,00  & 0,00  & 0,00  & 0,00\% \\
+    Checkpoint 1 & 90,27 & 86,79 & 88,56 & 88,59 & 31,09\% \\
+    Checkpoint 2 & 92,51 & 89,48 & 91,03 & 91,05 & 37,80\% \\
+    Checkpoint 3 & 92,83 & 89,96 & 91,39 & 91,41 & 40,31\% \\
+    Checkpoint 4 & 93,36 & 90,62 & 92,07 & 92,08 & 43,01\% \\
+    Checkpoint 5 & 93,48 & 90,77 & 92,16 & 92,16 & 43,38\% \\
     \bottomrule
     \end{tabular}
     \caption[Avaluació del model \textit{Flan-T5-Small (LaMini)}]{Avaluació del model \textit{Flan-T5-Small (LaMini)} (sense etiquetes)}
@@ -184,7 +184,7 @@ Després de l'entrenament continuat, es va avaluar el model sense etiquetes. Els
 El model mostra una millora progressiva al llarg dels \textit{checkpoints} d'entrenament, amb puntuacions ROUGE i percentatges de ``coincidència exacta'' creixents.
 
 \subsection{Flan-T5-Base (LoRA)}
-El model Flan-T5-Base es va ajustar mitjançant el mètode LoRA (\textit{Low-rank Adaptation of LLMs}), que es va centrar a entrenar únicament les matrius "q", "v", "k" i "o" del mòdul d'atenció del model. Aquests paràmentres entrenables només representen l'1,41\% de tots els paràmetres del model, reduïnt en gran mesura la càrrega computacional.
+El model Flan-T5-Base es va ajustar mitjançant el mètode LoRA (\textit{Low-rank Adaptation of LLMs}), que es va centrar a entrenar únicament les matrius ``q'', ``v'', ``k'' i ``o'' del mòdul d'atenció del model. Aquests paràmentres entrenables només representen l'1,41\% de tots els paràmetres del model, reduïnt en gran mesura la càrrega computacional.
 \begin{table}[H]
     \centering
     \label{tab:additional-training}
@@ -192,15 +192,11 @@ El model Flan-T5-Base es va ajustar mitjançant el mètode LoRA (\textit{Low-ran
     \toprule
     Epoch & Train & Val & ROUGE-1 & ROUGE-2 & ROUGE-L & ROUGE-Lsum \\
     \midrule
-    1 & 0.114 & 0.042 & 20.847 & 16.240 & 20.715 & 20.733 \\
-    2 & 0.057 & 0.036 & 20.757 & 16.301 & 20.672 & 20.673 \\
-    3 & 0.048 & 0.034 & 20.748 & 16.288 & 20.655 & 20.660 \\
+    1 & 0,114 & 0,042 & 20,847 & 16,240 & 20,715 & 20,733 \\
+    2 & 0,057 & 0,036 & 20,757 & 16,301 & 20,672 & 20,673 \\
+    3 & 0,048 & 0,034 & 20,748 & 16,288 & 20,655 & 20,660 \\
     \bottomrule
     \end{tabular}
     \caption[Entrenament del model \textit{Flan-T5-Base} amb LoRA]{Entrenament del model \textit{Flan-T5-Base} amb LoRA (amb etiquetes)}
 \end{table}
 El \textit{fine-tuning} amb el mètode \textit{LoRA} mostra un patró clar en els errors de \textit{Train} i \textit{Val}, cosa que indica una millora gradual del rendiment del model al llarg de les \textit{epochs} especificades. No obstant això, les puntuacions ROUGE mostren una tendència diferent, cosa que suggereix que la capacitat del model per captar el matisos del \textit{dataset} i generar resultats rellevants es pot veure qüestionada en aquest entrenament. És per aquest motiu que es va decidir cancelar el entrenament i no continuar amb el procés.
-
-\textit{LoRA} optimitza l'entrenament centrant-se en mòduls o paràmetres específics, cosa que permet un procés més eficient en termes de recursos. Tot i això, els resultats obtinguts amb \textit{LoRA} no sempre coincideixen amb les expectatives inicials. 
-
-La selecció dels paràmetres entrenables pot no captar els matissos de tot el \textit{dataset}, cosa que condueix a un àmbit de millora del model més reduït. A més a més, algunes tasques o conjunts de dades poden ser intrínsecament complexes i requerir una perspectiva més àmplia durant l'entrenament. 

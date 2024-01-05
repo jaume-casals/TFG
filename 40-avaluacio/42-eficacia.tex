@@ -1,1 +1,23 @@
 \section{Eficàcia de la solució}
+
+\subsection{Comparació dels models}
+El model que millors resultats ha donat ha sigut, \textit{FLan-T5-Base (La Mini)}. Comparant les mètriques de l'últim \textit{checkpoint}, es pot veure que supera en totes les categories al \textit{FLan-T5-Base}. 
+
+Per altra banda, si es compara amb la mida del model, el model \textit{FLan-T5-Small} ha donat el millor resultat tenint en compte que és 3 vegades més petit i només ha disminuït la seva mètrica de coincidència exacta 14,62\%. A més a més, és l'única mida de model que es preveu que es podria entrenar a les màquines de l'\textbf{Agència}, donant poc marge de millora.
+
+Ha sigut notable durant l'entrenament la diferència dels models \textit{LaMini}, donant un increment del rendiment amb el model base i una disminució amb el model petit, comparat amb el seu model oficial. Per assegurar que no ha sigut un error d'entrenament, s'hauria de tornar a entrenar el model per eliminar el component estocàstic de l'entrenament, però independentment, es creu que simplement per la mida del model, no pot ser entrenat dos cops sense perdre la capacitat de completar algunes tasques.
+
+Pel que fa al model \textit{FLan-T5-Base (LoRA)}, ha sigut entrenat amb aquest mètode que optimitza l'entrenament centrant-se en mòduls o paràmetres específics, cosa que permet un procés més eficient en termes de recursos. Tot i això, els resultats obtinguts no han coincidit amb les expectatives inicials. En aquest cas, ha donat un rendiment inferior als models més petits en totes les mètriques, a excepció de la mètrica de ``Coincidència exacta'', en la qual no s'ha provat. La raó per la qual ha pogut donar mals resultats pot ser perquè la selecció dels paràmetres entrenables no ha pogut captar del tot els matisos del \textit{dataset}, cosa que ha pogut conduir a un àmbit de millora del model més reduït. A més a més, algunes tasques o conjunts de dades poden ser intrínsecament complexes i requerir una perspectiva més àmplia durant l'entrenament. 
+
+Finalment, s'ha vist que la mètrica \textit{ROUGE} pot ser útil per moltes aplicacions, però en una última instància s'ha optat per fer servir una mètrica com la de ``Coincidència exacta'' que doni una informació més clara sobre com progressa el model. El problema principal amb la mètrica \textit{ROUGE} és que s'ha vist que es pot buscar una optimització d'aquesta mètrica sense que el resultat generat sigui exactament el que s'esperava, permetent que es pugui generar text de manera desordenada i que no es penalitzi negativament. Per aquesta raó, aquesta mètrica ha sigut utilitzada només com a referència i no per a entrenar el model.
+
+
+
+
+
+\subsection{Solució final}
+En conclusió, el \textit{fine-tuning} de diversos models per al \textit{dataset} escollit ha mostrat les capacitats potencials d'aquests models a l'hora d'abordar els reptes que plantegen els requisits del projecte. Tot i això, continua sent difícil determinar quin seria el model més eficaç en un desplegament real a causa de la manca de dades oficials que ha proporcionat l'\textbf{Agència}.
+
+Tot i les seves limitacions, el model \textit{FLan-T5-Base (La Mini)} s'ha posicionat primer en termes de mètriques. El seu rendiment en l'entorn simulat que s'ha plantejat el converteix en un candidat prometedor teòric per a la seva implementació. 
+
+A més a més, la solució és completa, ja que abasta no només el model ajustat, sinó també la \textit{pipeline}, la configuració del servidor OTRS i la recuperació i el preprocessament dels tiquets d'incidents. En teoria, el disseny garanteix una funcionalitat sense fissures, però la veritable prova està en l'aplicació al món real. Malauradament, l'absència de dades crucials impedeix una avaluació concloent de l'eficàcia de la solució en un entorn operatiu real.
