@@ -47,6 +47,6 @@ Aquesta última part se centra en la configuració i l'execució del \textit{fin
             \item \textbf{Optimitzador \textit{Adam}:} S'ha emprat l'optimitzador \textit{Adam} per a calcular el descens del gradient, amb els paràmetres per defecte.
             \item \textbf{Màxima generació de \textit{tokens}:} S'ha incrementat fins a 300 la generació de \textit{tokens} del model per permetre que en l'avaluació pugui fer ús de tot el seu potencial.
         \end{itemize}
-    \item \textbf{Buidar la memòria:} Per assegurar que el model cap en la limitada memòria disponible, abans de cada entrenament, s'ha buidat la memòria de la \textit{GPU} eliminant la memòria cau (memòria \textit{cache}) i forçant la recollida de la memòria brossa (\textit{garbage collection}).
+    \item \textbf{Buidar la memòria:} Per assegurar que el model cap en la limitada memòria disponible, abans de cada entrenament, s'ha buidat la memòria de la GPU eliminant la memòria cau (memòria \textit{cache}) i forçant la recollida de la memòria brossa (\textit{garbage collection}).
     \item \textbf{Iniciar el \textit{fine-tuning}:} Es comença el \textit{fine-tuning} especificant el model, els paràmetres d'entrenament, les dades d'entrenament i la funció d'avaluació. El procés triga diverses hores, en aquest cas, han sigut unes tres hores i mitja per cada model petit i set hores i mitja per cadascun dels grans.
 \end{enumerate}
