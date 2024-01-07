@@ -140,15 +140,15 @@ L'afinament ha finalitzat satisfactòriament aportant un \textit{rouge1} de $0,9
 
 Aquest model, tal com s'havia vist, té la capacitat de formular frases senzilles, però en una primera instància no ha sigut capaç de respondre cap pregunta correctament. Després de l'afinament, s'ha comprovat que no ha assolit trobar els patrons més bàsics de les dades, donant així un resultat negatiu i descartant el model per futurs passos.
 
+\subsubsection{Flan-T5-Base (LaMini)}
+Repetint el mateix procés que amb la seva versió inferior, \textit{Flan-T5-Base (LaMini)} \cite{flan-t5} \cite{lamini} és la versió afinada del model \textit{Flan-T5-Base} amb el \textit{dataset} per a seguir instruccions \textit{LaMini}. A causa dels bons resultats reportats pels mateixos creadors, amb un augment del rendiment en totes les proves comparatives, es decideix afinar aquest model, en cerca d'un rendiment superior als resultats obtinguts al \textit{Flan-T5-Base}. 
+
+S'ha de destacar que aquest model en les seves primeres proves no va destacar per la seva capacitat pràctica de resoldre els reptes plantejats. De fet, va ser més aviat les promeses teòriques que van impulsar a continuar amb el desenvolupament d'aquest model, ja que, en un principi va demostrar un rendiment similar o lleugerament inferior que el model del qual parteix, \textit{Flan-T5-Base}.
+
 \subsubsection{Flan-T5-Small (LaMini)}
 El model \textit{Flan-T5-Small (LaMini)} \cite{flan-t5} \cite{lamini} és una versió afinada del model \textit{Flan-T5-Small} amb el \textit{dataset} per a seguir instruccions \textit{LaMini}. Amb aquest afinament, el model és capaç de millorar respecte al model del qual ha partit. Els creadors afirmen que té el millor rendiment general donat la seva mida.
 
-Malauradament, no s'ha notat cap millora respecte al model anterior. No només no ha sigut capaç de generar text relacionat amb el text donat sinó que no ha contestat a les preguntes seguint el format amb el qual ha sigut entrenat. Deguts aquests motius, i veient que és el model més potent de la seva categoria, ha quedat clar que és necessari més paràmetres per poder completar aquesta tasca correctament.
-
-\subsubsection{Flan-T5-Base (LaMini)}
-Repetint el mateix procés que amb la seva versió inferior, \textit{Flan-T5-Base (LaMini)} \cite{flan-t5} \cite{lamini} és la versió afinada del model \textit{Flan-T5-Base} amb el \textit{dataset} per a seguir instruccions \textit{LaMini}. A causa dels bons resultats reportats pels mateixos creadors, amb un augment del rendiment en totes les proves comparatives, es decideix afinar aquest model, en cerca d'un rendiment superior als resultats obtinguts al \textit{Flan-T5-Base}.
-
-El descens sorprenent del rendiment observat durant la prova del model \textit{Flan-T5-Base (LaMini)} per a la resolució d'una tasca específica, malgrat el seu èxit previ en el seguiment general d'instruccions, planteja diverses causes potencials per a aquest resultat inesperat:
+Malauradament, no s'ha notat cap millora respecte al model anterior. No només no ha sigut capaç de generar text relacionat amb el text donat sinó que no ha contestat a les preguntes seguint el format amb el qual ha sigut entrenat. Deguts aquests motius, i veient que és el model més potent de la seva categoria, ha quedat clar que és necessari més paràmetres per poder completar aquesta tasca correctament. El descens sorprenent del rendiment observat durant la prova del model \textit{Flan-T5-Small (LaMini)} per a la resolució d'una tasca específica, planteja diverses causes potencials per a aquest resultat:
 
 \begin{itemize}
   \item \textbf{Qualitat del model:} El conjunt de dades \textit{LaMini} pot tenir característiques perjudicials per al rendiment a la tasca entrenada. Atès que el \textit{LaMini dataset} ha sigut generat sintèticament, és possible que no capturi amb precisió la complexitat i els matisos dels escenaris del món real per a dur a terme correctament les proves en qüestió. La naturalesa sintètica de les dades podria introduir biaixos o patrons poc realistes que afectin negativament la capacitat del model per generalitzar ara la tasca específica.
