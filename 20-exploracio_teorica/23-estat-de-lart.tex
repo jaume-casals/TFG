@@ -33,6 +33,7 @@ Tot i que alguns models resulten eficaços per abordar la tasca, han hagut de se
 
 
 \subsection{Comprovació dels models disponibles}
+\label{sec:comparacio-models}
 Avaluem cada model per valorar-ne l'eficàcia a l'hora de respondre les proves que han sigut seleccionades per cobrir els casos més típics. Aquesta secció presenta una descripció dels models que han sigut considerats, incloent-hi els punts forts i febles de cadascun. A través d'una anàlisi dels avantatges i desavantatges de cada model, l'objectiu és trobar raons per a la seva selecció o eliminació.
 
 Per cada model, s'ha descarregat la versió més gran (i, en conseqüència, s'espera que la més efectiva), que ha permès l'equip actual. S'ha executat el model amb una sèrie de tiquets de prova depenent del tipus de tasca per la qual ha sigut entrenat. 
@@ -79,6 +80,8 @@ Per cada model, s'ha descarregat la versió més gran (i, en conseqüència, s'e
         Mistral 7B & 7300M & Requereix massa recursos \\
         Mistral 7B (Instruct) & 7300M & Dissenyat per seguir instruccions | Ha sigut reduït (Quantificació) | Respon correctament \\
         Zephyr 7B $\beta$ & 7300M & Reentrenament de Mistral 7B | Requereix massa recursos \\
+        Flor-Instructed & 6300M & Està dissenyat per la comprensió i escriptura de text en català, no comprèn el format de sortida \\
+        Qwen1.5-Instructed & 7000M & Comprèn el català i segueix les instruccions a la perfecció. Es requereix una GPU per executar-se. \\
         \hline
     \end{tabular}
     \caption{Comparació dels models de \textit{Text Generation} (Generació de text)}
@@ -104,60 +107,3 @@ Per cada model, s'ha descarregat la versió més gran (i, en conseqüència, s'e
     \caption{Comparació dels models de \textit{Text to Text Generation} (Generació de text a text)}
     \label{tab:t2t-comparison}
 \end{table}
-
-\subsection{Models destacats}
-De la comparació dels models anteriors n'hi ha uns quants que han destacat per sobre dels altres. Aquests models han continuat per les proves de selecció i han sigut sotmesos a més testos i a afinaments per quantificar el seu rendiment. D'aquesta manera, es pot escollir el model més adequat pel projecte de manera acurada.
-
-\subsubsection{Mistral 7B (Instruct)}
-\textit{Mistral 7B Instruct} \cite{mistral} és un model del llenguatge natural que està afinat a partir del model \textit{Mistral 7B}. Aquest reentrenament es va realitzar, segons expliquen els creadors, per demostrar la facilitat que té el model original per adaptar-se a qualsevol tasca. Aquesta és una de les raons que va cridar molt l'atenció aquest model.
-
-Un altre motiu pel qual aquest model és tan interessant és que afirma ser el millor model de la seva mida. Això ha sigut comprovar comparant aquest model amb els més populars de la seva categoria en els \textit{datasets} més populars.
-
-El problema que té aquest model és que té massa paràmetres i tardaria massa temps a ser afinat correctament. De fet, el model sencer no es pot fer servir a les màquines disponibles, havent de recórrer a la versió quantificada del model per poder fer la inferència. 
-
-Aquest model s'ha executat més concretament utilitzant el programa \textit{localGPT} \cite{localgpt}. El programa permet, en essència, parlar a un assistent sobre un document indicat. \textit{LocalGPT} primer ingereix un document i després deixa fer preguntes sobre el document, tenint l'habilitat de comprendre'l, llegir-lo i extreure informació per contestar tots els dubtes. A més a més, pot recordar el context de la conversació, el que significa que es poden fer preguntes encadenades fent referència a les anteriors respostes.
-
-En les proves, ha donat molt bons resultats, encertant en gairebé totes les preguntes. El seu temps d'execució és bastant lent, però acceptable pels objectius que es plantegen. Finalment, aquest model s'ha descartat, ja que no es pot assegurar que les màquines de l'\textbf{Agència} tinguin la capacitat per executar aquest model.
-
-
-\subsubsection{Llama 2}
-\textit{Llama 2} \cite{llama} és un model NLP de codi obert desenvolupat per \textit{Meta}. Aquest model va ser publicat afirmant ser el millor model durant el seu temps en moltes proves de rendiment. Té $7000M$ paràmetres, fent impossible la seva execució localment amb els dispositius disponibles. Per aquest motiu, s'executa la seva versió quantificada. Dona resultats acceptables, però lluny de ser la solució del problema i, molt inferior comparat amb \textit{Mistral 7B}, el seu principal competidor.
-
-Aquest model també és compatible amb el programa \textit{LocalGPT} \cite{localgpt} i, és per això i per la seva mida similar que és tan comparat amb el model \textit{Mistral 7B}. \textit{Llama 2} és el model que està seleccionat per defecte al programa \textit{localGPT}, i per aquesta raó va ser el primer a ser provat. En veure la millora significativa comparat amb el seu model competidor, va ser ràpidament substituït per aquesta versió millorada seva.
-
-
-\subsubsection{Flan-T5-Base}
-El model \textit{Flan-T5-Base} \cite{flan-t5} és un model de processament del llenguatge natural que presenta millores en tots els aspectes respecte al seu model previ: \textit{T5 Base}. Els seus desenvolupadors van escriure: 
-\begin{quote}
-``Amb T5, proposem reformular totes les tasques de NLP en un format unificat de text a text on l'entrada i la sortida són sempre cadenes de text, a diferència dels models d'estil BERT que només poden donar com a sortida una etiqueta de classe o un tram de l'entrada. El nostre marc de text a text ens permet utilitzar el mateix model, funció de pèrdua i hiperparàmetres en qualsevol tasca NLP.''
-\end{quote}
-
-Un punt important d'aquest model és que està entrenat amb 60 llenguatges. Això significa que té una comprensió molt gran de tots els texts que se li puguin donar. A la vegada, no interessa tant que entengui gaires idiomes, ja que el format d'entrada estarà molt centrat en un idioma.
-
-Durant els experiments, ha demostrat una capacitat de comprensió del llenguatge i del tiquet. El principal problema és que, en la majoria dels casos, no compleix correctament l'objectiu especificat, a excepció d'una tasca en concret. Gràcies al potencial que s'ha vist en el model, es continua el procés, afinant el model amb una tasca de NER.
-
-L'afinament ha finalitzat satisfactòriament aportant un \textit{rouge1} de $0,96$. Fent proves amb inferència s'ha vist que aquest model contesta correctament a la majoria, però ha fallat sobretot perquè repeteix més d'una vegada les respostes.
-
-\subsubsection{Flan-T5-Small}
-\textit{Flan-T5-Small} \cite{flan-t5} és el germà més petit de la família \textit{Flan-T5}. Tenint això en compte, és lògic pensar que donaria un pitjor rendiment que els altres models. El raonament darrere de la decisió de provar aquest model a fons és aconseguir un model que seria més ràpid, tant en entrenament com en inferència, a canvi de perdre poca precisió en les respostes.
-
-Aquest model, tal com s'havia vist, té la capacitat de formular frases senzilles, però en una primera instància no ha sigut capaç de respondre cap pregunta correctament. Després de l'afinament, s'ha comprovat que no ha assolit trobar els patrons més bàsics de les dades, donant així un resultat negatiu i descartant el model per futurs passos.
-
-\subsubsection{Flan-T5-Base (LaMini)}
-Repetint el mateix procés que amb la seva versió inferior, \textit{Flan-T5-Base (LaMini)} \cite{flan-t5} \cite{lamini} és la versió afinada del model \textit{Flan-T5-Base} amb el \textit{dataset} per a seguir instruccions \textit{LaMini}. A causa dels bons resultats reportats pels mateixos creadors, amb un augment del rendiment en totes les proves comparatives, es decideix afinar aquest model, en cerca d'un rendiment superior als resultats obtinguts al \textit{Flan-T5-Base}. 
-
-S'ha de destacar que aquest model en les seves primeres proves no va destacar per la seva capacitat pràctica de resoldre els reptes plantejats. De fet, va ser més aviat les promeses teòriques que van impulsar a continuar amb el desenvolupament d'aquest model, ja que, en un principi va demostrar un rendiment similar o lleugerament inferior que el model del qual parteix, \textit{Flan-T5-Base}.
-
-\subsubsection{Flan-T5-Small (LaMini)}
-El model \textit{Flan-T5-Small (LaMini)} \cite{flan-t5} \cite{lamini} és una versió afinada del model \textit{Flan-T5-Small} amb el \textit{dataset} per a seguir instruccions \textit{LaMini}. Amb aquest afinament, el model és capaç de millorar respecte al model del qual ha partit. Els creadors afirmen que té el millor rendiment general donat la seva mida.
-
-Malauradament, no s'ha notat cap millora respecte al model anterior. No només no ha sigut capaç de generar text relacionat amb el text donat sinó que no ha contestat a les preguntes seguint el format amb el qual ha sigut entrenat. Deguts aquests motius, i veient que és el model més potent de la seva categoria, ha quedat clar que és necessari més paràmetres per poder completar aquesta tasca correctament. El descens sorprenent del rendiment observat durant la prova del model \textit{Flan-T5-Small (LaMini)} per a la resolució d'una tasca específica, planteja diverses causes potencials per a aquest resultat:
-
-\begin{itemize}
-  \item \textbf{Qualitat del model:} El conjunt de dades \textit{LaMini} pot tenir característiques perjudicials per al rendiment a la tasca entrenada. Atès que el \textit{LaMini dataset} ha sigut generat sintèticament, és possible que no capturi amb precisió la complexitat i els matisos dels escenaris del món real per a dur a terme correctament les proves en qüestió. La naturalesa sintètica de les dades podria introduir biaixos o patrons poc realistes que afectin negativament la capacitat del model per generalitzar ara la tasca específica.
-  \item \textbf{Rendiments decreixents a l'afinament:} L'ajust repetitiu del model pot haver resultat en un ajust excessiu, disminuint-ne l'adaptabilitat durant les proves. Els múltiples cicles d'afinament podrien haver trobat inicialment els patrons més rellevants, de manera que quan s'ha ajustat per última vegada, oferiria millores limitades i introduiria soroll potencialment. Tot i destacar en tasques generals de seguiment d'instruccions, el conjunt de dades \textit{LaMini} pot no ajustar-se als requisits específics de la tasca.
-\end{itemize}
-
-% \subsubsection{Flan-T5 Large}
-
-% \subsection{Justificació de la tria}
