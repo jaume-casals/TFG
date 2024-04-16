@@ -6,35 +6,40 @@ El principal objectiu d'aquest projecte és el desenvolupament d'una eina que ex
 
 \begin{itemize}
     \item Fer un estudi de l'estat de l'art per tal d'identificar solucions ja existents a problemes similars i adaptar-ne una al problema presentat.
-    \item Dissenyar i desenvolupar una \textit{pipeline} que extregui els tiquets, extregui i processi les dades, anonimitzi les necessàries i ho emmagatzemi a una altra base de dades.     
-    \item Implementar un sistema d'extracció de la informació d'un tiquet basat en l'objectiu anterior per aconseguir un resultat satisfactori.
+    \item Configurar una base de dades OTRS i crear una eina de descàrrega de tiquets de les fonts de dades proporcionades utilitzant \textit{PyOTRS}.
+    \item Fer un preprocessamnet del text que en elimini tot el text redundant possible, afegixi metadades i informació rellevant i formategi el text segons les especificacions requerides.
+    \item Desenvolupar i entrenar un model de \textit{Deep Learning} per a l'extracció dels camps especificats del text preprocessat.
+    \item Anonimització de les dades de sortida mitjançant un filtre de \textit{Logstash}.
+    \item Configurar i gestionar l'emmagatzematge de les dades preprocessades i anonimitzades en \textit{Elasticsearch}.
+    \item Combinar els elements anteriors i implementar una \textit{pipeline} que descarregui, processi, extregui, anonimitzi i emmagatzemi les dades en l'entorn especificat.
     \item Posar en funcionament una API que permeti accedir i utilitzar aquest sistema de manera senzilla.
 \end{itemize}
 
 
 \subsection{Requisits funcionals}
 
-Tot el funcionament de l'API és invisible per l'usuari, però darrere hi ha tot el sistema en funcionament. El funcionament del sistema permet el següent: 
+El funcionament de l'API és invisible per l'usuari, però darrere hi ha tot el sistema en funcionament. El funcionament del sistema permet el següent: 
 \begin{itemize}
-    \item L'usuari accedeix a l'API mitjançant una llibreria i especifica l'identificador del tiquet a analitzar. Ha de comprovar els possibles següents errors, els quals interrompen l'execució normal del programa:
+    \item L'usuari accedeix a l'API que està emmagatzemanda a l'entorn cedit per \textbf{i2CAT} i especifica l'identificador del tiquet a analitzar. Ha de comprovar els possibles següents errors, els quals interrompen l'execució normal del programa:
     \begin{itemize}
         \item No existeix el tiquet especificat. 
         \item No es pot connectar amb la base de dades d'on s'extreuen els tiquets.
         \item No es pot accedir a la base de dades on s'emmagatzema el resultat.
-        \item Un error d'execució genèric.
+        \item Un error d'execució degut al contingut del tiquet.
     \end{itemize}
-    \item S'obté un tiquet de la base de dades utilitzant la configuració i programes preparats per a fer-ho.
+    \item S'obté un tiquet de la base de dades \textit{OTRS} utilitzant la configuració i llibreries preparades per a fer-ho.
     \item Es preprocessa el tiquet per tal d'afegir tota aquella informació rellevant al procés d'extracció d'informació propera i extreure tota aquella que sigui repetida i no aporti dades noves. Aquests són els processos pels quals passa:
     \begin{itemize}
+        \item Extreure en text simple tot el text del tiquet en format HTML.
         \item Addició del text dels fitxers adjunts.
         \item Addició del text dels tiquets als quals es fa referència.
         \item Addició de tots els articles del tiquet.
         \item Eliminació del text duplicat detectat.
-        \item Eliminació de signatures que no són rellevants pel context de l'incident
+        \item Afegir el \textit{system prompt} i reordenar el text en el format necessari per l'entrada del model.
     \end{itemize}
-    \item S'executa l'algorisme principal localment emprant el tiquet aconseguit i extreu la informació dels camps especificats.
-    \item El resultat es passa per un algorisme d'anonimització cedit per \textbf{i2CAT}.
-    \item El resultat, ja anonimitzat, s'emmagatzema en la segona base de dades escollida.
+    \item S'executa el model emprant el tiquet aconseguit i extreu la informació dels camps especificats.
+    \item El resultat es passa per un algorisme d'anonimització implementat amb un filtre de \textit{Logstash}.
+    \item El resultat, ja anonimitzat, es redirigeix i s'emmagatzema en la segona base de dades \textit{Elasticsearch}.
 \end{itemize}
 
 
@@ -42,7 +47,7 @@ Tot el funcionament de l'API és invisible per l'usuari, però darrere hi ha tot
 
 \begin{itemize}
     \item \textbf{Adaptabilitat:} El sistema ha de permetre l'extracció d'informació de qualsevol tiquet independentment de la manera en la qual s'ha escrit. Ha d'aconseguir comprendre el significat dels texts i extreure els camps correctament, fins i tot amb variacions a la redacció.
-    \item \textbf{Usabilitat:} L'eina ha de ser fàcil d'usar per facilitar-ne la integració en el flux de treball actual amb les mínimes dificultats.
+    \item \textbf{Usabilitat:} L'eina ha de ser fàcil d'usar per facilitar-ne la integració en el flux de treball actual i amb eines futures amb les mínimes dificultats.
     \item \textbf{Eficiència:} Aquest projecte no prioritza el desenvolupament d'un sistema crític on el temps sigui una preocupació primordial. Tot i això, s'ha de processar una gran quantitat de dades i és crucial evitar un temps d'espera llarg per evitar que aquest pas esdevingui un coll d'ampolla en el procés.
     \item \textbf{Escalabilitat:} Els tiquets a processar varien en mida, tant pel que fa a la longitud dels mateixos articles com al nombre d'articles inclosos en un tiquet. Per obtenir un rendiment òptim, l'eina ha de tenir un rang d'acceptació ampli, que doni cabuda a la màxima quantitat de tiquets i garanteixi al mateix temps una funcionalitat correcta amb tots ells.
     \item \textbf{Confidencialitat:} Els tiquets que es processen estan subjectes a contractes de confidencialitat estrictes. Aquest fet implica que les dades no es poden retirar dels servidors designats i s'han de tractar amb cura, adoptant les mesures d'anonimització adequades. Aquests contractes també imposen limitacions als tipus de models i tècniques que es poden utilitzar durant el projecte.
