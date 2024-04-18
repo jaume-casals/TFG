@@ -23,9 +23,9 @@ El sistema consta d'una sèrie de scripts de Python que s'executen seqüencialme
 
 \begin{enumerate}
      \item Extreure els tiquets de la base de dades OTRS de l'\textbf{Agència}.
-     \item Preprocessar el text de cada tiquet, eliminant el soroll, normalitzant el format i inserint les referències necessàries.
+     \item Preprocessar el text de cada tiquet, eliminant el soroll (dades repetides o innecessàries), normalitzant el format i inserint les referències necessàries.
      \item Aplicar un model de processament del llenguatge natural (NLP) que detecta i extreu els camps rellevants de cada tiquet.
-     \item Anonimitzar els camps extrets mitjançant una funció proporcionada per l'\textbf{Agència}, que substitueix les dades personals o sensibles per símbols o etiquetes genèriques.
+     \item Anonimitzar els camps extrets mitjançant una funció a Elasticsearch, que substitueix les dades de sortida per símbols o etiquetes genèriques.
      \item Emmagatzemar els camps anonimitzats en una base de dades Elasticsearch, que és un motor de cerca i anàlisi distribuïda.
 \end{enumerate}
 
@@ -48,7 +48,7 @@ Per extreure els tiquets del Servidor OTRS de l'\textbf{Agència}, s'ha fa servi
 
 \begin{enumerate}
      \item \textbf{Iniciar sessió:} Es fan unes configuracions per assegurar que els tiquets es reben amb el format esperat i mitjançant les funcions creades a OTRS. Després es crea un client amb l'adreça IP del servidor, l'usuari i la contrasenya obtingudes de l'\textbf{Agència}.
-     \item \textbf{Iterar pels tiquets:} Es busca i s'obre el fitxer Excel especificat en el qual hi haurà la informació necessària dels tiquets que s'ha de processar. S'itera per la columna en la qual es troben els identificadors dels tiquets.
+     \item \textbf{Iterar pels tiquets:} En cas que s'extreguin molts tiquets seguits es busca i s'obre el fitxer Excel especificat en el qual hi haurà la informació necessària dels tiquets que s'ha de processar. S'itera per la columna en la qual es troben els identificadors dels tiquets. També hi ha una opció per especificar un sol identificador de tiquet.
      \item \textbf{Llegir ID del tiquet:} Per cada fila, es llegeix l'identificador del tiquet i es crida a la següent funció.
      \item \textbf{Comprovar la utilització del tiquet:} Abans de començar a extreure els tiquets, es comprova si el tiquet en qüestió ja ha sigut extret abans. Això es fa per evitar cicles infinits amb referències cícliques dins dels tiquets. Es reinicia la llista de tiquets visitats després de cada iteració.
      \item \textbf{Extreure tiquet:} S'envia la petició al servidor OTRS mitjançant la funció \linebreak \pyth{get_ticket_by_number} de \textbf{PyOTRS}. El qual retorna un tiquet de la classe \pyth{Ticket}, molt convenientment, pel seu futur processament. En cas que el tiquet amb l'identificador especificat no existeixi, es llançarà un error informant del succés.
@@ -73,6 +73,60 @@ El preprocessament dels tiquets té com a objectiu preparar el text per ser anal
      \item \textbf{Unir i retornar:} Finalment, s'uneixen totes les peces en un mateix text, de manera que quedarien els articles ordenats temporalment i, sota de cada article, el text dels fitxers adjunts (si han pogut ser descodificats) i els tiquets als quals es fan referència.
 \end{enumerate}
 
+\subsection{Eliminació de signatures i peus de pàgina}
+La majoria dels articles d'un tiquet contenien un últim paràgraf que contenia informació genèrica sobre ciberseguretat, telèfons o correus de contacte, advertències, etc. A més a més, a sobre d'aquest peu de pàgina hi havia una signatura automàtica informant de la seva posició a l'empresa, ubicació, etc. 
+
+Combinant les signatures i els peus de pàgina, hi havia articles on la majoria de text era aquesta part irrellevant del correu. Es va considerar que aquesta informació no era rellevant per a l'entrenament del model principal, ja que el fet que un correu fos confidencial o el número de telèfon d'una persona no hauria d'influir en el resultat, pel fet que no era cap dels camps que es buscava extreure. L'objectiu d'aquest model de "preprocessament" dels articles era:
+
+\begin{itemize}
+     \item Alleugerir la càrrega computacional del model principal.
+     \item Mostrar al model només la informació rellevant.
+     \item Permetre entrenar amb més informació d'entrada com els adjunts dels tiquets o les referències.
+\end{itemize}
+
+Per a l'entrenament d'aquest model es va decidir treballar amb articles individuals en comptes de amb tot el tiquet, ja que les signatures són individuals de cada article i no en general al tiquet. Això també va permetre la possibilitat d'utilitzar models amb un context més reduït.
+
+\subsubsection{Conjunt de dades}
+L'objectiu del model és rebre el text d'un article directament com surten del procés de preprocessament de tiquets i obtenir com a resultat un tiquet sense les signatures ni peus de pàgina mencionats anteriorment. S'ha plantejat diverses maneres en què un model pot aprendre aquest comportament desitjat:
+
+\begin{itemize}
+     \item \textbf{Detectar el text:} El resultat d'aquest model és directament el text rellevant que es vol. No és necessari cap processament després d'obtenir el resultat.
+     \item \textbf{Detectar la signatura:} El resultat del model serà la signatura present a l'article, en cas que no n'hi hagi cap, no es retornaria res. Després es pot detectar aquesta signatura en l'article d'entrada i eliminar-la. El problema que presenta aquest mètode és que en cas que el model escrigui una sola lletra incorrectament del resultat ja no es podria trobar al text original.
+     \item \textbf{Detectar caràcter d'inici de la signatura:} S'ha vist que la majoria de les correccions que es poden realitzar a un article es troben al final. Aprofitant aquest fet, es pot entrenar un model que indiqui a partir de quina alçada s'inicia la signatura i així poder-la retallar. No obstant hi ha casos on informació rellevant com el departament de la persona que escriu l'article pot ser esborrat.
+     \item \textbf{Classificació de frases:} Inspirat en altres projectes amb objectius similars, s'ha plantejat un conjunt de dades amb elements més reduïts i simples en forma de frase i que l'objectiu sigui classificar-les segons si formen part de la signatura o no. Utilitzant un altre model del llenguatge natural, es pot dividir un text en frases i, reutilitzant intel·ligentment les dades dels conjunts de dades anteriors, es pot evitar tornar a etiquetar. Per tenir més flexibilitat, s'ha afegit la posició de la frase dins de l'article juntament amb el nombre de frases totals de l'article. Totes aquestes dades ens poden ajudar a classificar millor si una frase pertany a una signatura.
+\end{itemize}
+
+\subsubsection{Entrenament}
+A continuació es presenten els models utilitzats i quin ha sigut el conjunt de dades en el que s'ha entrenat.
+
+\textbf{Flan-T5-Base}
+
+Aquest model s'ha entrenat amb l'objectiu de detectar el text dels articles, descartant en el procés les signatures. Utilitzant les tècniques de Gradient Checkpointing i Gradient Accumulation, s'ha aconseguit entrenar aquest model dins de la GPU de 8GB sacrificant en el procés el temps d'entrenament. S'ha entrenat durant 10 epochs que ha sigut l'equivalent a més de 24 hores d'entrenament continuat.
+Tot i el bon historial d'aquest model, el resultat d'aquest finetuning ha sigut un fracàs. El model no ha sigut capaç de generalitzar la tasca d'eliminar la signatura, ni en els casos on més es repetia. La causa d'aquest mal entrenament queda desconeguda, ja que aquesta tasca es considera teòricament senzilla de resoldre per un model del llenguatge natural.
+
+\textbf{FLOR-760M}
+##### CONTINUAR AQUI!!!!! #####
+A causa del fet que el model \textbf{Flan-T5-Base} no va demostrar bons resultats en eliminar les signatures dels correus, es va decidr canviar de model. El model \textbf{FLOR} és un model de llenguatge causal basat en l'arquitectura transformers per a català, castellà i anglès. És el resultat d'una tècnica d'adaptació lingüística realitzada al model \textbf{BLOOM}, que implica modificar el vocabulari del model i la capa d'\textit{embedding}, i entrenar el model contínuament amb fitxes de 26B en les llengües objectiu. S'ha fet l'entrenament amb el model de 760M per 5 epochs.
+En observar els resultats de l'entrenament, s'esperaven resultats acceptables pel nostre cas d'ús. Això no obstant, en fer l'avaluació en les dades de testatge, hem vist que el model no generalitza bé. Addicionalment, un altre desavantatge del model és el temps d'inferència. Hem observat que en netejar un article tarda entorn d'un minut, la qual cosa fa inviable netejar les dades amb un model de generació de text.
+A causa d'aquests problemes, s'ha decidit canviar el mètode per detectar les signatures en els articles dels tiquets.
+
+\textbf{Modificació RoBERTa}
+
+Com que els models generatius triguen molt a executar-se i no hem trobat resultats bons, hem decidit canviar de mètode per resoldre el problema. Hem decidit canviar el problema d'un problema de generació de text a un problema de classificació de frases. Per a classificar les frases el que es vol és convertir cada frase en un embeddings de mida fixa que mantingui el significat de la frase i utilitzar-lo per classificar-la com a una de les dues classes resultat: "pertany a una signatura" o "no pertany a una signatura". Per a fer-ho, s'ha fet servir el model RoBERTa per a generar l'embedding de la frase i s'ha emprat una sèrie de capes denses que reben aquest embedding i el processen iterativament fins a arribar a una capa de classificació amb dues neurones on la neurona més activada indica quina classificació té.
+Addicionalment, s'ha afegit una capa que donada la posició de la frase i el nombre de frases per arribar al final (ambdues normalitzades entre 0 i 1), augmenta la seva mida fins a arribar a la mateixa que els embeddings, així tenen una representació igual i no són menyspreats. Aquests nombres es concatenen amb els embeddings i es posen com a input a les capes de classificació per a aconseguir més informació sobre la frase.
+Després de moltes iteracions (més de 10) sobre l'arquitectura del model, la naturalesa de les dades i la manera d'entrenament, s'ha arribat a la conclusió que la millor precisió a la qual pot arribar és a un 87%. Això significa que només un 87% de les frases seran classificades correctament, obtenint potencialment un correu que perd molta informació que pot ser vital per comprendre la incidència o trobar alguns camps. És per això que no es considera que aquest model es pugui utilitzar en producció i es continua fent recerca per resoldre aquest problema.
+
+\textbf{Spacy Pipeline}
+
+En observar que els resultats del model ROBERTA no milloraven i pel fet que una classificació incorrecta, ens podria perdre informació important, vam provar un últim mètode. Vam decidir fer una solució més tradicional fent servir la llibreria Spacy.
+Spacy és una llibreria de processament del llenguatge natural (NLP) desenvolupada en Python que ofereix eines eficients per analitzar i processar text de manera precisa i eficaç. Amb Spacy, pots realitzar diverses tasques de NLP, com ara etiquetar de manera automàtica el tipus de paraules en un text (POS tagging), reconeixement d'entitats amb models preentrenats, anàlisi de dependències sintàctiques i molt més. Una de les funcionalitats destacades de Spacy és la seva capacitat per a la classificació de textos, que permet etiquetar automàticament els documents o fragments de text en categories prèviament definides, facilitant així la seva organització i anàlisi en aplicacions de processament de llenguatge natural.
+Nosaltres hem fet servir la pipeline tradicional que fa servir tok2vec en lloc de Transformers per crear els embeddings de les frases. S'ha fet servir tok2vec, ja que no requereix fer ús de GPU. En cas que haguéssim de fer servir Transformers per millorar els resultats, faria falta baixar la versió de cuda toolkit de 12.1 a 11.8. La causa d'això és el fet que encara hi ha llibreries com Cupy (essencial per entrenar Spacy amb models de Transformers) que requereixen la versió Cuda toolkit 11.8. I pel fet que per baixar la versió del Cuda Toolkit ens fa falta permisos d'administrador, hem decidit no fer servir GPU. Per això s'ha procedit a entrenar fent servir la CPU.
+Encara que hàgim fet servir un mètode més tradicional, s'han millorat els resultats respecte al model de Transformers i hem aconseguit una f1 score de 90. Podem observar que els resultats són impressionants considerant que no fem servir un mètode estat de l'art com poden ser els transformers a l'hora de trobar embeddings. Si en el futur considerem que hauríem de millorar el model de filtratge de signatures, crearem un tiquet al lloc de treballar per baixar la versió de Cuda toolkit de 12.1 a 11.8.
+
+\subsubsection{Conclusió eliminació de signatures i peus de pàgina}
+En conclusió, el viatge per desenvolupar un model d'eliminació de signatures eficaç ha estat ple de reptes i contratemps. Els models inicials, inclosos el Flan-T5-Base i el FLOR-760M, no van assolir les expectatives establertes, lluitant amb la generalització i els temps d'inferència poc pràctics. El posterior canvi a la classificació de frases mitjançant el model RoBERTa també va quedar curt, aconseguint una precisió que, tot i que lloable, no era suficient per al desplegament en un entorn de producció a causa del risc d'omissió informació crítica.
+
+L'exploració de mètodes tradicionals amb el pipeline tok2vec de Spacy ha donat resultats prometedors, superant els dels models Transformer més avançats. Tanmateix, la puntuació f1 de 90, tot i ser un assoliment important, no proporciona el nivell de confiança necessari per garantir que no es perdi cap informació important durant el procés d'eliminació de la signatura. Aquesta desconfiança prové del fet que hi ha articles on la informació més rellevant sol estar al final de l'article en una mena de resum fet per la persona que ha resolt el tiquet. La pèrdua d'aquesta informació pot reduir l'efectivitat del model d'extracció posterior. Per tant, s'ha pres la decisió de no utilitzar aquest model en el seu estat actual. A més a més, a causa de les limitacions de temps, l'enfocament s'ha desplaçat cap a la millora del model principal, que és fonamental per al projecte.
 
 \subsection{Aplicació del model}
 Per aplicar el model NLP que detecta i extreu els camps rellevants de cada tiquet, s'ha fet servir la llibreria \textit{Transformers}.
