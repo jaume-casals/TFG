@@ -44,7 +44,7 @@ El funcionament és tan senzill com exposar un exemple o diversos exemples del p
 \subsubsection{Avaluació dels models}
 Per avaluar i millorar l'entrenament d'un model, s'utilitzen certes mètriques que permeten quantificar com s'assembla la generació del model amb la resposta correcta de referència. S'ha fet ús de les següents mètriques:
 \begin{itemize}
-    \item \textit{Train\_Loss}: Error durant l'entrenament. Calculat automàticament per la funció \textit{Trainer} de la llibreria \textit{transformers}. La funció pel còmput d'aquest error s'escull automàticament i depèn de la tasca amb la qual s'està entrenant, en aquest cas, fa servir la funció de \texttt{CrossEntropyLoss} (Error d'entropia creuada).
+    \item \textit{Train\_Loss}: Error durant l'entrenament. Calculat automàticament per la funció \textit{Trainer} de la llibreria \texttt{Transformers}. La funció pel còmput d'aquest error s'escull automàticament i depèn de la tasca amb la qual s'està entrenant, en aquest cas, fa servir la funció de \texttt{CrossEntropyLoss} (Error d'entropia creuada).
     \item \textit{Val\_Loss} Error durant la validació. Es calcula també automàticament i fa servir la funció de \texttt{CrossEntropyLoss}.
     \item \textit{ROUGE-1}: Mesura la superposició d'unigrames (cada paraula) entre el text generat i el text de referència.
     \item \textit{ROUGE-2}: Mesura el solapament d'unigrames (dues paraules seguides) entre el text generat i el text de referència.
