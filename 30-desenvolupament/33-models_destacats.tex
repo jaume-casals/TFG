@@ -64,7 +64,7 @@ A causa del fet que el camp de la IA generativa és un camp que evoluciona molt 
 
 A causa d'això, s'ha buscat models alternatius que es puguin entrenar amb llibreries comunes disponibles a Windows. Aquesta cerca és bastant peculiar, ja que requereix els pesos del model seleccionat càpiga en una GPU de 8 GB i a més a més que pugui entendre el català, castellà i, en certa manera, l'anglès. A part del model \textit{Flan-T5}, s'ha trobat el model \textit{FLOR}, desenvolupat pel projecte AINA. Aquest model té diverses mides que són de 780M, 1.3B i 6.3B.
 
-S'ha optat per entrenar el model FLOR 1.3B per l'extracció dels camps que s'han definit en el projecte. Es creu que aquest model hauria de comportar-se millor que el QWEN-1.5, ja que se centra específicament en els 3 idiomes que són rellevants pel problema. En canvi, el QWEN-1.5 té molts més idiomes i podria ser pitjor en idiomes com el català.
+S'ha optat per entrenar el model FLOR 1.3B per l'extracció dels camps que s'han definit en el projecte. Es creu que aquest model hauria de comportar-se millor que el \textit{QWEN1.5}, ja que se centra específicament en els 3 idiomes que són rellevants pel problema. En canvi, el \textit{QWEN1.5} té molts més idiomes i podria ser pitjor en idiomes com el català.
 
 Tal com s'havia comprovat a les primeres proves, el model no entén el format de sortida, el qual és crucial per poder completar el procés d'anonimització i emmagatzematge. Fins i tot després d'un entrenament de 10 hores no arriba als estàndards mínims requerits.
 

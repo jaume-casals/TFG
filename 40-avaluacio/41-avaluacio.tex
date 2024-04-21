@@ -200,3 +200,37 @@ El model Flan-T5-Base es va ajustar mitjançant el mètode LoRA (\textit{Low-ran
     \caption[Entrenament del model \textit{Flan-T5-Base} amb LoRA]{Entrenament del model \textit{Flan-T5-Base} amb LoRA (amb etiquetes)}
 \end{table}
 El \textit{fine-tuning} amb el mètode \textit{LoRA} mostra un patró clar en els errors de \textit{Train} i \textit{Val}, cosa que indica una millora gradual del rendiment del model al llarg de les \textit{epochs} especificades. No obstant això, les puntuacions ROUGE mostren una tendència diferent, cosa que suggereix que la capacitat del model per captar el matisos del \textit{dataset} i generar resultats rellevants es pot veure qüestionada en aquest entrenament. És per aquest motiu que es va decidir cancelar el entrenament i no continuar amb el procés.
+
+\subsection{FLOR 6.3B (LoRA)}
+
+\subsection{QWEN1.5-Instructed 7B (QLoRA)}
+
+\begin{table}[H]
+    \centering
+    \begin{tabular}{cccccccc}
+        \toprule
+        affected Users & mitigation Actions & control Actions & urlMail Incident & fromMail Incident & recipient Mail Incident & subject Mail Incident & Total \\         
+        \midrule
+        Accuracy (Jaccard similarity) & 26.6\% & 63.3\% & 80.0\% & 80.0\% & 46.6\% & 66.6\% & 86.6\% & 64.2\% \\ 
+        Percentage of NotFound (true) & 80.0\% & 73.3\% & 93.3\% & 86.6\% & 60.0\% & 66.6\% & 73.3\% & 76.1\% \\ 
+        Percentage of NotFound (pred) & 20.0\% & 60.0\% & 86.6\% & 93.3\% & 33.3\% & 86.6\% & 86.6\% & 66.6\% \\ 
+        Percentage of NotFound (training set) & 70.0\% & 56.2\% & 100.0\% & 91.2\% & 41.2\% & 56.2\% & 58.7\% & 67.6\% \\
+        \bottomrule
+    \end{tabular}
+    \caption[Entrenament del model \textit{QWEN1.5 7B}]{Entrenament del model \textit{QWEN1.5 7B} amb QLoRA amb el primer conjunt de dades}
+\end{table}
+
+\begin{table}[H]
+    \centering
+    \begin{tabular}{cccccccc}
+        \toprule
+        affected Users & mitigation Actions & control Actions & urlMail Incident & fromMail Incident & recipient Mail Incident & subject Mail Incident & Total \\         
+        \midrule
+        Accuracy (Jaccard similarity) & 53.3\% & 80.0\% & 93.3\% & 86.6\% & 53.3\% & 60.0\% & 73.3\% & 71.4\% \\ 
+        Percentage of NotFound (true) & 60.0\% & 73.3\% & 93.3\% & 86.6\% & 60.0\% & 60.0\% & 73.3\% & 72.3\% \\ 
+        Percentage of NotFound (pred) & 80.0\% & 93.3\% & 100.0\% & 100.0\% & 80.0\% & 86.6\% & 86.6\% & 89.5\% \\ 
+        Percentage of NotFound (training set) & 50.0\% & 63.7\% & 97.5\% & 92.5\% & 56.2\% & 52.5\% & 61.2\% & 67.6\% \\ 
+        \bottomrule
+    \end{tabular}
+    \caption[Entrenament del model \textit{QWEN1.5 7B} després de la correcció]{Entrenament del model \textit{QWEN1.5 7B} amb QLoRA amb el conjut de dades corregit}
+\end{table}
