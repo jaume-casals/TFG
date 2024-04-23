@@ -1,7 +1,7 @@
 \section{Dataset i fine-tune amb dades reals}
 En aquest projecte no es va obtenir accés a les dades reals fins al mes de gener de 2024. Aquesta data és un any després de l'inici del projecte. Durant aquest any va canviar tant els requisits d'\textbf{i2CAT}, els mètodes de desenvolupament i del sistema plantejats, els coneixements adquirits, els objectius del projecte i, fins i tot, la mentalitat dels desenvolupadors. És aquesta diferència temporal que fa que es vegi com un projecte diferent o l'inici del projecte amb l'arribada de les dades. A més a més, el temps, el maquinari i l'accés el software van ser tant limitants que es va haver de centrar-se en trobar una sol·lució per al projecte el més ràpid possible.
 
-\subsection{Exploració de les dades}
+\subsection{Descripció general}
 Les dades reals consisteixen en una llista de 804 tiquets (700 originalment pactats + 104 de reserva) que van ser seleccionats manualment per \textbf{i2CAT}. D'aquests hi ha aproximadament la meitat d'incidents de \textit{Phishing} o \textit{Spam} i l'altre meitat de \textit{Malware}.
 
 \begin{table}[H]
@@ -22,8 +22,7 @@ Les dades reals consisteixen en una llista de 804 tiquets (700 originalment pact
 
 Després d'etiquetar 25 tiquets es va veure que ja majoria de les respostes eren \pyth{"NotFound"}. Això és una mala notícia perquè llavors el model aprendrà que per obtenir molt bon rendiment haurà de contestar sempre el mateix. Mirant més detingudament, es va descobrir que la majoria dels tiquets on suceeix aquest problema són els tiquets de \textit{Malware} ja que les entitats de sortida no estan fetes per tenir en comptes aquest tipus de tiquets.
 
-Com a resposta, es va plantejar quina seria la millor sol·lució per arreglar aquest problema. Es va plantejar afegir nous camps o crear un model diferent per cada cua. Degut a la manca de temps per poder executar cap de les dues sol·lucions, \textbf{i2CAT} va seleccionar 461 tiquets dels 804 previs. D'aquesta nova selecció la majoria són de la cua de Protecció Perimetre tot i que hi ha alguns de Gestió Incidents.
-
+Com a resposta, es va plantejar quina seria la millor sol·lució per arreglar aquest problema. Es va plantejar afegir nous camps o crear un model diferent per cada cua. Degut a la manca de temps per poder executar cap de les dues sol·lucions, \textbf{i2CAT} va seleccionar 461 tiquets dels 804 previs. D'aquesta nova selecció la majoria són de la cua de Protecció Perimetre tot i que hi ha alguns de Gestió Incidents. També es va escollir aleatoriament 80 tiquets i es van etiquetar. Més tard, aquests tiquets van ser revisats i es va tornar a entrenar els models que havien estat entrenats amb aquestes dades. 
 
 \begin{table}[H]
   \centering
@@ -41,6 +40,90 @@ Com a resposta, es va plantejar quina seria la millor sol·lució per arreglar a
   \label{tab:recompte_per_cua_2}
 \end{table}
 
+\subsection{Exploració de les dades}
+Per comprovar la mida de les dades amb les que es treballa, es crean histogrames i diagrames de caixa.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=\textwidth]{boxplot_num_chars_tiquets.png}
+    \caption[Boxplot dels caràcters del text principal de cada tiquet]{Boxplot del nombre de caràcters de cada tiquet. Els tiquets només contenen el text principal. \\ (Creació pròpia)}
+    \label{fig:boxplot_num_chars_tiquets}
+\end{figure}
+
+ 
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=\textwidth]{boxplot_num_chars_tiquets_outliers.png}
+    \caption[Boxplot dels caràcters del text principal de cada tiquet sense outliers]{Boxplot del nombre de caràcters de cada tiquet. Els tiquets només contenen el text principal i no s'inclouen els tiquets outliers. \\ (Creació pròpia)}
+    \label{fig:boxplot_num_chars_tiquets_outliers}
+\end{figure}
+
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=\textwidth]{histograma_num_chars_adj_refs.png}
+    \caption[Histograma dels caràcters de cada tiquet amb adjunts i referències]{Histograma del nombre de caràcters de cada tiquet. Els tiquets contenen el text princpial així com els fitxers adjunts i les referències a altres tiquets. \\ (Creació pròpia)}
+    \label{fig:histograma_num_chars_adj_refs}
+\end{figure}
+
+ 
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=\textwidth]{histograma_num_chars_adj_refs_outliers.png}
+    \caption[Histograma dels caràcters de cada tiquet amb adjunts i referències i sense outliers]{Histograma del nombre de caràcters de cada tiquet. Els tiquets contenen el text princpial així com els fitxers adjunts i les referències a altres tiquets. També s'ha eliminat els outliers. \\ (Creació pròpia)}
+    \label{fig:histograma_num_chars_adj_refs_outliers}
+\end{figure}
+
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=\textwidth]{histograma_num_chars_tiquets.png}
+    \caption[Histograma dels caràcters del text principal de cada tiquet]{Histograma del nombre de caràcters de cada tiquet. Els tiquets només contenen el text principal. \\ (Creació pròpia)}
+    \label{fig:histograma_num_chars_tiquets}
+\end{figure}
+
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=\textwidth]{histograma_num_chars_tiquets_outliers.png}
+    \caption[Histograma dels caràcters del text principal de cada tiquet sense outliers]{Histograma del nombre de caràcters de cada tiquet. Els tiquets només contenen el text principal i no s'inclouen els tiquets outliers. \\ (Creació pròpia)}
+    \label{fig:histograma_num_chars_tiquets_outliers}
+\end{figure}
+
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=\textwidth]{histograma_num_adj.png}
+    \caption[Histograma del nombre d'adjunts a cada tiquet]{Histograma del nombre de arxius adjunts a cada tiquet. \\ (Creació pròpia)}
+    \label{fig:histograma_num_adj}
+\end{figure}
+
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=\textwidth]{histograma_num_refs.png}
+    \caption[Histograma del nombre de referències a cada tiquet]{Histograma del nombre de referències a altres tiquets a cada tiquet. \\ (Creació pròpia)}
+    \label{fig:histograma_num_refs}
+\end{figure}
+
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=\textwidth]{boxplot_num_chars_adj_refs.png}
+    \caption[Boxplot dels caràcters de cada tiquet amb adjunts i referències]{Boxplot del nombre de caràcters de cada tiquet. Els tiquets contenen el text princpial així com els fitxers adjunts i les referències a altres tiquets. \\ (Creació pròpia)}
+    \label{fig:boxplot_num_chars_adj_refs}
+\end{figure}
+
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=\textwidth]{boxplot_num_chars_adj_refs_outliers.png}
+    \caption[Boxplot dels caràcters de cada tiquet amb adjunts i referències i sense outliers]{Boxplot del nombre de caràcters de cada tiquet. Els tiquets contenen el text princpial així com els fitxers adjunts i les referències a altres tiquets. També s'ha eliminat els outliers. \\ (Creació pròpia)}
+    \label{fig:boxplot_num_chars_adj_refs_outliers}
+\end{figure}
+
+
+
 % Boxplot + histograma de tiquets i tiquets + adjunts + referències
 % Histograma només tiquets dividit per cua
-% Histograma nombre articles d'adjunts i nombre referències
+% Histograma nombre articles d'adjunts i nombre referències ([a-z|_]+\.png)
