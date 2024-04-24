@@ -47,7 +47,13 @@ Com a resposta, es va plantejar quina seria la millor sol·lució per arreglar a
 \subsection{Exploració de les dades}
 Per comprovar la mida de les dades amb les que es treballa, es crean histogrames i diagrames de caixa.
 
-\subsubsection{Només text tiquets}
+\subsubsection{Anàlisi de la llarga dels tiquets}
+Aquest anàlisi proporciona informació sobre l'estructura i la complexitat típiques de les dades textuals. Comprendre la distribució de les longituds dels tiquets ajuda a dissenyar els models per manejar eficaçment les diferents longituds d'entrada. A més a més, els valors atípics poden distorsionar les anàlisis i introduir biaixos als models. En eliminar els valors atípics o aplicar les transformacions adequades, els investigadors poden garantir la solidesa i la fiabilitat de les seves anàlisis.
+
+El \textit{boxplot} (diagrama de caixa) de la figura \ref{fig:boxplot_num_chars_tiquets} mostra la distribució del nombre de caràcters dels tiquets, amb una distribució esbiaixada i una caixa de l'amplitud interquartílica desproporcionadament petita a causa de la presència de \textit{outliers} amb recomptes de caràcters excepcionalment alts.
+
+En contrast, el \textit{boxplot} de la figura \ref{fig:boxplot_num_chars_tiquets_outliers} presenta una representació més clara de la distribució de la longitud dels tiquets del conjunt de dades després d'eliminar tots els tiquets amb un recompte de caràcters superior a 10000. L'eliminació d'aquests \textit{outliers} permet veure que la majoria de tiquets té més de 2000 caràcters i amb molts per sobre dels 5000.
+
 \begin{figure}[H]
     \centering
     \begin{subfigure}{.5\textwidth}
@@ -66,6 +72,7 @@ Per comprovar la mida de les dades amb les que es treballa, es crean histogrames
     \label{fig:boxplot_num_chars_tiquets_dos}
 \end{figure}
 
+A més a més, a les figures \ref{fig:histograma_num_chars_tiquets} i {fig:histograma_num_chars_tiquets_outliers} es pot veure de manera més precisa el recompte de les llargades del nombre de caràcters dels tiquets.
 
 \begin{figure}[H]
     \centering
@@ -82,7 +89,10 @@ Per comprovar la mida de les dades amb les que es treballa, es crean histogrames
     \label{fig:histograma_num_chars_tiquets_outliers}
 \end{figure}
 
-\subsubsection{Tiquets amb refes i adjunts}
+\subsubsection{Anàlisi de la llarga dels tiquets amb adjunts i referències}
+Una petició freqüent va ser afegir més context a cada tiquet, ja que un incident pot estar inclòs en diversos tiquets o pot contenir la resposta d'alguns camps als arxius adjunts. El problema és que amb el maquinari tan limitat, fins i tot entrenar amb només el text principal del tiquet ja és un problema. 
+
+A pesar de la limitació d'espai, es va comprovar l'estat de les dades amb aquest context afegit. A les figures \ref{fig:boxplot_num_chars_adj_refs} i \ref{fig:boxplot_num_chars_adj_refs_outliers} es pot veure un \textit{boxplot} de la llargada dels tiquets, amb tots els tiquets i eliminant els 80 outliers de més de 10000 caràcters, respectivament. Es pot comprovar que hi ha significativament més caràcters de mitjana respecte a només tenir el text principal, el que implicaria més temps d'inferència i, en conseqüència, més temps d'entrenament.
 \begin{figure}[H]
     \centering
     \begin{subfigure}{.5\textwidth}
@@ -100,6 +110,8 @@ Per comprovar la mida de les dades amb les que es treballa, es crean histogrames
     \caption[Boxplot dels caràcters de cada tiquet amb adjunts i referències]{Boxplot del nombre de caràcters de cada tiquet. Els tiquets contenen el text princpial així com el contingut dels fitxers adjunts i les referències a altres tiquets. \\ (Creació pròpia)}
     \label{fig:boxplot_num_chars_adj_refs_dos}
 \end{figure}
+
+A les següents figures \ref{fig:histograma_num_chars_adj_refs} i \ref{fig:histograma_num_chars_adj_refs_outliers} es pot veure també la mateixa informació en format histograma.
 
 \begin{figure}[H]
     \centering
