@@ -40,44 +40,36 @@ Com a resposta, es va plantejar quina seria la millor sol·lució per arreglar a
   \label{tab:recompte_per_cua_2}
 \end{table}
 
+
+
+
+
 \subsection{Exploració de les dades}
 Per comprovar la mida de les dades amb les que es treballa, es crean histogrames i diagrames de caixa.
 
+\subsubsection{Només text tiquets}
 \begin{figure}[H]
     \centering
-    \includegraphics[width=\textwidth]{boxplot_num_chars_tiquets.png}
+    \begin{subfigure}{.5\textwidth}
+      \centering
+      \includegraphics[width=.7\linewidth]{boxplot_num_chars_tiquets.png}
+      \caption{Amb totes les sentències.}
+      \label{fig:boxplot_num_chars_tiquets}
+    \end{subfigure}%
+    \begin{subfigure}{.5\textwidth}
+      \centering
+      \includegraphics[width=.7\linewidth]{boxplot_num_chars_tiquets_outliers.png}
+      \caption{Sense \textit{outliers}.}
+      \label{fig:boxplot_num_chars_tiquets_outliers}
+    \end{subfigure}
     \caption[Boxplot dels caràcters del text principal de cada tiquet]{Boxplot del nombre de caràcters de cada tiquet. Els tiquets només contenen el text principal. \\ (Creació pròpia)}
-    \label{fig:boxplot_num_chars_tiquets}
-\end{figure}
-
- 
-\begin{figure}[H]
-    \centering
-    \includegraphics[width=\textwidth]{boxplot_num_chars_tiquets_outliers.png}
-    \caption[Boxplot dels caràcters del text principal de cada tiquet sense outliers]{Boxplot del nombre de caràcters de cada tiquet. Els tiquets només contenen el text principal i no s'inclouen els tiquets outliers. \\ (Creació pròpia)}
-    \label{fig:boxplot_num_chars_tiquets_outliers}
+    \label{fig:boxplot_num_chars_tiquets_dos}
 \end{figure}
 
 
 \begin{figure}[H]
     \centering
-    \includegraphics[width=\textwidth]{histograma_num_chars_adj_refs.png}
-    \caption[Histograma dels caràcters de cada tiquet amb adjunts i referències]{Histograma del nombre de caràcters de cada tiquet. Els tiquets contenen el text princpial així com els fitxers adjunts i les referències a altres tiquets. \\ (Creació pròpia)}
-    \label{fig:histograma_num_chars_adj_refs}
-\end{figure}
-
- 
-\begin{figure}[H]
-    \centering
-    \includegraphics[width=\textwidth]{histograma_num_chars_adj_refs_outliers.png}
-    \caption[Histograma dels caràcters de cada tiquet amb adjunts i referències i sense outliers]{Histograma del nombre de caràcters de cada tiquet. Els tiquets contenen el text princpial així com els fitxers adjunts i les referències a altres tiquets. També s'ha eliminat els outliers. \\ (Creació pròpia)}
-    \label{fig:histograma_num_chars_adj_refs_outliers}
-\end{figure}
-
-
-\begin{figure}[H]
-    \centering
-    \includegraphics[width=\textwidth]{histograma_num_chars_tiquets.png}
+    \includegraphics[width=0.9\textwidth]{histograma_num_chars_tiquets.png}
     \caption[Histograma dels caràcters del text principal de cada tiquet]{Histograma del nombre de caràcters de cada tiquet. Els tiquets només contenen el text principal. \\ (Creació pròpia)}
     \label{fig:histograma_num_chars_tiquets}
 \end{figure}
@@ -85,15 +77,50 @@ Per comprovar la mida de les dades amb les que es treballa, es crean histogrames
 
 \begin{figure}[H]
     \centering
-    \includegraphics[width=\textwidth]{histograma_num_chars_tiquets_outliers.png}
+    \includegraphics[width=0.9\textwidth]{histograma_num_chars_tiquets_outliers.png}
     \caption[Histograma dels caràcters del text principal de cada tiquet sense outliers]{Histograma del nombre de caràcters de cada tiquet. Els tiquets només contenen el text principal i no s'inclouen els tiquets outliers. \\ (Creació pròpia)}
     \label{fig:histograma_num_chars_tiquets_outliers}
 \end{figure}
 
+\subsubsection{Tiquets amb refes i adjunts}
+\begin{figure}[H]
+    \centering
+    \begin{subfigure}{.5\textwidth}
+      \centering
+      \includegraphics[width=.7\linewidth]{boxplot_num_chars_adj_refs.png}
+      \caption{Amb totes les sentències.}
+      \label{fig:boxplot_num_chars_adj_refs}
+    \end{subfigure}%
+    \begin{subfigure}{.5\textwidth}
+      \centering
+      \includegraphics[width=.7\linewidth]{boxplot_num_chars_adj_refs_outliers.png}
+      \caption{Sense \textit{outliers}.}
+      \label{fig:boxplot_num_chars_adj_refs_outliers}
+    \end{subfigure}
+    \caption[Boxplot dels caràcters de cada tiquet amb adjunts i referències]{Boxplot del nombre de caràcters de cada tiquet. Els tiquets contenen el text princpial així com el contingut dels fitxers adjunts i les referències a altres tiquets. \\ (Creació pròpia)}
+    \label{fig:boxplot_num_chars_adj_refs_dos}
+\end{figure}
 
 \begin{figure}[H]
     \centering
-    \includegraphics[width=\textwidth]{histograma_num_adj.png}
+    \includegraphics[width=0.9\textwidth]{histograma_num_chars_adj_refs.png}
+    \caption[Histograma dels caràcters de cada tiquet amb adjunts i referències]{Histograma del nombre de caràcters de cada tiquet. Els tiquets contenen el text princpial així com el contingut dels fitxers adjunts i les referències a altres tiquets. \\ (Creació pròpia)}
+    \label{fig:histograma_num_chars_adj_refs}
+\end{figure}
+
+ 
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.9\textwidth]{histograma_num_chars_adj_refs_outliers.png}
+    \caption[Histograma dels caràcters de cada tiquet amb adjunts i referències i sense outliers]{Histograma del nombre de caràcters de cada tiquet. Els tiquets contenen el text princpial així com el contingut dels fitxers adjunts i les referències a altres tiquets. També s'ha eliminat els outliers. \\ (Creació pròpia)}
+    \label{fig:histograma_num_chars_adj_refs_outliers}
+\end{figure}
+
+
+\subsubsection{Comparació nombre d'adjunts i referències}
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.9\textwidth]{histograma_num_adj.png}
     \caption[Histograma del nombre d'adjunts a cada tiquet]{Histograma del nombre de arxius adjunts a cada tiquet. \\ (Creació pròpia)}
     \label{fig:histograma_num_adj}
 \end{figure}
@@ -101,29 +128,7 @@ Per comprovar la mida de les dades amb les que es treballa, es crean histogrames
 
 \begin{figure}[H]
     \centering
-    \includegraphics[width=\textwidth]{histograma_num_refs.png}
+    \includegraphics[width=0.9\textwidth]{histograma_num_refs.png}
     \caption[Histograma del nombre de referències a cada tiquet]{Histograma del nombre de referències a altres tiquets a cada tiquet. \\ (Creació pròpia)}
     \label{fig:histograma_num_refs}
 \end{figure}
-
-
-\begin{figure}[H]
-    \centering
-    \includegraphics[width=\textwidth]{boxplot_num_chars_adj_refs.png}
-    \caption[Boxplot dels caràcters de cada tiquet amb adjunts i referències]{Boxplot del nombre de caràcters de cada tiquet. Els tiquets contenen el text princpial així com els fitxers adjunts i les referències a altres tiquets. \\ (Creació pròpia)}
-    \label{fig:boxplot_num_chars_adj_refs}
-\end{figure}
-
-
-\begin{figure}[H]
-    \centering
-    \includegraphics[width=\textwidth]{boxplot_num_chars_adj_refs_outliers.png}
-    \caption[Boxplot dels caràcters de cada tiquet amb adjunts i referències i sense outliers]{Boxplot del nombre de caràcters de cada tiquet. Els tiquets contenen el text princpial així com els fitxers adjunts i les referències a altres tiquets. També s'ha eliminat els outliers. \\ (Creació pròpia)}
-    \label{fig:boxplot_num_chars_adj_refs_outliers}
-\end{figure}
-
-
-
-% Boxplot + histograma de tiquets i tiquets + adjunts + referències
-% Histograma només tiquets dividit per cua
-% Histograma nombre articles d'adjunts i nombre referències ([a-z|_]+\.png)
