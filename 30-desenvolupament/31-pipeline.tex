@@ -102,7 +102,7 @@ A continuació es presenten els models utilitzats i quin ha sigut el conjunt de 
 \underline{Flan-T5-Base}
 
 Aquest model s'ha entrenat amb l'objectiu de detectar el text dels articles, descartant en el procés les signatures. Utilitzant les tècniques de Gradient Checkpointing i Gradient Accumulation, s'ha aconseguit entrenar aquest model dins de la GPU de 8GB sacrificant en el procés el temps d'entrenament. S'ha entrenat durant 10 epochs que ha sigut l'equivalent a més de 24 hores d'entrenament continuat.
-Tot i el bon historial d'aquest model, el resultat d'aquest finetuning ha sigut un fracàs. El model no ha sigut capaç de generalitzar la tasca d'eliminar la signatura, ni en els casos on més es repetia. La causa d'aquest mal entrenament queda desconeguda, ja que aquesta tasca es considera teòricament senzilla de resoldre per un model del llenguatge natural.
+Tot i el bon historial d'aquest model, el resultat d'aquest \textit{fine-tuning} ha sigut un fracàs. El model no ha sigut capaç de generalitzar la tasca d'eliminar la signatura, ni en els casos on més es repetia. La causa d'aquest mal entrenament queda desconeguda, ja que aquesta tasca es considera teòricament senzilla de resoldre per un model del llenguatge natural.
 
 \underline{FLOR-760M}
 

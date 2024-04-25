@@ -202,8 +202,28 @@ El model Flan-T5-Base es va ajustar mitjançant el mètode LoRA (\textit{Low-ran
 El \textit{fine-tuning} amb el mètode \textit{LoRA} mostra un patró clar en els errors de \textit{Train} i \textit{Val}, cosa que indica una millora gradual del rendiment del model al llarg de les \textit{epochs} especificades. No obstant això, les puntuacions ROUGE mostren una tendència diferent, cosa que suggereix que la capacitat del model per captar el matisos del \textit{dataset} i generar resultats rellevants es pot veure qüestionada en aquest entrenament. És per aquest motiu que es va decidir cancelar el entrenament i no continuar amb el procés.
 
 \subsection{FLOR 6.3B (LoRA)}
-
-\subsection{QWEN1.5-Instructed 7B (QLoRA)}
+{\setlength{\tabcolsep}{1pt}   %Espai a la dreta i esquerra de cada cel·la amb text
+\begin{table}[H]
+    \centering
+    \begin{tabular}{lcccccccc}
+        \toprule
+        Mètrica 
+        & \begin{tabular}{@{}c@{}}affected \\ Users\end{tabular}
+        & \begin{tabular}{@{}c@{}}mitigation \\ Actions\end{tabular}
+        & \begin{tabular}{@{}c@{}}control \\ Actions\end{tabular}
+        & \begin{tabular}{@{}c@{}}urlMail \\ Incident\end{tabular}
+        & \begin{tabular}{@{}c@{}}fromMail \\ Incident\end{tabular}
+        & \begin{tabular}{@{}c@{}}recipientMail \\ Incident\end{tabular}
+        & \begin{tabular}{@{}c@{}}subjectMail \\ Incident\end{tabular} 
+        & Total \\         
+        \midrule
+        \makecell[l]{ Accuracy \\ \textit{Jaccard} \\ \textit{similarity} } & 0.0\% & 0.0\% & 0.0\% & 0.0\% & 0.0\% & 0.0\% & 0.0\% & 0.0\% \\ 
+        \makecell[l]{ NotFound \\ \textit{pred} } & 0.0\% & 0.0\% & 0.0\% & 0.0\% & 0.0\% & 0.0\% & 0.0\% & 0.0\% \\ 
+        \bottomrule
+    \end{tabular}
+    \caption[Resultats de l'entrenament del model \textit{FLOR 6.3B}]{Estadístiques dels resultats de l'entrenament del model \textit{FLOR 6.3B} amb \textit{LoRA} amb el primer conjunt de dades }
+\end{table}
+}
 
 {\setlength{\tabcolsep}{1pt}   %Espai a la dreta i esquerra de cada cel·la amb text
 \begin{table}[H]
@@ -220,13 +240,35 @@ El \textit{fine-tuning} amb el mètode \textit{LoRA} mostra un patró clar en el
         & \begin{tabular}{@{}c@{}}subjectMail \\ Incident\end{tabular} 
         & Total \\         
         \midrule
-        \makecell[l]{ Accuracy \\ \textit{Jaccard} \\ \textit{similarity} } & 26.6\% & 63.3\% & 80.0\% & 80.0\% & 46.6\% & 66.6\% & 86.6\% & 64.2\% \\ 
-        \makecell[l]{ NotFound \\ \textit{test} } & 80.0\% & 73.3\% & 93.3\% & 86.6\% & 60.0\% & 66.6\% & 73.3\% & 76.1\% \\ 
-        \makecell[l]{ NotFound \\ \textit{train} } & 20.0\% & 60.0\% & 86.6\% & 93.3\% & 33.3\% & 86.6\% & 86.6\% & 66.6\% \\ 
-        \makecell[l]{ NotFound \\ \textit{train} } & 70.0\% & 56.2\% & 100.0\% & 91.2\% & 41.2\% & 56.2\% & 58.7\% & 67.6\% \\
+        \makecell[l]{ Accuracy \\ \textit{Jaccard} \\ \textit{similarity} } & 0.0\% & 0.0\% & 0.0\% & 0.0\% & 0.0\% & 0.0\% & 0.0\% & 0.0\% \\ 
+        \makecell[l]{ NotFound \\ \textit{pred} } & 0.0\% & 0.0\% & 0.0\% & 0.0\% & 0.0\% & 0.0\% & 0.0\% & 0.0\% \\ 
         \bottomrule
     \end{tabular}
-    \caption[Entrenament del model \textit{QWEN1.5 7B}]{Entrenament del model \textit{QWEN1.5 7B} amb QLoRA amb el primer conjunt de dades}
+    \caption[Resultats de l'entrenament del model \textit{FLOR 6.3B} amb el segon conjunt de dades]{Estadístiques dels resultats de l'entrenament del model \textit{FLOR 6.3B} amb \textit{LoRA} amb el segon conjunt de dades }
+\end{table}
+}
+
+\subsection{QWEN1.5-Instructed 7B (QLoRA)}
+{\setlength{\tabcolsep}{1pt}   %Espai a la dreta i esquerra de cada cel·la amb text
+\begin{table}[H]
+    \centering
+    \begin{tabular}{lcccccccc}
+        \toprule
+        Mètrica 
+        & \begin{tabular}{@{}c@{}}affected \\ Users\end{tabular}
+        & \begin{tabular}{@{}c@{}}mitigation \\ Actions\end{tabular}
+        & \begin{tabular}{@{}c@{}}control \\ Actions\end{tabular}
+        & \begin{tabular}{@{}c@{}}urlMail \\ Incident\end{tabular}
+        & \begin{tabular}{@{}c@{}}fromMail \\ Incident\end{tabular}
+        & \begin{tabular}{@{}c@{}}recipientMail \\ Incident\end{tabular}
+        & \begin{tabular}{@{}c@{}}subjectMail \\ Incident\end{tabular} 
+        & Total \\         
+        \midrule
+        \makecell[l]{ Accuracy \\ \textit{Jaccard} \\ \textit{similarity} } & 26.6\% & 63.3\% & 80.0\% & 80.0\% & 46.6\% & 66.6\% & 86.6\% & 64.2\% \\ 
+        \makecell[l]{ NotFound \\ \textit{pred} } & 20.0\% & 60.0\% & 86.6\% & 93.3\% & 33.3\% & 86.6\% & 86.6\% & 66.6\% \\ 
+        \bottomrule
+    \end{tabular}
+    \caption[Resultats de l'entrenament del model \textit{QWEN1.5 7B}]{Estadístiques dels resultats de l'entrenament del model \textit{QWEN1.5 7B} amb QLoRA amb el primer conjunt de dades}
 \end{table}
 }
 
@@ -246,11 +288,9 @@ El \textit{fine-tuning} amb el mètode \textit{LoRA} mostra un patró clar en el
         & Total \\         
         \midrule
         \makecell[l]{ Accuracy \\ \textit{Jaccard} \\ \textit{similarity} } & 53.3\% & 80.0\% & 93.3\% & 86.6\% & 53.3\% & 60.0\% & 73.3\% & 71.4\% \\ 
-        \makecell[l]{ NotFound \\ \textit{test} } & 60.0\% & 73.3\% & 93.3\% & 86.6\% & 60.0\% & 60.0\% & 73.3\% & 72.3\% \\ 
         \makecell[l]{ NotFound \\ \textit{pred} } & 80.0\% & 93.3\% & 100.0\% & 100.0\% & 80.0\% & 86.6\% & 86.6\% & 89.5\% \\ 
-        \makecell[l]{ NotFound \\ \textit{train} } & 50.0\% & 63.7\% & 97.5\% & 92.5\% & 56.2\% & 52.5\% & 61.2\% & 67.6\% \\ 
         \bottomrule
     \end{tabular}
-    \caption[Entrenament del model \textit{QWEN1.5 7B} després de la correcció]{Entrenament del model \textit{QWEN1.5 7B} amb QLoRA amb el conjut de dades corregit}
+    \caption[Resultats de l'entrenament del model \textit{QWEN1.5 7B} amb el segon conjunt de dades]{Estadístiques dels resultats de l'entrenament del model \textit{QWEN1.5 7B} amb QLoRA amb el conjut de dades corregit}
 \end{table}
 }
