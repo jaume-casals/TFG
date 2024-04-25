@@ -157,7 +157,9 @@ Quan s'analitza un \textit{dataset}, és fonamental assegurar-se que es manté l
 
 La presència d'un nombre significatiu d'entrades \pyth{"NotFound"} introdueix un biaix a l'anàlisi. Això distorsiona les mètriques, la qual cosa porta a percepcions i conclusions inexactes. En conseqüència, els models entrenats amb aquests \textit{datasets} poden tenir dificultats per generalitzar bé dades no vistes. L'absència d'informació a la partició d'entrenament impedeix la capacitat del model per extrapolar coneixements a instàncies noves amb precisió.
 
-A continuació es pot veure a les taules \ref{tab:stats_dataset_1} i \ref{tab:stats_dataset_2} el percentatge dels camps de sortida que no es poden contestar amb la informació proporcionada al tiquet. S'ha de notar que si es tingués en compte el contingut dels arxius adjunts i dels tiquets que es referencien, aquests percentatges disminuirien lleugerament, però encara serien majoritàriament \pyth{"NotFound"}.
+A continuació es pot veure a les taules \ref{tab:stats_dataset_1} i \ref{tab:stats_dataset_2} el percentatge dels camps de sortida que no es poden contestar amb la informació proporcionada al tiquet. Es pot observar també que els percentatges de camps no trobats gairebé no canvia entre versions, però com s'ha pogut veure, ha tingut unes implicacions més grans a l'hora de l'entrenament.
+
+S'ha de notar que si es tingués en compte el contingut dels arxius adjunts i dels tiquets que es referencien, aquests percentatges disminuirien lleugerament, però encara serien majoritàriament \pyth{"NotFound"}.
 
 {\setlength{\tabcolsep}{1pt}   %Espai a la dreta i esquerra de cada cel·la amb text
 \begin{table}[H]
