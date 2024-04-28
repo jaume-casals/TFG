@@ -1,9 +1,9 @@
-\section{Arquitectura del sistema (pipeline)}
+\section{Arquitectura del sistema (\textit{pipeline})}
 Aquest apartat descriu l'arquitectura del sistema que s'ha desenvolupat per a l'anàlisi automàtica dels tiquets d'incidències de ciberseguretat de l'\textbf{Agència}. L'arquitectura del sistema està directament lligat a les màquines des de les quals s'han disposat propietat de l'\textbf{Agència} i al sistema que tenien en producció. L'\textbf{Agència} va posar a disposició de l'equip tres servidors idèntics per cada secció on estaran les dades i dos portàtils amb accés als servidors a través d'una VPN privada.
 
 \begin{itemize}
      \item \textbf{Servidor 1 (OTRS):} Servidor on s'emmagatzema la base de dades d'OTRS amb els tiquets al seu interior.
-     \item \textbf{Servidor 2 (Pipeline):} Servidor encarregat d'accedir als altres servidors per llegir i guardar informació i passar-la pel programa desenvolupat per resoldre el problema.
+     \item \textbf{Servidor 2 (\textit{Pipeline}):} Servidor encarregat d'accedir als altres servidors per llegir i guardar informació i passar-la pel programa desenvolupat per resoldre el problema.
      \item \textbf{Servidor 3 (Elasticsearch):} Servidor que recull les dades processades i anonimitzades per un futur us.
 \end{itemize}
 
