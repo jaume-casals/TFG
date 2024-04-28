@@ -1,6 +1,9 @@
 # Ignore the "_minted-00-main" folder
 _minted-00-main/
 
+# Ignore the ".vscode" folder
+.vscode/
+
 # Ignore everything inside the "output" folder
 output/*
 

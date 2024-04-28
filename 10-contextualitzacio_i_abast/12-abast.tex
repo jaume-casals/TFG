@@ -7,7 +7,7 @@ El principal objectiu d'aquest projecte és el desenvolupament i implementació 
 \begin{itemize}
     \item Fer un estudi de l'estat de l'art per tal d'identificar solucions ja existents a problemes similars i adaptar-ne una al problema presentat.
     \item Configurar una base de dades \textit{OTRS} i crear una eina de descàrrega de tiquets de les fonts de dades proporcionades utilitzant \textit{PyOTRS}.
-    \item Fer un preprocessamnet del text que en elimini tot el text redundant possible, afegixi metadades i informació rellevant i formategi el text segons les especificacions requerides.
+    \item Fer un preprocessament del text que elimini tot el text redundant possible, afegeixi metadades i informació rellevant i formati el text segons les especificacions requerides.
     \item Desenvolupar i entrenar un model de \textit{Deep Learning} per a l'extracció dels camps especificats del text preprocessat.
     \item Anonimització de les dades de sortida mitjançant un filtre de \textit{Logstash}.
     \item Configurar i gestionar l'emmagatzematge de les dades preprocessades i anonimitzades en \textit{Elasticsearch}.
@@ -20,22 +20,22 @@ El principal objectiu d'aquest projecte és el desenvolupament i implementació 
 
 El funcionament de l'API és invisible per l'usuari, però darrere hi ha tot el sistema en funcionament. El funcionament del sistema permet el següent: 
 \begin{itemize}
-    \item L'usuari accedeix a l'API que està emmagatzemanda a l'entorn cedit per \textbf{i2CAT} i especifica l'identificador del tiquet a analitzar. Ha de comprovar els possibles següents errors, els quals interrompen l'execució normal del programa:
+    \item L'usuari accedeix a l'API que està emmagatzemada a l'entorn cedit per \textbf{i2CAT} i especifica l'identificador del tiquet a analitzar. Ha de comprovar els possibles següents errors, els quals interrompen l'execució normal del programa:
     \begin{itemize}
         \item No existeix el tiquet especificat. 
-        \item No es pot connectar amb la base de dades d'on s'extreuen els tiquets.
+        \item La connexió amb la base de dades \textit{OTRS} no és possible.
         \item No es pot accedir a la base de dades on s'emmagatzema el resultat.
-        \item Un error d'execució degut al contingut del tiquet.
+        \item Un error d'execució a causa del contingut del tiquet.
     \end{itemize}
     \item S'obté un tiquet de la base de dades \textit{OTRS} utilitzant la configuració i llibreries preparades per a fer-ho.
     \item Es preprocessa el tiquet per tal d'afegir tota aquella informació rellevant al procés d'extracció d'informació propera i extreure tota aquella que sigui repetida i no aporti dades noves. Aquests són els processos pels quals passa:
     \begin{itemize}
         \item Extreure en text simple tot el text del tiquet en format HTML.
-        \item Addició del text dels fitxers adjunts.
-        \item Addició del text dels tiquets als quals es fa referència.
         \item Addició de tots els articles del tiquet.
+        \item Afegir el text dels fitxers adjunts.
+        \item Afegir el text dels tiquets als quals es fa referència.
         \item Eliminació del text duplicat detectat.
-        \item Afegir el \textit{system prompt} i reordenar el text en el format necessari per l'entrada del model.
+        \item Afegir el \textit{system prompt} i reordenar el text en el format necessari per a l'entrada del model.
     \end{itemize}
     \item S'executa el model emprant el tiquet aconseguit i extreu la informació dels camps especificats.
     \item El resultat es passa per un algorisme d'anonimització implementat amb un filtre de \textit{Logstash}.
@@ -57,10 +57,10 @@ El funcionament de l'API és invisible per l'usuari, però darrere hi ha tot el 
 \subsection{Obstacles i riscos potencials} \label{ssec:abast-riscos}
 
 \begin{itemize}
-    \item \textbf{L'eina no entén correctament el llenguatge:} Comprendre el llenguatge natural és una tasca difícil que evoluciona contínuament i, sobretot, és molt lluny de ser perfecta. Una preocupació important ha estat la possible inadequació dels models disponibles per comprendre eficaçment determinats textos. És una tasca difícil, sobretot en català, trobar models de NLP que tinguin la capacitat de comprendre textos extensos i que extreguin la informació desitjada. A més a més, dependre únicament de models en local pot augmentar aquest risc en impedir que el sistema millori i s'ajusti constantment amb nous models lingüístics i dades, cosa que podria impedir el rendiment sostingut del programari.
-    \item \textbf{Disgregació de la resposta:} Aquest repte sorgeix perquè els models de NLP depenen sovint del context i la proximitat per establir connexions entre paraules i frases. Quan els detalls clau estan dispersos o són incoherents, el model pot tenir dificultats per reunir la informació necessària, cosa que dona lloc a respostes incompletes o errònies a les consultes dels usuaris. Això també s'aplica a situacions en què la informació està repartida en diversos articles o tiquets, ja que no és factible proporcionar al model una conversa completa d'un tiquet amb tot el context necessari per comprendre la situació i trobar correctament tots els . En conseqüència, si la resposta es fragmenta i no és analitzada correctament, es pot perdre part de la informació. A més a més, aquesta limitació restringeix la varietat de models disponibles, pel fet que certes categories d'aquest àmbit no afavoreixen el nivell de flexibilitat desitjat.
+    \item \textbf{L'eina no entén correctament el llenguatge:} Comprendre el llenguatge natural és una tasca difícil que evoluciona contínuament i, sobretot, és molt lluny de ser perfecta. Una preocupació important ha estat la possible inadequació dels models disponibles per comprendre eficaçment determinats textos. És una tasca difícil, sobretot en català, trobar models de \textit{NLP} que tinguin la capacitat de comprendre textos extensos i que extreguin la informació desitjada. A més a més, dependre únicament de models en local pot augmentar aquest risc en impedir que el sistema millori i s'ajusti constantment amb nous models lingüístics i dades, cosa que podria impedir el rendiment sostingut del programari.
+    \item \textbf{Disgregació de la resposta:} Aquest repte sorgeix perquè els models de \textit{NLP} depenen sovint del context i la proximitat per establir connexions entre paraules i frases. Quan els detalls clau estan dispersos o són incoherents, el model pot tenir dificultats per reunir la informació necessària, cosa que dona lloc a respostes incompletes o errònies a les consultes dels usuaris. Això també s'aplica a situacions en què la informació està repartida en diversos articles o tiquets, ja que no és factible proporcionar al model una conversa completa d'un tiquet amb tot el context necessari per comprendre la situació i trobar correctament tots els . En conseqüència, si la resposta es fragmenta i no és analitzada correctament, es pot perdre part de la informació. A més a més, aquesta limitació restringeix la varietat de models disponibles, pel fet que certes categories d'aquest àmbit no afavoreixen el nivell de flexibilitat desitjat.
     \item \textbf{Escassetat i varietat de dades d'entrenament:} L'èxit de l'entrenament del model depèn en gran manera d'un conjunt de dades ampli i variat. Tot i això, l'adquisició d'aquestes dades és lenta i hi ha una llarga demora per aconseguir-les. Aquest estancament impedeix l'avenç del projecte i també limita la capacitat per perfeccionar i optimitzar eficaçment el model. En cas que fos necessari, es buscarien dades sintètiques per compensar aquestes limitacions, encara que estiguessin en llengües diferents.
     \item \textbf{Potència insuficient per executar el model:} Aquests models són reconeguts per la seva complexitat i mida, cosa que exigeix considerables recursos informàtics. És possible que l'\textbf{Agència} no tingui la infraestructura necessària per suportar els models d'ús intensiu de recursos. Aquesta circumstància té el potencial de dificultar l'execució exitosa del projecte i donar lloc a problemes de rendiment que poden requerir la reavaluació del model seleccionat.
     \item \textbf{Poca experiència amb les tecnologies necessàries:} Aquesta manca de coneixements podria provocar problemes durant el desenvolupament, com ara un progrés més lent, possibles errors i una corba d'aprenentatge més pronunciada. Per reduir aquest risc, es compta amb orientació, formació addicional programada i col·laboració amb experts als camps pertinents per a una execució del projecte més fluida i satisfactòria.
-    \item \textbf{Accés restringit:} La limitació de recursos de programari i maquinari imposa un desavantatge significatiu a la gamma de models que es poden provar i als mètodes disponibles per a l'entrenament. El projecte es pot veure restringit a solucions menys òptimes, cosa que obstaculitza la capacitat d'assolir els nivells de rendiment desitjats. Tots els canvis i imprevistos que hagin sortit en el moment triguen un temps en ser avaluats i admesos (o denegats) per l'\textbf{Agència} o \textbf{i2CAT}.
+    \item \textbf{Accés restringit:} La limitació de recursos de programari i maquinari imposa un desavantatge significatiu a la gamma de models que es poden provar i als mètodes disponibles per a l'entrenament. El projecte es pot veure restringit a solucions no òptimes, cosa que obstaculitza la capacitat d'assolir els nivells de rendiment desitjats. Tots els canvis i imprevistos que hagin sortit en el moment triguen un temps a ser avaluats i admesos (o denegats) per l'\textbf{Agència} o \textbf{i2CAT}.
 \end{itemize}
