@@ -2,7 +2,7 @@
 Aquest apartat descriu l'arquitectura del sistema que s'ha desenvolupat per a l'anàlisi automàtica dels tiquets d'incidències de ciberseguretat de l'\textbf{Agència}. L'arquitectura del sistema està directament lligat a les màquines des de les quals s'han disposat propietat de l'\textbf{Agència} i al sistema que tenien en producció. L'\textbf{Agència} va posar a disposició de l'equip tres servidors idèntics per cada secció on estaran les dades i dos portàtils amb accés als servidors a través d'una VPN privada.
 
 \begin{itemize}
-     \item \textbf{Servidor 1 (OTRS):} Servidor on s'emmagatzema la base de dades d'OTRS amb els tiquets al seu interior.
+     \item \textbf{Servidor 1 (\textit{OTRS}):} Servidor on s'emmagatzema la base de dades d'\textit{OTRS} amb els tiquets al seu interior.
      \item \textbf{Servidor 2 (\textit{Pipeline}):} Servidor encarregat d'accedir als altres servidors per llegir i guardar informació i passar-la pel programa desenvolupat per resoldre el problema.
      \item \textbf{Servidor 3 (Elasticsearch):} Servidor que recull les dades processades i anonimitzades per un futur us.
 \end{itemize}
@@ -22,7 +22,7 @@ Aquest apartat descriu l'arquitectura del sistema que s'ha desenvolupat per a l'
 El sistema consta d'una sèrie de scripts de Python que s'executen seqüencialment i duen a terme les tasques següents:
 
 \begin{enumerate}
-     \item Extreure els tiquets de la base de dades OTRS de l'\textbf{Agència}.
+     \item Extreure els tiquets de la base de dades \textit{OTRS} de l'\textbf{Agència}.
      \item Preprocessar el text de cada tiquet, eliminant el soroll (dades repetides o innecessàries), normalitzant el format i inserint les referències necessàries.
      \item Aplicar un model de processament del llenguatge natural (NLP) que detecta i extreu els camps rellevants de cada tiquet.
      \item Anonimitzar els camps extrets mitjançant una funció a Elasticsearch, que substitueix les dades de sortida per símbols o etiquetes genèriques.
@@ -43,15 +43,15 @@ La figura \ref{fig:pipeline} mostra un diagrama que il·lustra el funcionament d
 
 En les següents seccions es detallen els components i les tecnologies que han sigut utilitzades a cadascuna de les etapes del \textit{pipeline}.
 \subsection{Extracció de tiquets d'OTRS}
-% Explicar com està configurat el OTRS
-Per extreure els tiquets del Servidor OTRS de l'\textbf{Agència}, s'ha fa servir \textit{PyOTRS}, que permet accedir a les dades mitjançant peticions a través de la REST API. S'ha implementat un script de Python que utilitza la llibreria mencionada per fer les peticions i obtenir els tiquets. L'script s'encarrega d'autenticar-se amb les credencials cedides per l'\textbf{Agència}, extreure els tiquets especificats a un fitxer Excel i fer un postprocessament per aconseguir tota la informació del tiquet en un format estandarditzat i sense repeticions innecessàries. A continuació es detalla el funcionament del codi seguint l'ordre que recorren els tiquets.
+% Explicar com està configurat el \textit{OTRS}
+Per extreure els tiquets del Servidor \textit{OTRS} de l'\textbf{Agència}, s'ha fa servir \textit{PyOTRS}, que permet accedir a les dades mitjançant peticions a través de la REST API. S'ha implementat un script de Python que utilitza la llibreria mencionada per fer les peticions i obtenir els tiquets. L'script s'encarrega d'autenticar-se amb les credencials cedides per l'\textbf{Agència}, extreure els tiquets especificats a un fitxer Excel i fer un postprocessament per aconseguir tota la informació del tiquet en un format estandarditzat i sense repeticions innecessàries. A continuació es detalla el funcionament del codi seguint l'ordre que recorren els tiquets.
 
 \begin{enumerate}
-     \item \textbf{Iniciar sessió:} Es fan unes configuracions per assegurar que els tiquets es reben amb el format esperat i mitjançant les funcions creades a OTRS. Després es crea un client amb l'adreça IP del servidor, l'usuari i la contrasenya obtingudes de l'\textbf{Agència}.
+     \item \textbf{Iniciar sessió:} Es fan unes configuracions per assegurar que els tiquets es reben amb el format esperat i mitjançant les funcions creades a \textit{OTRS}. Després es crea un client amb l'adreça IP del servidor, l'usuari i la contrasenya obtingudes de l'\textbf{Agència}.
      \item \textbf{Iterar pels tiquets:} En cas que s'extreguin molts tiquets seguits es busca i s'obre el fitxer Excel especificat en el qual hi haurà la informació necessària dels tiquets que s'ha de processar. S'itera per la columna en la qual es troben els identificadors dels tiquets. També hi ha una opció per especificar un sol identificador de tiquet.
      \item \textbf{Llegir ID del tiquet:} Per cada fila, es llegeix l'identificador del tiquet i es crida a la següent funció.
      \item \textbf{Comprovar la utilització del tiquet:} Abans de començar a extreure els tiquets, es comprova si el tiquet en qüestió ja ha sigut extret abans. Això es fa per evitar cicles infinits amb referències cícliques dins dels tiquets. Es reinicia la llista de tiquets visitats després de cada iteració.
-     \item \textbf{Extreure tiquet:} S'envia la petició al servidor OTRS mitjançant la funció \linebreak \pyth{get_ticket_by_number} de \textbf{PyOTRS}. El qual retorna un tiquet de la classe \pyth{Ticket}, molt convenientment, pel seu futur processament. En cas que el tiquet amb l'identificador especificat no existeixi, es llançarà un error informant del succés.
+     \item \textbf{Extreure tiquet:} S'envia la petició al servidor \textit{OTRS} mitjançant la funció \linebreak \pyth{get_ticket_by_number} de \textbf{PyOTRS}. El qual retorna un tiquet de la classe \pyth{Ticket}, molt convenientment, pel seu futur processament. En cas que el tiquet amb l'identificador especificat no existeixi, es llançarà un error informant del succés.
 \end{enumerate}
 
 
@@ -60,7 +60,7 @@ El preprocessament dels tiquets té com a objectiu preparar el text per ser anal
 % Com s'organitza el tiquet amb els tres anteriors apartats (posar imatge/exemple)
 \begin{enumerate}
      \item \textbf{Iterar pels articles:} El processament bàsic del tiquet consisteix a iterar per tots els articles del tiquet i, per cadascun d'ells unir el cos principal de l'article amb els arxius adjunts i les referències a altres tiquets. Fent això repetit per cada article fins a arribar a l'últim i evitant sempre repetir text ja mencionat anteriorment.
-     \item \textbf{Processament del cos:} El primer que s'insereix és el cos principal de l'article que s'està tractant en el moment. Gràcies a una opció d'OTRS, el cos està adjuntat com un fitxer adjunt més en format HTML, permetent molta més flexibilitat a l'hora de modificar el seu contingut. Un problema que es va trobar en tots els tiquets, és que per cada article que es contesta, es torna a enviar tota la conversa fins al moment a sota. És per això que es busca l'element HTML que marca el final del tiquet (Una vora esquerra blava) i s'elimina tot el que hi ha dins. Després es converteix a text normal, s'elimina la firma (indica l'hora, lloc i altra informació irrellevant) amb una expressió regular (regex) i s'elimina tots els salts de línia sobrants.
+     \item \textbf{Processament del cos:} El primer que s'insereix és el cos principal de l'article que s'està tractant en el moment. Gràcies a una opció d'\textit{OTRS}, el cos està adjuntat com un fitxer adjunt més en format HTML, permetent molta més flexibilitat a l'hora de modificar el seu contingut. Un problema que es va trobar en tots els tiquets, és que per cada article que es contesta, es torna a enviar tota la conversa fins al moment a sota. És per això que es busca l'element HTML que marca el final del tiquet (Una vora esquerra blava) i s'elimina tot el que hi ha dins. Després es converteix a text normal, s'elimina la firma (indica l'hora, lloc i altra informació irrellevant) amb una expressió regular (regex) i s'elimina tots els salts de línia sobrants.
      \item \textbf{Processament dels adjunts:} Els fitxers adjunts estan tots codificats amb la codificació \textbf{Base 64}, per tant, el primer pas és descodificar el fitxer. Després depenent del seu format es fa ús de llibreries diferents per acabar amb el fitxer en format text UTF-8. No tots els fitxers poden ser processats per extreure la seva informació, per exemple, s'ha considerat que analitzar les imatges està fora de l'àmbit d'aquest projecte i, per tant, s'ha decidit tractar els seguents formats:
           \begin{itemize}
                \item \textbf{Fitxer de text (.txt):} Per tractar els fitxers de text, simplement es pot descodificar l'arxiu amb la codificació \textbf{Base 64} i codificar el resultat binari amb la codificació UTF-8.
