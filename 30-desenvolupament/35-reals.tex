@@ -12,8 +12,8 @@ Aquestes dades són significativament més complexes que el \textit{dataset} sin
         \Xhline{2\arrayrulewidth}
         \textbf{Cua} & \textbf{Recompte} \\
         \hline
-        Gestió Incidents (Malware) & 363 \\
-        Protecció Perimetre (\textit{Phishing} / \textit{Spam}) & 441  \\
+        Gestió Incidents (\textit{Malware}) & 363 \\
+        Protecció Perímetre (\textit{Phishing} / \textit{Spam}) & 441  \\
         \hline
         \textbf{Total} & \textbf{804} \\
         \Xhline{2\arrayrulewidth}
@@ -52,7 +52,7 @@ Per comprovar la mida de les dades amb les quals es treballa, es creen histogram
 \subsubsection{Anàlisi de la llarga dels tiquets}
 Aquesta anàlisi proporciona informació sobre l'estructura i la complexitat típiques de les dades textuals. Comprendre la distribució de les longituds dels tiquets ajuda a dissenyar els models per manejar eficaçment les diferents longituds d'entrada. A més a més, els valors atípics poden distorsionar les anàlisis i introduir biaixos als models. En eliminar els valors atípics o aplicar les transformacions adequades, els investigadors poden garantir la solidesa i la fiabilitat de les seves anàlisis.
 
-El \textit{boxplot} (diagrama de caixa) de la figura \ref{fig:boxplot_num_chars_tiquets} mostra la distribució del nombre de caràcters dels tiquets, amb una distribució esbiaixada i una caixa de l'amplitud interquartílica desproporcionadament petita a causa de la presència de \textit{outliers} amb recomptes de caràcters excepcionalment alts.
+El \textit{boxplot} (diagrama de caixa) de la figura \ref{fig:boxplot_num_chars_tiquets} mostra la distribució del nombre de caràcters dels tiquets, amb una distribució esbiaixada i una caixa de l'amplitud interquartílica desproporcionadament petita a causa de la presència d'\textit{outliers} amb recomptes de caràcters excepcionalment alts.
 
 En contrast, el \textit{boxplot} de la figura \ref{fig:boxplot_num_chars_tiquets_outliers} presenta una representació més clara de la distribució de la longitud dels tiquets del conjunt de dades després d'eliminar tots els tiquets amb un recompte de caràcters superior a 10000. L'eliminació d'aquests \textit{outliers} permet veure que la majoria dels tiquets té més de 2000 caràcters i amb molts per sobre dels 5000.
 
@@ -110,7 +110,7 @@ A pesar de la limitació d'espai, es va comprovar l'estat de les dades amb aques
       \caption{Sense \textit{outliers}.}
       \label{fig:boxplot_num_chars_adj_refs_outliers}
     \end{subfigure}
-    \caption[Boxplot dels caràcters de cada tiquet amb adjunts i referències]{Boxplot del nombre de caràcters de cada tiquet. Els tiquets contenen el text princpial així com el contingut dels fitxers adjunts i les referències a altres tiquets. \\ (Creació pròpia)}
+    \caption[Boxplot dels caràcters de cada tiquet amb adjunts i referències]{Boxplot del nombre de caràcters de cada tiquet. Els tiquets contenen el text principal així com el contingut dels fitxers adjunts i les referències a altres tiquets. \\ (Creació pròpia)}
     \label{fig:boxplot_num_chars_adj_refs_dos}
 \end{figure}
 
@@ -119,7 +119,7 @@ A les següents figures \ref{fig:histograma_num_chars_adj_refs} i \ref{fig:histo
 \begin{figure}[H]
     \centering
     \includegraphics[width=0.9\textwidth]{histograma_num_chars_adj_refs.png}
-    \caption[Histograma dels caràcters de cada tiquet amb adjunts i referències]{Histograma del nombre de caràcters de cada tiquet. Els tiquets contenen el text princpial així com el contingut dels fitxers adjunts i les referències a altres tiquets. \\ (Creació pròpia)}
+    \caption[Histograma dels caràcters de cada tiquet amb adjunts i referències]{Histograma del nombre de caràcters de cada tiquet. Els tiquets contenen el text principal així com el contingut dels fitxers adjunts i les referències a altres tiquets. \\ (Creació pròpia)}
     \label{fig:histograma_num_chars_adj_refs}
 \end{figure}
 
@@ -127,7 +127,7 @@ A les següents figures \ref{fig:histograma_num_chars_adj_refs} i \ref{fig:histo
 \begin{figure}[H]
     \centering
     \includegraphics[width=0.9\textwidth]{histograma_num_chars_adj_refs_outliers.png}
-    \caption[Histograma dels caràcters de cada tiquet amb adjunts i referències i sense outliers]{Histograma del nombre de caràcters de cada tiquet. Els tiquets contenen el text princpial així com el contingut dels fitxers adjunts i les referències a altres tiquets. També s'ha eliminat els outliers. \\ (Creació pròpia)}
+    \caption[Histograma dels caràcters de cada tiquet amb adjunts i referències i sense outliers]{Histograma del nombre de caràcters de cada tiquet. Els tiquets contenen el text principal així com el contingut dels fitxers adjunts i les referències a altres tiquets. També s'ha eliminat els outliers. \\ (Creació pròpia)}
     \label{fig:histograma_num_chars_adj_refs_outliers}
 \end{figure}
 
@@ -140,7 +140,7 @@ L'histograma de la figura \ref{fig:histograma_num_adj} indica que la majoria del
 \begin{figure}[H]
     \centering
     \includegraphics[width=0.9\textwidth]{histograma_num_adj.png}
-    \caption[Histograma del nombre d'adjunts a cada tiquet]{Histograma del nombre de arxius adjunts a cada tiquet. \\ (Creació pròpia)}
+    \caption[Histograma del nombre d'adjunts a cada tiquet]{Histograma del nombre d'arxius adjunts a cada tiquet. \\ (Creació pròpia)}
     \label{fig:histograma_num_adj}
 \end{figure}
 
@@ -154,7 +154,7 @@ L'histograma de la figura \ref{fig:histograma_num_adj} indica que la majoria del
 
 Donats els limitats recursos de maquinari, ha sigut imperatiu optimitzar el procés d'extracció de la informació. En excloure els fitxers adjunts i els tiquets referenciats, s'ha reduït la longitud de la seqüència d'entrada, cosa que es tradueix en temps de processament més ràpid i un menor consum de memòria. Aquesta decisió ha permès obtenir resultats més fiables de l'extracció dels camps sense comprometre el sistema.
 
-\subsubsection{Comparació conjunt de dades d'entrenament i test}
+\subsubsection{Comparació conjunts de dades d'entrenament i test}
 Quan s'analitza un \textit{dataset}, és fonamental assegurar-se que es manté la integritat de les dades en tot moment. En aquest cas, és molt indesitjable que hi hagi un alt percentatge d'entrades sense resposta o, en aquest cas \pyth{"NotFound"}, com s'observa tant al conjunt de dades d'entrenament com al de prova.
 
 La presència d'un nombre significatiu d'entrades \pyth{"NotFound"} introdueix un biaix a l'anàlisi. Això distorsiona les mètriques, la qual cosa porta a percepcions i conclusions inexactes. En conseqüència, els models entrenats amb aquests \textit{datasets} poden tenir dificultats per generalitzar bé dades no vistes. L'absència d'informació a la partició d'entrenament impedeix la capacitat del model per extrapolar coneixements a instàncies noves amb precisió.

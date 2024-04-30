@@ -13,10 +13,10 @@ El text dels tiquets ha sigut processat primerament per obtenir el text sense fo
 Gràcies a la recerca inicial i la continuada durant el progrés del projecte, s'ha provat, entrenat i validat diversos models de \textit{Deep learning} amb l'objectiu d'extreure els camps especificats. S'ha aconseguit entrenar un model que obté un 71,4\% d'encerts en les proves de validació. Es considera que aquest objectiu \textbf{ha sigut assolit satisfactòriament}.
 
 \subsection{Anonimització de la sortida del sistema}
-S'ha instal·lat i configurat \textit{Logstash} per rebre la sortida del model d'extracció d'informació en format JSON. S'ha desenvolupat una funció que anonimitza cada camp depenent del seu tipus i reparteix segons la seva destinació. Aquesta funció es pot parametritzar per a rebre més camps dels especificats. Es considera que aquest objectiu \textbf{ha sigut assolit satisfactòriament}.
+S'ha instal·lat i configurat \textit{Logstash} per rebre la sortida del model d'extracció d'informació en format \textit{JSON}. S'ha desenvolupat una funció que anonimitza cada camp depenent del seu tipus i reparteix segons la seva destinació. Aquesta funció es pot parametritzar per a rebre més camps dels especificats. Es considera que aquest objectiu \textbf{ha sigut assolit satisfactòriament}.
 
 \subsection{Emmagatzematge de les dades en Elasticsearch}
-En conjunció amb el mòdul de Logstash, s'ha instal·lat i configurat una base de dades \textit{Elasticsearch}. Es pot inserir en dos índexos diferents el resultat anonimitzat rebut del mòdul de \textit{Logstash}. Es considera que aquest objectiu \textbf{ha sigut assolit satisfactòriament}.
+En conjunció amb el mòdul de Logstash, s'ha instal·lat i configurat una base de dades \textit{Elasticsearch}. Es pot inserir en dos índexs diferents el resultat anonimitzat rebut del mòdul de \textit{Logstash}. Es considera que aquest objectiu \textbf{ha sigut assolit satisfactòriament}.
 
 \subsection{Implementació del pipeline}
 El \textit{pipeline} ha sigut dissenyat i implementat des de zero, tenint en compte les especificacions i limitacions del projecte. La figura \ref{fig:pipeline_flux_real} il·lustra el desplegament final de la \textit{pipeline}. Es pot veure com el portàtil amb GPU només s'utilitza per a l'execució del model, però la resta d'eines s'executen en el seu servidor designat. Es considera que aquest objectiu \textbf{ha sigut assolit satisfactòriament}.

@@ -123,7 +123,7 @@ A la taula següent es resumeix el procés d'entrenament del model \textit{Flan-
     \end{tabular}
     \caption[Entrenament del model \textit{Flan-T5-Small}]{Entrenament del model \textit{Flan-T5-Small} (amb etiquetes)}
 \end{table}
-El progrés del model durant l'entrenament indica una disminució dels errors tant a \textit{Train} com a \textit{Val} al llarg de les cinc \textit{epochs}, cosa que suggereix que ha après eficaçment de les dades etiquetades. Per altre banda, hi ha hagut una lleugera disminució de les mètriques de \textit{ROUGE} durant l'última \textit{epoch}, que podrien donar a entendre que el penúltim \textit{checkpoint} pot tenir millor rendiment que l'últim. Aquesta última afirmació va ser contrastada comprovant l'avaluació dels punts de control mostrats a la següent taula. 
+El progrés del model durant l'entrenament indica una disminució dels errors tant a \textit{Train} com a \textit{Val} al llarg de les cinc \textit{epochs}, cosa que suggereix que ha après eficaçment de les dades etiquetades. Per altra banda, hi ha hagut una lleugera disminució de les mètriques de \textit{ROUGE} durant l'última \textit{epoch}, que podrien donar a entendre que el penúltim \textit{checkpoint} pot tenir millor rendiment que l'últim. Aquesta última afirmació va ser contrastada comprovant l'avaluació dels punts de control mostrats a la següent taula. 
 
 \begin{table}[H]
     \centering
@@ -139,7 +139,7 @@ El progrés del model durant l'entrenament indica una disminució dels errors ta
     \caption[Avaluació del model \textit{Flan-T5-Small}]{Avaluació del model \textit{Flan-T5-Small} (sense etiquetes)}
 \end{table}
 
-Després	de l'avaluació sense etiquetes, s'ha pogut comprovar que el model ha decidit comprometre una lleguera part de puntuació \textit{ROUGE} per aconseguir una última millora de les coincidències exactes.
+Després	de l'avaluació sense etiquetes, s'ha pogut comprovar que el model ha decidit comprometre una lleugera part de puntuació \textit{ROUGE} per aconseguir una última millora de les coincidències exactes.
 
 
 
@@ -184,7 +184,7 @@ Després de l'entrenament continuat, es va avaluar el model sense etiquetes. Els
 El model mostra una millora progressiva al llarg dels \textit{checkpoints} d'entrenament, amb puntuacions ROUGE i percentatges de ``coincidència exacta'' creixents.
 
 \subsection{Flan-T5-Base (LoRA)}
-El model Flan-T5-Base es va ajustar mitjançant el mètode LoRA (\textit{Low-rank Adaptation of LLMs}), que es va centrar a entrenar únicament les matrius ``q'', ``v'', ``k'' i ``o'' del mòdul d'atenció del model. Aquests paràmentres entrenables només representen l'1,41\% de tots els paràmetres del model, reduïnt en gran mesura la càrrega computacional.
+El model Flan-T5-Base es va ajustar mitjançant el mètode \textit{LoRA} (\textit{Low-rank Adaptation of LLMs}), que es va centrar a entrenar únicament les matrius ``q'', ``v'', ``k'' i ``o'' del mòdul d'atenció del model. Aquests paràmetres entrenables només representen l'1,41\% de tots els paràmetres del model, reduint en gran manera la càrrega computacional.
 \begin{table}[H]
     \centering
     \label{tab:additional-training}
@@ -197,8 +197,6 @@ El model Flan-T5-Base es va ajustar mitjançant el mètode LoRA (\textit{Low-ran
     3 & 0,048 & 0,034 & 20,748 & 16,288 & 20,655 & 20,660 \\
     \bottomrule
     \end{tabular}
-    \caption[Entrenament del model \textit{Flan-T5-Base} amb LoRA]{Entrenament del model \textit{Flan-T5-Base} amb LoRA (amb etiquetes)}
+    \caption[Entrenament del model \textit{Flan-T5-Base} amb \textit{LoRA} ]{Entrenament del model \textit{Flan-T5-Base} amb \textit{LoRA} (amb etiquetes)}
 \end{table}
-El \textit{fine-tuning} amb el mètode \textit{LoRA} mostra un patró clar en els errors de \textit{Train} i \textit{Val}, cosa que indica una millora gradual del rendiment del model al llarg de les \textit{epochs} especificades. No obstant això, les puntuacions ROUGE mostren una tendència diferent, cosa que suggereix que la capacitat del model per captar el matisos del \textit{dataset} i generar resultats rellevants es pot veure qüestionada en aquest entrenament. És per aquest motiu que es va decidir cancelar el entrenament i no continuar amb el procés.
-
-
+El \textit{fine-tuning} amb el mètode \textit{LoRA} mostra un patró clar en els errors de \textit{Train} i \textit{Val}, cosa que indica una millora gradual del rendiment del model al llarg de les \textit{epochs} especificades. No obstant això, les puntuacions ROUGE mostren una tendència diferent, cosa que suggereix que la capacitat del model per captar els matisos del \textit{dataset} i generar resultats rellevants es pot veure qüestionada en aquest entrenament. És per aquest motiu que es va decidir cancel·lar l'entrenament i no continuar amb el procés.

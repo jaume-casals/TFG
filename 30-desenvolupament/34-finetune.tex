@@ -11,17 +11,17 @@ A continuació es mostren els primers passos pel \textit{fine-tuning} del model:
 \end{enumerate}
 
 
-\subsubsection{Preprocés del \textit{dataset}}
+\subsubsection{Preprocessament del \textit{dataset}}
 Aquest apartat explora el procés de preparació final del conjunt de dades abans del \textit{fine-tuning}. Els objectius principals són determinar les longituds de les entrades i sortides posteriors a la \textit{tokenització} i articular els passos necessaris per elaborar la funció de preprocessament. Les tasques pertanyents a aquest apartat de preprocessament són les següents:
 
 \begin{enumerate}
     \setcounter{enumi}{2}
-    \item \textbf{Calcular la longitud de les dades:} S'ha hagut de determinar la llargada màxima de l'entrada, ja que serà necessària per a la pròxima tasca. Això és perquè s'ha d'establir una llargada màxima pel model, pel fet que no pot llegir una entrada indefinidament llarga. Aquest càlcul s'ha fet dues vegades, per les dades d'entrada i per les de sortida, agafant totes les dades, \textit{tokenitzant-la} amb el \textit{tokenitzador} i agafant el mínim entre la seva llargada i el màxim acceptat pel model. S'ha hagut de retallar la mida de les dades ja que 
-    \item \textbf{Funció de preprocés:} Abans de passar l'entrada pel model, s'ha de modificar les dades perquè el model les pugui entendre. Primer s'ha afegit una instrucció anomenada \textit{system\_prompt}, que indica al model la tasca que ha de fer. Després, s'ha \textit{tokenitzat} les sentències i els resultats truncant a la llargada màxima calculada anteriorment. Aquesta mateixa funció de \textit{tokenització} també afegeix un \textit{padding} a tots aquells textos que són menors que la llargada màxima, fent que siguin tots de la mateixa mida.
+    \item \textbf{Calcular la longitud de les dades:} S'ha hagut de determinar la llargada màxima de l'entrada, ja que serà necessària per a la pròxima tasca. Això és perquè s'ha d'establir una llargada màxima pel model, pel fet que no pot llegir una entrada indefinidament llarga. Aquest càlcul s'ha fet dues vegades, per les dades d'entrada i per les de sortida, agafant totes les dades, \textit{tokenitzant-la} amb el \textit{tokenitzador} i agafant el mínim entre la seva llargada i el màxim acceptat pel model.
+    \item \textbf{Funció de preprocessament:} Abans de passar l'entrada pel model, s'ha de modificar les dades perquè el model les pugui entendre. Primer s'ha afegit una instrucció anomenada \textit{system\_prompt}, que indica al model la tasca que ha de fer. Després, s'ha \textit{tokenitzat} les sentències i els resultats truncant a la llargada màxima calculada anteriorment. Aquesta mateixa funció de \textit{tokenització} també afegeix un \textit{padding} a tots aquells textos que són menors que la llargada màxima, fent que siguin tots de la mateixa mida.
 \end{enumerate}
 
 
-\subsubsection{Postprocés i avaluació del resultat}
+\subsubsection{Postprocessament i avaluació del resultat}
 En aquesta secció s'analitza la fase de postprocessament del nostre model. L'objectiu és millorar la precisió mitjançant l'aplicació de dues funcions diferents de postprocessament en diferents fases de l'entrenament. Per avaluar objectivament l'eficàcia del model, s'ha utilitzat la mètrica \textit{ROUGE}, una mesura del processament del llenguatge natural per avaluar la similitud entre dos textos. Aquests han sigut els passos:
 
 \begin{enumerate}
@@ -42,7 +42,7 @@ Aquesta última part se centra en la configuració i l'execució del \textit{fin
         \begin{itemize}
             \item \textbf{Batch size:} Ha sigut igual tant per entrenament com per inferència per evitar incrementar l'ús de la memòria el màxim possible. En els models més petits s'ha arribat a usar 4 però en la resta, només 1.
             \item \textbf{fp16:} La precisió \textit{fp16} hauria permès utilitzar altres configuracions més adequades, però per un error de compatibilitat, ha hagut d'estar desactivat (\pyth{False}).
-            \item \textbf{Learning rate:} La taxa d'aprenentatge ha estat igual que en l'entrenament original del model \cite{flan-t5}: $5e-4$.
+            \item \textbf{Learning rate:} La taxa d'aprenentatge ha estat igual que en l'entrenament original del model \cite{flan-t5}: 5e-4.
             \item \textbf{Epochs:} El nombre de vegades que les dades passen per l'algorisme d'entrenament. Ha estat 3 per la primera funció de postprocessament i 2 més per la segona, donant un total de 5.
             \item \textbf{Optimitzador \textit{Adam}:} S'ha emprat l'optimitzador \textit{Adam} per a calcular el descens del gradient, amb els paràmetres per defecte.
             \item \textbf{Màxima generació de \textit{tokens}:} S'ha incrementat fins a 300 la generació de \textit{tokens} del model per permetre que en l'avaluació pugui fer ús de tot el seu potencial.
