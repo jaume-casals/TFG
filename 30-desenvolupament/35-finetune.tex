@@ -1,0 +1,52 @@
+\section{Fine-tune del model}
+\label{sec:fine-tune}
+En aquesta secció s'analitza el procés de \textit{fine-tuning} del model \textit{Flan-T5} (i les seves diferents versions) per millorar la seva capacitat d'extracció d'entitats. Aquesta secció explica com s'ha preprocessat el conjunt de dades, postprocessats els resultats i com s'ha configurat i entrenat el model amb el \textit{dataset} escollit.
+
+\subsection{Preparació de les dades}
+A continuació es mostren els primers passos pel \textit{fine-tuning} del model:
+
+\begin{enumerate}
+    \item \textbf{Carregar \textit{dataset}:} Es llegeixen els fitxers on s'ha emmagatzemat les dades en format \texttt{.csv}.
+    \item \textbf{Carregar \textit{tokenitzador}:} S'utilitza la funció \pyth{from_pretrained} de la llibreria \texttt{Transformers} per carregar el \textit{tokenitzador} del model oficial de Google: ``google/flan-t5-small''. Aquest model ha canviat segons el que s'entreni en cada moment, agafant inclús models no oficials de l'empresa però compatibles igualment amb l'estructura emprada.
+\end{enumerate}
+
+
+\subsubsection{Preprocessament del \textit{dataset}}
+Aquest apartat explora el procés de preparació final del conjunt de dades abans del \textit{fine-tuning}. Els objectius principals són determinar les longituds de les entrades i sortides posteriors a la \textit{tokenització} i articular els passos necessaris per elaborar la funció de preprocessament. Les tasques pertanyents a aquest apartat de preprocessament són les següents:
+
+\begin{enumerate}
+    \setcounter{enumi}{2}
+    \item \textbf{Calcular la longitud de les dades:} S'ha hagut de determinar la llargada màxima de l'entrada, ja que serà necessària per a la pròxima tasca. Això és perquè s'ha d'establir una llargada màxima pel model, pel fet que no pot llegir una entrada indefinidament llarga. Aquest càlcul s'ha fet dues vegades, per les dades d'entrada i per les de sortida, agafant totes les dades, \textit{tokenitzant-la} amb el \textit{tokenitzador} i agafant el mínim entre la seva llargada i el màxim acceptat pel model.
+    \item \textbf{Funció de preprocessament:} Abans de passar l'entrada pel model, s'ha de modificar les dades perquè el model les pugui entendre. Primer s'ha afegit una instrucció anomenada \textit{system\_prompt}, que indica al model la tasca que ha de fer. Després, s'ha \textit{tokenitzat} les sentències i els resultats truncant a la llargada màxima calculada anteriorment. Aquesta mateixa funció de \textit{tokenització} també afegeix un \textit{padding} a tots aquells textos que són menors que la llargada màxima, fent que siguin tots de la mateixa mida.
+\end{enumerate}
+
+
+\subsubsection{Postprocessament i avaluació del resultat}
+En aquesta secció s'analitza la fase de postprocessament del nostre model. L'objectiu és millorar la precisió mitjançant l'aplicació de dues funcions diferents de postprocessament en diferents fases de l'entrenament. Per avaluar objectivament l'eficàcia del model, s'ha utilitzat la mètrica \textit{ROUGE}, una mesura del processament del llenguatge natural per avaluar la similitud entre dos textos. Aquests han sigut els passos:
+
+\begin{enumerate}
+    \setcounter{enumi}{4}
+    \item \textbf{Carregar el model:} El model ha sigut carregat fent servir el mateix mètode per carregar el \textit{tokenitzador}, i és fent ús de la funció \pyth{from_pretrained} i s'ha obtingut de la mateixa font ``google/flan-t5-small'' (o la que es faci servir en el moment).
+    \item \textbf{Primera funció de postprocessament:} La primera funció de postprocessament senzillament descodifica els \textit{tokens} generats pel model en text, neteja qualsevol excedent d'espai que hi hagi i el divideix en frases per poder ser avaluades.
+    \item \textbf{Segona funció de postprocessament:} La segona funció és pràcticament idèntica a la primera, però elimina les etiquetes que escriu el model abans de donar la resposta. Això s'ha fet perquè experimentalment s'ha vist que si el model simplement escriu les etiquetes, ja aconsegueix un resultat elevat. Eliminant aquest factor de l'avaluació permet assolir un resultat quantificat més representatiu de la realitat. Aquesta segona funció només es pot aplicar quan el model ja ha sigut entrenat per suficient temps i sempre genera, com a mínim les etiquetes esperades.
+    \item \textbf{Funció d'avaluació:} Per a avaluar el rendiment del model s'ha usat la mètrica \textit{ROUGE} a través de la llibreria \textit{evaluate}. Aquesta funció retorna les mètriques de \textit{ROUGE-1}, \textit{ROUGE-2}, \textit{ROUGE-L} i \textit{ROUGE-Lsum}.
+\end{enumerate}
+
+
+\subsection{Configuració i entrenament}
+Aquesta última part se centra en la configuració i l'execució del \textit{fine-tuning}. A continuació es mostren els passos que s'han pres:
+
+\begin{enumerate}
+    \setcounter{enumi}{8}
+    \item \textbf{Configuració per l'entrenament:} Les configuracions més rellevants utilitzades han sigut:
+        \begin{itemize}
+            \item \textbf{Batch size:} Ha sigut igual tant per entrenament com per inferència per evitar incrementar l'ús de la memòria el màxim possible. En els models més petits s'ha arribat a usar 4 però en la resta, només 1.
+            \item \textbf{fp16:} La precisió \textit{fp16} hauria permès utilitzar altres configuracions més adequades, però per un error de compatibilitat, ha hagut d'estar desactivat (\pyth{False}).
+            \item \textbf{Learning rate:} La taxa d'aprenentatge ha estat igual que en l'entrenament original del model \cite{flan-t5}: 5e-4.
+            \item \textbf{Epochs:} El nombre de vegades que les dades passen per l'algorisme d'entrenament. Ha estat 3 per la primera funció de postprocessament i 2 més per la segona, donant un total de 5.
+            \item \textbf{Optimitzador \textit{Adam}:} S'ha emprat l'optimitzador \textit{Adam} per a calcular el descens del gradient, amb els paràmetres per defecte.
+            \item \textbf{Màxima generació de \textit{tokens}:} S'ha incrementat fins a 300 la generació de \textit{tokens} del model per permetre que en l'avaluació pugui fer ús de tot el seu potencial.
+        \end{itemize}
+    \item \textbf{Buidar la memòria:} Per assegurar que el model cap en la limitada memòria disponible, abans de cada entrenament, s'ha buidat la memòria de la GPU eliminant la memòria cau (memòria \textit{cache}) i forçant la recollida de la memòria brossa (\textit{garbage collection}).
+    \item \textbf{Iniciar el \textit{fine-tuning}:} Es comença el \textit{fine-tuning} especificant el model, els paràmetres d'entrenament, les dades d'entrenament i la funció d'avaluació. El procés triga diverses hores, en aquest cas, han sigut unes tres hores i mitja per cada model petit i set hores i mitja per cadascun dels grans.
+\end{enumerate}
